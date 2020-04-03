@@ -3,19 +3,25 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02F45408AE6D73925D9317D3 /* Pods_WalkAshlandTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42CE7BA39036BDD1CF39859B /* Pods_WalkAshlandTests.framework */; };
+		60B4BFC87E2E1B4E75356EAB /* Pods_WalkAshland.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A5AD611FCA8A39D578510AA /* Pods_WalkAshland.framework */; };
 		6A959628242B41B0002F19CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A959627242B41B0002F19CF /* AppDelegate.swift */; };
 		6A95962A242B41B0002F19CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A959629242B41B0002F19CF /* SceneDelegate.swift */; };
-		6A95962C242B41B0002F19CF /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A95962B242B41B0002F19CF /* FirstViewController.swift */; };
-		6A95962E242B41B0002F19CF /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A95962D242B41B0002F19CF /* SecondViewController.swift */; };
+		6A95962C242B41B0002F19CF /* toursViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A95962B242B41B0002F19CF /* toursViewController.swift */; };
+		6A95962E242B41B0002F19CF /* accountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A95962D242B41B0002F19CF /* accountViewController.swift */; };
 		6A959631242B41B0002F19CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A95962F242B41B0002F19CF /* Main.storyboard */; };
 		6A959633242B41B1002F19CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A959632242B41B1002F19CF /* Assets.xcassets */; };
 		6A959636242B41B1002F19CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A959634242B41B1002F19CF /* LaunchScreen.storyboard */; };
 		6A959641242B41B1002F19CF /* WalkAshlandTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A959640242B41B1002F19CF /* WalkAshlandTests.swift */; };
 		6A95964C242B41B1002F19CF /* WalkAshlandUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A95964B242B41B1002F19CF /* WalkAshlandUITests.swift */; };
+		6A95965A242B421B002F19CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A959659242B421B002F19CF /* GoogleService-Info.plist */; };
+		6A95965C242B4323002F19CF /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A95965B242B4323002F19CF /* DataModel.swift */; };
+		6A95965E242F3CA2002F19CF /* tourInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A95965D242F3CA2002F19CF /* tourInfo.swift */; };
+		D1C3706A162B94BD94737816 /* Pods_WalkAshland_WalkAshlandUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C734EC90AD374A411D6901A /* Pods_WalkAshland_WalkAshlandUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,11 +42,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		42CE7BA39036BDD1CF39859B /* Pods_WalkAshlandTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalkAshlandTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6916F5E884C5702772D198E5 /* Pods-WalkAshlandTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkAshlandTests.release.xcconfig"; path = "Target Support Files/Pods-WalkAshlandTests/Pods-WalkAshlandTests.release.xcconfig"; sourceTree = "<group>"; };
 		6A959624242B41B0002F19CF /* WalkAshland.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkAshland.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A959627242B41B0002F19CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6A959629242B41B0002F19CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		6A95962B242B41B0002F19CF /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		6A95962D242B41B0002F19CF /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		6A95962B242B41B0002F19CF /* toursViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = toursViewController.swift; sourceTree = "<group>"; };
+		6A95962D242B41B0002F19CF /* accountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = accountViewController.swift; sourceTree = "<group>"; };
 		6A959630242B41B0002F19CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6A959632242B41B1002F19CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6A959635242B41B1002F19CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +59,16 @@
 		6A959647242B41B1002F19CF /* WalkAshlandUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WalkAshlandUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A95964B242B41B1002F19CF /* WalkAshlandUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkAshlandUITests.swift; sourceTree = "<group>"; };
 		6A95964D242B41B1002F19CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6A959659242B421B002F19CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6A95965B242B4323002F19CF /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		6A95965D242F3CA2002F19CF /* tourInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tourInfo.swift; sourceTree = "<group>"; };
+		6C734EC90AD374A411D6901A /* Pods_WalkAshland_WalkAshlandUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalkAshland_WalkAshlandUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F7C389BCFF5BB6307BCC1C0 /* Pods-WalkAshland.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkAshland.debug.xcconfig"; path = "Target Support Files/Pods-WalkAshland/Pods-WalkAshland.debug.xcconfig"; sourceTree = "<group>"; };
+		8A5AD611FCA8A39D578510AA /* Pods_WalkAshland.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalkAshland.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		91AA5DA5AA92FAECBA3726E6 /* Pods-WalkAshland-WalkAshlandUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkAshland-WalkAshlandUITests.release.xcconfig"; path = "Target Support Files/Pods-WalkAshland-WalkAshlandUITests/Pods-WalkAshland-WalkAshlandUITests.release.xcconfig"; sourceTree = "<group>"; };
+		963245A9FB1247C801EB67E7 /* Pods-WalkAshland-WalkAshlandUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkAshland-WalkAshlandUITests.debug.xcconfig"; path = "Target Support Files/Pods-WalkAshland-WalkAshlandUITests/Pods-WalkAshland-WalkAshlandUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E17CC3F90DDBD3A86646061A /* Pods-WalkAshland.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkAshland.release.xcconfig"; path = "Target Support Files/Pods-WalkAshland/Pods-WalkAshland.release.xcconfig"; sourceTree = "<group>"; };
+		F9DA9DACF46712E8055A05C3 /* Pods-WalkAshlandTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkAshlandTests.debug.xcconfig"; path = "Target Support Files/Pods-WalkAshlandTests/Pods-WalkAshlandTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60B4BFC87E2E1B4E75356EAB /* Pods_WalkAshland.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02F45408AE6D73925D9317D3 /* Pods_WalkAshlandTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,12 +92,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1C3706A162B94BD94737816 /* Pods_WalkAshland_WalkAshlandUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11F5DC14E109379803976D91 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6F7C389BCFF5BB6307BCC1C0 /* Pods-WalkAshland.debug.xcconfig */,
+				E17CC3F90DDBD3A86646061A /* Pods-WalkAshland.release.xcconfig */,
+				963245A9FB1247C801EB67E7 /* Pods-WalkAshland-WalkAshlandUITests.debug.xcconfig */,
+				91AA5DA5AA92FAECBA3726E6 /* Pods-WalkAshland-WalkAshlandUITests.release.xcconfig */,
+				F9DA9DACF46712E8055A05C3 /* Pods-WalkAshlandTests.debug.xcconfig */,
+				6916F5E884C5702772D198E5 /* Pods-WalkAshlandTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		4602C0EE7ED871C7BD8A32E3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8A5AD611FCA8A39D578510AA /* Pods_WalkAshland.framework */,
+				6C734EC90AD374A411D6901A /* Pods_WalkAshland_WalkAshlandUITests.framework */,
+				42CE7BA39036BDD1CF39859B /* Pods_WalkAshlandTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		6A95961B242B41B0002F19CF = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +129,8 @@
 				6A95963F242B41B1002F19CF /* WalkAshlandTests */,
 				6A95964A242B41B1002F19CF /* WalkAshlandUITests */,
 				6A959625242B41B0002F19CF /* Products */,
+				11F5DC14E109379803976D91 /* Pods */,
+				4602C0EE7ED871C7BD8A32E3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,11 +149,14 @@
 			children = (
 				6A959627242B41B0002F19CF /* AppDelegate.swift */,
 				6A959629242B41B0002F19CF /* SceneDelegate.swift */,
-				6A95962B242B41B0002F19CF /* FirstViewController.swift */,
-				6A95962D242B41B0002F19CF /* SecondViewController.swift */,
+				6A95962B242B41B0002F19CF /* toursViewController.swift */,
+				6A95965B242B4323002F19CF /* DataModel.swift */,
+				6A95962D242B41B0002F19CF /* accountViewController.swift */,
+				6A95965D242F3CA2002F19CF /* tourInfo.swift */,
 				6A95962F242B41B0002F19CF /* Main.storyboard */,
 				6A959632242B41B1002F19CF /* Assets.xcassets */,
 				6A959634242B41B1002F19CF /* LaunchScreen.storyboard */,
+				6A959659242B421B002F19CF /* GoogleService-Info.plist */,
 				6A959637242B41B1002F19CF /* Info.plist */,
 			);
 			path = WalkAshland;
@@ -138,9 +187,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6A959650242B41B1002F19CF /* Build configuration list for PBXNativeTarget "WalkAshland" */;
 			buildPhases = (
+				B30327F2AEF0753459C51A58 /* [CP] Check Pods Manifest.lock */,
 				6A959620242B41B0002F19CF /* Sources */,
 				6A959621242B41B0002F19CF /* Frameworks */,
 				6A959622242B41B0002F19CF /* Resources */,
+				A7A46656F8FBCD8708DA630C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -155,6 +206,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6A959653242B41B1002F19CF /* Build configuration list for PBXNativeTarget "WalkAshlandTests" */;
 			buildPhases = (
+				70B1ED04C83364DF940F727A /* [CP] Check Pods Manifest.lock */,
 				6A959638242B41B1002F19CF /* Sources */,
 				6A959639242B41B1002F19CF /* Frameworks */,
 				6A95963A242B41B1002F19CF /* Resources */,
@@ -173,9 +225,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6A959656242B41B1002F19CF /* Build configuration list for PBXNativeTarget "WalkAshlandUITests" */;
 			buildPhases = (
+				981DFE194A8EEA77346A68A0 /* [CP] Check Pods Manifest.lock */,
 				6A959643242B41B1002F19CF /* Sources */,
 				6A959644242B41B1002F19CF /* Frameworks */,
 				6A959645242B41B1002F19CF /* Resources */,
+				A28E7CD35CA938CA3CB53407 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -236,6 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A959636242B41B1002F19CF /* LaunchScreen.storyboard in Resources */,
+				6A95965A242B421B002F19CF /* GoogleService-Info.plist in Resources */,
 				6A959633242B41B1002F19CF /* Assets.xcassets in Resources */,
 				6A959631242B41B0002F19CF /* Main.storyboard in Resources */,
 			);
@@ -257,13 +312,118 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		70B1ED04C83364DF940F727A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WalkAshlandTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		981DFE194A8EEA77346A68A0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WalkAshland-WalkAshlandUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A28E7CD35CA938CA3CB53407 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WalkAshland-WalkAshlandUITests/Pods-WalkAshland-WalkAshlandUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WalkAshland-WalkAshlandUITests/Pods-WalkAshland-WalkAshlandUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WalkAshland-WalkAshlandUITests/Pods-WalkAshland-WalkAshlandUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A7A46656F8FBCD8708DA630C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WalkAshland/Pods-WalkAshland-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WalkAshland/Pods-WalkAshland-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WalkAshland/Pods-WalkAshland-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B30327F2AEF0753459C51A58 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WalkAshland-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6A959620242B41B0002F19CF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A95962E242B41B0002F19CF /* SecondViewController.swift in Sources */,
-				6A95962C242B41B0002F19CF /* FirstViewController.swift in Sources */,
+				6A95965C242B4323002F19CF /* DataModel.swift in Sources */,
+				6A95965E242F3CA2002F19CF /* tourInfo.swift in Sources */,
+				6A95962E242B41B0002F19CF /* accountViewController.swift in Sources */,
+				6A95962C242B41B0002F19CF /* toursViewController.swift in Sources */,
 				6A959628242B41B0002F19CF /* AppDelegate.swift in Sources */,
 				6A95962A242B41B0002F19CF /* SceneDelegate.swift in Sources */,
 			);
@@ -436,6 +596,7 @@
 		};
 		6A959651242B41B1002F19CF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F7C389BCFF5BB6307BCC1C0 /* Pods-WalkAshland.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -445,7 +606,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.walkashland.WalkAshland;
+				PRODUCT_BUNDLE_IDENTIFIER = com.WalkAshland;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -454,6 +615,7 @@
 		};
 		6A959652242B41B1002F19CF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E17CC3F90DDBD3A86646061A /* Pods-WalkAshland.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -463,7 +625,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.walkashland.WalkAshland;
+				PRODUCT_BUNDLE_IDENTIFIER = com.WalkAshland;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -472,6 +634,7 @@
 		};
 		6A959654242B41B1002F19CF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F9DA9DACF46712E8055A05C3 /* Pods-WalkAshlandTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -494,6 +657,7 @@
 		};
 		6A959655242B41B1002F19CF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6916F5E884C5702772D198E5 /* Pods-WalkAshlandTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -516,6 +680,7 @@
 		};
 		6A959657242B41B1002F19CF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 963245A9FB1247C801EB67E7 /* Pods-WalkAshland-WalkAshlandUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -536,6 +701,7 @@
 		};
 		6A959658242B41B1002F19CF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 91AA5DA5AA92FAECBA3726E6 /* Pods-WalkAshland-WalkAshlandUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
