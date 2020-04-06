@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Firebase
+import FirebaseStorage
 
 //A tour consists of multiple attributes
 struct Tour {
