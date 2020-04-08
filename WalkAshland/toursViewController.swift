@@ -26,15 +26,20 @@ class toursViewController: UITableViewController {
     let storageRef = Storage.storage().reference()
     
     
+    
     override func viewDidLoad() {
+        
         //dataModel?.writeToFireBase()
-        dataModel?.retrieve_data()
+        self.dataModel?.retrieve_data()
         super.viewDidLoad()
-
+        
+        
     }
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         tableView.reloadData()
+        super.viewWillAppear(animated)
+        
+
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tours.count
@@ -51,18 +56,19 @@ class toursViewController: UITableViewController {
          Download the image and view is
          */
         //Create a reference to this image from the firebase storage
-        let imageRef = storageRef.child(tour.imgPath)
+        let imageRef = storageRef.child("ashland2.jpg")
         
         //a default image
         let defImage = UIImage(named: "ashland1")
         
         //load the image
         cell.imgOut!.sd_setImage(with: imageRef, placeholderImage: defImage)
+        
 
 
         
         
-  //      cell.typeImgOut.image = UIImage.init(named: "walking")
+        cell.typeImgOut.image = UIImage.init(named: "walking")
         cell.durImgOut.image = UIImage.init(named: "timeicon")
         cell.distImgOut.image = UIImage.init(named: "locationicon")
         
