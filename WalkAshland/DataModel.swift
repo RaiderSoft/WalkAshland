@@ -24,24 +24,15 @@ struct Tour {
         self.locationPoints = locs
         self.audioClips = auds
     }
-    //The Tour title
-    var title: String
     
-    //A description about the tour viewed as about
-    var description: String
+    var title: String  //The Tour title
+    var description: String  //A description about the tour viewed as about
+    var price: String = "3.00"  //The price of a toure currently 3.00 dollars
+    var imgPath: String  ////An image to be displayed in as a preview image
+
     
-    //The price of a toure currently 3.00 dollars
-    var price: String = "3.00"
-    
-    //A path to the image file stored in the Firebase Storage
-    var imgPath: String //will be retrieved from URL
-    
-    //The Duraction of tour in minutes
-    var duration: String
-    
-    //To store the type of the tour can be Walking, ByCar, Terain For now just Walking
-    var tourType: String = "Walking"
-    
+    var duration: String  //The Duraction of tour in minutes
+    var tourType: String = "Walking"  //To store the type of the tour can be Walking, ByCar, Terain For now just Walking
     
     //location points on this tour
     //location points are labeled with integer numbers that coresponds to a point with latitude and logntitude
@@ -50,7 +41,6 @@ struct Tour {
     //Not sure Need to be edited
     var audioClips: [String]
 
-    
     var saveTourDetail: [String: String] {
     
         return [
@@ -59,10 +49,8 @@ struct Tour {
         "price": "\(price)",
         "image": "\(imgPath)",
         "duration": "\(duration)",
-        "type": "\(tourType)",
+        "type": "\(tourType)"
             
-        
-        
         ]
     }
     
