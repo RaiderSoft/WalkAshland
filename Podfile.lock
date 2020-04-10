@@ -44,6 +44,13 @@ PODS:
   - GoogleDataTransportCCTSupport (1.4.0):
     - GoogleDataTransport (~> 4.0)
     - nanopb (~> 0.3.901)
+  - GoogleMaps (3.8.0):
+    - GoogleMaps/Maps (= 3.8.0)
+  - GoogleMaps/Base (3.8.0)
+  - GoogleMaps/Maps (3.8.0):
+    - GoogleMaps/Base
+  - GooglePlaces (3.8.0):
+    - GoogleMaps/Base (= 3.8.0)
   - GoogleUtilities/AppDelegateSwizzler (6.5.1):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -86,6 +93,8 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Storage
   - FirebaseUI/Storage
+  - GoogleMaps
+  - GooglePlaces
   - SDWebImage
   - SDWebImageWebPCoder (from `https://github.com/SDWebImage/SDWebImageWebPCoder.git`, branch `master`)
 
@@ -102,6 +111,8 @@ SPEC REPOS:
     - FirebaseUI
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
+    - GoogleMaps
+    - GooglePlaces
     - GoogleUtilities
     - GTMSessionFetcher
     - leveldb-library
@@ -131,6 +142,8 @@ SPEC CHECKSUMS:
   FirebaseUI: e57e9b9c4340631151fbe67a14206d23d0974f37
   GoogleDataTransport: 47fe3b8e1673e5187dfd615656a3c5034f150d69
   GoogleDataTransportCCTSupport: 36f69887fd212db6d7ef4dd45ba44523717a434e
+  GoogleMaps: 7c8d66d70e4e8c300f43a7219d8fdaad7b325a9a
+  GooglePlaces: d5f70c3e9e427964fdeca1301a665d276ccd8754
   GoogleUtilities: 06eb53bb579efe7099152735900dd04bf09e7275
   GTMSessionFetcher: cea130bbfe5a7edc8d06d3f0d17288c32ffe9925
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
@@ -139,6 +152,6 @@ SPEC CHECKSUMS:
   SDWebImage: 7edb9c3ea661e77a66661f7f044de8c1b55d1120
   SDWebImageWebPCoder: e7ae855f058e3dcae99696920b6a5d134e9dcddf
 
-PODFILE CHECKSUM: 6118ee88c80acb4e3010388fb9e568934d31645b
+PODFILE CHECKSUM: f91814034aeb8228cda79db075ec1873418d8c47
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.1

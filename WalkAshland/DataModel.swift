@@ -65,108 +65,6 @@ class DataModel {
     //List of available tours
     var tours: [Tour] = []
     
-
-    
-
-    func writeToFireBase() {
-        
-        /*
-        //Getting a reference to the storage service using the defauld firebase app
-        let storage = Storage.storage()
-        
-        //Create a storage reference from out storage service
-        let storageRef = storage.reference()
-        
-        //create a child reference where the image file will be saved
-        //let imageRef = storageRef.child("images/ashland2.jpg")
-        
-        
-        //First way
-        //Get the data in the memory
-        let data = Data()
-        
-        //reference to the file being uploaded
-        let ashlandRef = storageRef.child("images/ashland2.jpg")
-        
-        //upload the file to the path /images/ashland2.jpg
-        let uploadTask = ashlandRef.putData(data, metadata: nil) {
-            (metadata, error) in
-            guard let metadata = metadata else {
-                //in error case
-                return
-            }
-            let size = metadata.size
-            ashlandRef.downloadURL { (url, error) in
-                guard let downloadURL = url else {
-                    //error occured
-                    return
-                }
-            }
-        }
-        
-        
-        
-        
-        
-        
-        */
-        
-        
-        
-        
-        //This Section was for saving data to the database
-        //We are not implementing this functionality but I am looking forward to use it somewhere.
-        
-        
-        //Get the reference to the database
-        self.databaseRef = Database.database().reference()
-        var tours2: [Tour] = []  //THIS code must be removed This tours2 was defined for demonstration only
-        
-         //var tours2: [Tour] = [] //Was used to demonstrate saving to the database
-         
-         
-         //Just for dimonstrating the saveing data to the database
-        let t = Tour.init(ti: "Caribean1", des: "THis is a test", pr: "4.55", img: "/images/ashland2.jpg", dur: "34",type: "Walking", locs: [/*either this must be string or a getter for firebase objects*/["Longitude":33.4, "Latitude": 34.4]], auds: ["this", "that"])
-         
-         let n = Tour.init(
-            ti: "Caribean2", des: "THis is a test", pr: "4.55", img: "/images/ashland2.jpg", dur: "34",type: "Walking", locs: [["Longitude": 33.4, "latitude": 34.4], ["Longitude": 34.4, "Latitude": 54.2] ] , auds: ["audio1URL", "audio2URL"])
-         
-
-        // Append example tours to the tours2
-        tours2.append(t)
-        
-        tours2.append(n)
-        //Write the array of tours from tours2 to the data base
-        var i = 0
-        //save data to the database
-        for tour in tours2 {
-            self.databaseRef.child("db").child("\(i)").setValue(tour.saveTourDetail)
-            self.databaseRef.updateChildValues(
-                [
-                    "/db/\(i)/audios": tour.audioClips]
-                )
-            self.databaseRef.updateChildValues(
-            [
-                "/db/\(i)/locations": tour.locationPoints ]
-            )
-            
-            
-            /*self.databaseRef.child("db").setValue(
-                ["tours": [
-                    "title": "\(tours[0].title)",
-                    "about": "\(tours[0].description)",
-                    "location":"\(tours[0].locationPoints[0])",
-                    "image": "\(tours[0].imgPath)",
-                    "duration": "\(tours[0].duration)",
-                    "audios": "\(tours[0].audioClips)"
-                    
-                    ]
-                ]
-            )*/
-            i += 1
-        }
-    }
-    
     
     func retrieve_data(){
         
@@ -175,7 +73,7 @@ class DataModel {
         self.databaseRef = Database.database().reference()
 
         var x : Int = 0
-        while x < 2 {
+        while x < 1 {
             
             databaseRef.child("db").child("\(x)").observeSingleEvent(of: .value, with: { (data) in
               // Get user value

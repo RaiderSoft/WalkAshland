@@ -10,7 +10,7 @@
         <!--Create-->
         <scene sceneID="aHd-Ta-w8i">
             <objects>
-                <viewController id="63Z-6q-Jap" sceneMemberID="viewController">
+                <viewController id="63Z-6q-Jap" customClass="createTour" customModule="WalkAshland" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nVO-Vj-kV7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -67,7 +67,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FileExplorer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XPg-r4-qwe">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PhotoLibrary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XPg-r4-qwe">
                                 <rect key="frame" x="186" y="351" width="90" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="FAr-VV-C9T"/>
@@ -121,6 +121,8 @@
                                 <rect key="frame" x="20" y="515" width="249" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="hNh-u2-M8o"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="249" id="lma-c4-5dw"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="mPz-EX-iaT"/>
                                     <constraint firstAttribute="width" constant="249" id="uEH-ZI-7Vh"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -154,16 +156,41 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="File Explorer " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JZI-Mq-cAO">
+                                <rect key="frame" x="284" y="510" width="113" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="edj-YH-CbA"/>
+                                    <constraint firstAttribute="width" constant="113" id="zYE-BA-wBJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yWr-Zk-RY6">
+                                <rect key="frame" x="164" y="702" width="86" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="86" id="K3l-Hv-w5K"/>
+                                    <constraint firstAttribute="height" constant="30" id="g6S-To-152"/>
+                                </constraints>
+                                <state key="normal" title="Add the tour"/>
+                                <connections>
+                                    <action selector="createButton:" destination="63Z-6q-Jap" eventType="touchUpInside" id="RMv-28-KBu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="JFQ-l3-VHr" firstAttribute="trailing" secondItem="Myc-KF-n5p" secondAttribute="trailing" constant="33" id="10x-0k-i8x"/>
+                            <constraint firstItem="JFQ-l3-VHr" firstAttribute="trailing" secondItem="yWr-Zk-RY6" secondAttribute="trailing" constant="164" id="1Dy-i7-pcS"/>
                             <constraint firstItem="pDK-cB-KfK" firstAttribute="leading" secondItem="Y7F-ul-VTY" secondAttribute="trailing" constant="30" id="2Vf-sK-PAC"/>
                             <constraint firstItem="2W6-5V-yoP" firstAttribute="top" secondItem="ZrI-wx-gT4" secondAttribute="bottom" constant="44" id="4CE-As-xpE"/>
                             <constraint firstItem="JFQ-l3-VHr" firstAttribute="trailing" secondItem="QUC-jH-utw" secondAttribute="trailing" constant="145" id="4Fx-3b-8PS"/>
+                            <constraint firstItem="JFQ-l3-VHr" firstAttribute="bottom" secondItem="yWr-Zk-RY6" secondAttribute="bottom" constant="81" id="4vT-Ne-Mby"/>
                             <constraint firstItem="ZrI-wx-gT4" firstAttribute="leading" secondItem="JFQ-l3-VHr" secondAttribute="leading" constant="20" id="4xd-P3-AeU"/>
                             <constraint firstItem="QUC-jH-utw" firstAttribute="top" secondItem="pDK-cB-KfK" secondAttribute="bottom" constant="28" id="4yZ-UZ-4DH"/>
+                            <constraint firstItem="yWr-Zk-RY6" firstAttribute="top" secondItem="QUC-jH-utw" secondAttribute="bottom" constant="166" id="5Zd-Ui-jpZ"/>
                             <constraint firstItem="JFQ-l3-VHr" firstAttribute="trailing" secondItem="AkY-0Y-D15" secondAttribute="trailing" constant="139" id="5aP-EI-eak"/>
+                            <constraint firstItem="JZI-Mq-cAO" firstAttribute="top" secondItem="Myc-KF-n5p" secondAttribute="bottom" constant="17" id="5xv-2r-NIf"/>
                             <constraint firstItem="gIW-jh-77G" firstAttribute="top" secondItem="JFQ-l3-VHr" secondAttribute="top" constant="64" id="6Hs-aA-4wc"/>
                             <constraint firstItem="XPg-r4-qwe" firstAttribute="top" secondItem="rhh-D2-Daf" secondAttribute="bottom" constant="33" id="6W4-qg-QHY"/>
                             <constraint firstItem="JFQ-l3-VHr" firstAttribute="trailing" secondItem="rhh-D2-Daf" secondAttribute="trailing" constant="20" id="7QB-By-iCh"/>
@@ -172,15 +199,16 @@
                             <constraint firstItem="ey6-vM-wkm" firstAttribute="top" secondItem="2W6-5V-yoP" secondAttribute="bottom" constant="29" id="9av-pU-dKt"/>
                             <constraint firstItem="I18-1m-980" firstAttribute="top" secondItem="Zhn-DK-QAG" secondAttribute="bottom" constant="24" id="ALY-Gu-Exl"/>
                             <constraint firstItem="rhh-D2-Daf" firstAttribute="leading" secondItem="I18-1m-980" secondAttribute="trailing" constant="8" id="Bm8-3r-lXp"/>
-                            <constraint firstItem="JFQ-l3-VHr" firstAttribute="bottom" secondItem="QUC-jH-utw" secondAttribute="bottom" constant="277" id="CMA-Uu-ovA"/>
                             <constraint firstItem="I18-1m-980" firstAttribute="leading" secondItem="JFQ-l3-VHr" secondAttribute="leading" constant="20" id="Dgt-3B-Nfh"/>
                             <constraint firstItem="JFQ-l3-VHr" firstAttribute="trailing" secondItem="bdu-fd-glp" secondAttribute="trailing" constant="33" id="Jcb-wG-TNM"/>
                             <constraint firstItem="Zhn-DK-QAG" firstAttribute="top" secondItem="AkY-0Y-D15" secondAttribute="bottom" constant="24" id="Ksr-H1-d3M"/>
                             <constraint firstItem="JFQ-l3-VHr" firstAttribute="trailing" secondItem="XPg-r4-qwe" secondAttribute="trailing" constant="138" id="OAr-8i-M8p"/>
                             <constraint firstItem="gIW-jh-77G" firstAttribute="leading" secondItem="JFQ-l3-VHr" secondAttribute="leading" constant="20" id="QxV-1r-IWI"/>
+                            <constraint firstItem="yWr-Zk-RY6" firstAttribute="leading" secondItem="JFQ-l3-VHr" secondAttribute="leading" constant="164" id="Rgg-Xt-KOk"/>
                             <constraint firstItem="bdu-fd-glp" firstAttribute="leading" secondItem="2W6-5V-yoP" secondAttribute="trailing" constant="39" id="UUl-D0-xYn"/>
                             <constraint firstItem="ZrI-wx-gT4" firstAttribute="top" secondItem="rhh-D2-Daf" secondAttribute="bottom" constant="33" id="UZs-Fz-vOH"/>
                             <constraint firstItem="AkY-0Y-D15" firstAttribute="leading" secondItem="JFQ-l3-VHr" secondAttribute="leading" constant="139" id="Vw2-LU-JDI"/>
+                            <constraint firstItem="JFQ-l3-VHr" firstAttribute="trailing" secondItem="JZI-Mq-cAO" secondAttribute="trailing" constant="17" id="W7z-QN-UcS"/>
                             <constraint firstItem="pDK-cB-KfK" firstAttribute="top" secondItem="bdu-fd-glp" secondAttribute="bottom" constant="29" id="WYk-Wg-2cS"/>
                             <constraint firstItem="I18-1m-980" firstAttribute="top" secondItem="gIW-jh-77G" secondAttribute="bottom" constant="30" id="WmY-4W-1ID"/>
                             <constraint firstItem="AkY-0Y-D15" firstAttribute="top" secondItem="JFQ-l3-VHr" secondAttribute="top" constant="12" id="YiE-WK-PZ4"/>
@@ -195,13 +223,20 @@
                             <constraint firstItem="Y7F-ul-VTY" firstAttribute="leading" secondItem="ey6-vM-wkm" secondAttribute="trailing" constant="16" id="lGV-5D-JC8"/>
                             <constraint firstItem="Y7F-ul-VTY" firstAttribute="top" secondItem="2W6-5V-yoP" secondAttribute="bottom" constant="22" id="lmG-wP-AC7"/>
                             <constraint firstItem="QUC-jH-utw" firstAttribute="top" secondItem="ey6-vM-wkm" secondAttribute="bottom" constant="28" id="o5Q-ag-sQ9"/>
-                            <constraint firstItem="JFQ-l3-VHr" firstAttribute="bottom" secondItem="Myc-KF-n5p" secondAttribute="bottom" constant="320" id="qeo-PU-dL4"/>
+                            <constraint firstItem="JFQ-l3-VHr" firstAttribute="bottom" secondItem="JZI-Mq-cAO" secondAttribute="bottom" constant="273" id="rcm-Ko-drR"/>
+                            <constraint firstItem="JZI-Mq-cAO" firstAttribute="leading" secondItem="QUC-jH-utw" secondAttribute="trailing" constant="15" id="tGh-2i-2ap"/>
                             <constraint firstItem="QUC-jH-utw" firstAttribute="leading" secondItem="JFQ-l3-VHr" secondAttribute="leading" constant="20" id="vHb-OP-y3c"/>
                             <constraint firstItem="Myc-KF-n5p" firstAttribute="top" secondItem="bdu-fd-glp" secondAttribute="bottom" constant="22" id="zMq-rz-7cD"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="JFQ-l3-VHr"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Create" id="QLq-sL-fjd"/>
+                    <connections>
+                        <outlet property="descriptionField" destination="rhh-D2-Daf" id="T1X-jt-8os"/>
+                        <outlet property="priceField" destination="Myc-KF-n5p" id="H3H-W1-FSL"/>
+                        <outlet property="titleFieldOut" destination="Zhn-DK-QAG" id="qdw-JE-wDJ"/>
+                        <outlet property="typeField" destination="Y7F-ul-VTY" id="cQQ-se-Xlm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jKW-C9-yyh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -223,17 +258,17 @@
             </objects>
             <point key="canvasLocation" x="748" y="360"/>
         </scene>
-        <!--Setting-->
+        <!--Maps-->
         <scene sceneID="vIh-Ew-IUz">
             <objects>
-                <viewController id="Z8Z-bi-cfZ" sceneMemberID="viewController">
+                <viewController id="Z8Z-bi-cfZ" userLabel="Maps" customClass="playingViewController" customModule="WalkAshland" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="n3Z-3v-Tfy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="HBS-Cl-0nq"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Setting" selectedImage="calendar" catalog="system" id="6Z9-2n-vkm"/>
+                    <tabBarItem key="tabBarItem" title="Map" selectedImage="calendar" catalog="system" id="6Z9-2n-vkm"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D3P-we-MhW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -253,7 +288,7 @@
                         <segue destination="vTB-TD-Grg" kind="relationship" relationship="viewControllers" id="yuk-Fr-4F3"/>
                         <segue destination="EZK-zD-xlG" kind="relationship" relationship="viewControllers" id="267-Jj-NfD"/>
                         <segue destination="63Z-6q-Jap" kind="relationship" relationship="viewControllers" id="bcg-S1-BrS"/>
-                        <segue destination="Z8Z-bi-cfZ" kind="relationship" relationship="viewControllers" id="ARF-85-89X"/>
+                        <segue destination="Z8Z-bi-cfZ" kind="relationship" relationship="viewControllers" id="2ch-9a-8zh"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>

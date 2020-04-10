@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase //needed to use firebase platform
+import GoogleMaps //For using google maps
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,7 +19,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 
+        //Connecting to Firebase database
         FirebaseApp.configure()
+        
+        //Later Restrict the API key
+        //providing the google maps Api key
+        GMSServices.provideAPIKey("AIzaSyDjNpvuv_eW0ogWbHevj3MWwll2El58mW0")
+        
+        
         return true
     }
 
