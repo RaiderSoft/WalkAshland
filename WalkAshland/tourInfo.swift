@@ -12,12 +12,22 @@ class tourInfo: UIViewController {
     
     var tour: Tour?
     
-    @IBOutlet weak var fakeTitle: UILabel!
-    override func viewDidLoad() {
-        
-        if let tour = tour {
-            fakeTitle.text = tour.title
-        }
-    }
+    @IBOutlet weak var TourTitle: UILabel!
+        //TourTitle.text = tour?.title
+    
+    @IBOutlet weak var TourImage: UIImageView!
+        //TourImage.image = tour?.imgPath
+
+    @IBOutlet weak var TourTime: UILabel!
+        //TourTime.text = tour?.duration
+    
+    @IBOutlet weak var TourType: UILabel!
+        //TourType.text = tour?.tourType
+    
+    @IBOutlet weak var TourDistance: UILabel!
+        //TourDistance.text = tour?.duration
+    
+    @IBOutlet weak var TourDescription: UILabel!
+        //TourDescription.text = tour?.description
     
 }
