@@ -2473,6 +2473,14 @@ This application makes use of the following third party libraries:
    limitations under the License.
 
 
+## GoogleMaps
+
+Copyright 2020 Google
+
+## GooglePlaces
+
+Copyright 2020 Google
+
 ## GoogleUtilities
 
 

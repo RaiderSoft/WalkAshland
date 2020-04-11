@@ -12,6 +12,8 @@ target 'WalkAshland' do
     pod 'FirebaseUI/Storage'
     pod 'SDWebImage'
     pod 'SDWebImageWebPCoder', :git => 'https://github.com/SDWebImage/SDWebImageWebPCoder.git', :branch => 'master'
+    pod 'GoogleMaps'
+    pod 'GooglePlaces'
 
   target 'WalkAshlandTests' do
     inherit! :search_paths
