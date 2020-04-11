@@ -13,21 +13,27 @@ class tourInfo: UIViewController {
     var tour: Tour?
     
     @IBOutlet weak var TourTitle: UILabel!
-        //TourTitle.text = tour?.title
     
     @IBOutlet weak var TourImage: UIImageView!
-        //TourImage.image = tour?.imgPath
 
     @IBOutlet weak var TourTime: UILabel!
-        //TourTime.text = tour?.duration
     
     @IBOutlet weak var TourType: UILabel!
-        //TourType.text = tour?.tourType
     
     @IBOutlet weak var TourDistance: UILabel!
-        //TourDistance.text = tour?.duration
     
     @IBOutlet weak var TourDescription: UILabel!
-        //TourDescription.text = tour?.description
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        TourTitle.text = "Plaza" //tour?.title
+        //TourImage.image = tour?.imgPath
+        TourTime.text = "23 mins" //tour?.duration
+        TourType.text = "Walking" //tour?.tourType
+        TourDistance.text = "500 ft" //tour?.duration
+        TourDescription.text = "This is a test Discription" //tour?.description
+
+    }
     
 }
