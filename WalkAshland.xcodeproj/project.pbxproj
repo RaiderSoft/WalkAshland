@@ -17,7 +17,6 @@
 		6A95962E242B41B0002F19CF /* accountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A95962D242B41B0002F19CF /* accountViewController.swift */; };
 		6A959631242B41B0002F19CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A95962F242B41B0002F19CF /* Main.storyboard */; };
 		6A959633242B41B1002F19CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A959632242B41B1002F19CF /* Assets.xcassets */; };
-		6A959636242B41B1002F19CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A959634242B41B1002F19CF /* LaunchScreen.storyboard */; };
 		6A959641242B41B1002F19CF /* WalkAshlandTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A959640242B41B1002F19CF /* WalkAshlandTests.swift */; };
 		6A95964C242B41B1002F19CF /* WalkAshlandUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A95964B242B41B1002F19CF /* WalkAshlandUITests.swift */; };
 		6A95965A242B421B002F19CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A959659242B421B002F19CF /* GoogleService-Info.plist */; };
@@ -55,7 +54,6 @@
 		6A95962D242B41B0002F19CF /* accountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = accountViewController.swift; sourceTree = "<group>"; };
 		6A959630242B41B0002F19CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6A959632242B41B1002F19CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		6A959635242B41B1002F19CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6A959637242B41B1002F19CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A95963C242B41B1002F19CF /* WalkAshlandTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WalkAshlandTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A959640242B41B1002F19CF /* WalkAshlandTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkAshlandTests.swift; sourceTree = "<group>"; };
@@ -161,7 +159,6 @@
 				6A95962F242B41B0002F19CF /* Main.storyboard */,
 				6A6E1A1524405E58004B75CE /* playingViewController.swift */,
 				6A959632242B41B1002F19CF /* Assets.xcassets */,
-				6A959634242B41B1002F19CF /* LaunchScreen.storyboard */,
 				6A959659242B421B002F19CF /* GoogleService-Info.plist */,
 				6A959637242B41B1002F19CF /* Info.plist */,
 			);
@@ -297,7 +294,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A959636242B41B1002F19CF /* LaunchScreen.storyboard in Resources */,
 				6A95965A242B421B002F19CF /* GoogleService-Info.plist in Resources */,
 				6A959633242B41B1002F19CF /* Assets.xcassets in Resources */,
 				6A959631242B41B0002F19CF /* Main.storyboard in Resources */,
@@ -511,14 +507,6 @@
 				6A959630242B41B0002F19CF /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		6A959634242B41B1002F19CF /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6A959635242B41B1002F19CF /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
