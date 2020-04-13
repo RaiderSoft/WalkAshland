@@ -284,17 +284,73 @@
         <scene sceneID="IRW-LW-UDZ">
             <objects>
                 <viewController id="aGu-xx-Lzz" customClass="playingViewController" customModule="WalkAshland" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Oot-PU-iFJ">
+                    <view key="view" contentMode="scaleToFill" id="Oot-PU-iFJ" userLabel="MainView">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ANo-wH-rXt" userLabel="SubView">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="674"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xZH-GV-ySW">
+                                <rect key="frame" x="0.0" y="759" width="414" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" semanticContentAttribute="playback" translatesAutoresizingMaskIntoConstraints="NO" id="v9i-uy-wdl">
+                                <rect key="frame" x="0.0" y="759" width="414" height="49"/>
+                                <items>
+                                    <barButtonItem systemItem="rewind" id="cqv-g9-Ks3">
+                                        <connections>
+                                            <action selector="Rewind:" destination="aGu-xx-Lzz" id="xlX-pC-xCQ"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="vnS-Sy-IPx"/>
+                                    <barButtonItem systemItem="play" id="iu7-Rz-85T">
+                                        <connections>
+                                            <action selector="Play:" destination="aGu-xx-Lzz" id="7Yp-eS-XY1"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="o4Z-B2-Shz"/>
+                                    <barButtonItem systemItem="pause" id="DTs-bx-21e">
+                                        <connections>
+                                            <action selector="Pause:" destination="aGu-xx-Lzz" id="qfK-4X-frI"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="kKl-fP-W1X"/>
+                                    <barButtonItem systemItem="fastForward" id="d69-jk-8U6">
+                                        <connections>
+                                            <action selector="FastForward:" destination="aGu-xx-Lzz" id="xdY-Js-5vq"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="5Ux-r5-M9I" firstAttribute="trailing" secondItem="ANo-wH-rXt" secondAttribute="trailing" id="2Qf-cg-0Cs"/>
+                            <constraint firstItem="xZH-GV-ySW" firstAttribute="top" secondItem="ANo-wH-rXt" secondAttribute="bottom" constant="85" id="6UK-YY-z3P"/>
+                            <constraint firstItem="5Ux-r5-M9I" firstAttribute="trailing" secondItem="xZH-GV-ySW" secondAttribute="trailing" id="dIP-zq-s7y"/>
+                            <constraint firstItem="ANo-wH-rXt" firstAttribute="top" secondItem="5Ux-r5-M9I" secondAttribute="top" id="gYo-yG-mZD"/>
+                            <constraint firstItem="ANo-wH-rXt" firstAttribute="leading" secondItem="5Ux-r5-M9I" secondAttribute="leading" id="gdd-Yo-xl3"/>
+                            <constraint firstItem="v9i-uy-wdl" firstAttribute="bottom" secondItem="5Ux-r5-M9I" secondAttribute="bottom" id="iKT-Ld-Qie"/>
+                            <constraint firstItem="v9i-uy-wdl" firstAttribute="top" secondItem="xZH-GV-ySW" secondAttribute="bottom" id="juE-BZ-RLI"/>
+                            <constraint firstItem="v9i-uy-wdl" firstAttribute="trailing" secondItem="5Ux-r5-M9I" secondAttribute="trailing" id="vWA-If-kb1"/>
+                            <constraint firstItem="v9i-uy-wdl" firstAttribute="leading" secondItem="5Ux-r5-M9I" secondAttribute="leading" id="w2h-7G-Sky"/>
+                            <constraint firstItem="xZH-GV-ySW" firstAttribute="leading" secondItem="5Ux-r5-M9I" secondAttribute="leading" id="xBT-g1-NPU"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="5Ux-r5-M9I"/>
                     </view>
                     <navigationItem key="navigationItem" id="evZ-O2-vyx"/>
+                    <connections>
+                        <outlet property="MediaBar" destination="v9i-uy-wdl" id="scj-bf-LOR"/>
+                        <outlet property="ViewForMap" destination="ANo-wH-rXt" id="x2z-DY-TTh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qJx-Sj-fFW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-213" y="-715"/>
+            <point key="canvasLocation" x="-213.04347826086959" y="-715.17857142857144"/>
         </scene>
         <!--Tours-->
         <scene sceneID="sLf-9X-tUM">
@@ -383,7 +439,7 @@
                                                 <attributedString key="attributedTitle">
                                                     <fragment content="Download">
                                                         <attributes>
-                                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <font key="NSFont" metaFont="system" size="15"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>

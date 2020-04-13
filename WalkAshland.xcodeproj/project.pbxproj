@@ -23,6 +23,7 @@
 		6A95965C242B4323002F19CF /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A95965B242B4323002F19CF /* DataModel.swift */; };
 		6A95965E242F3CA2002F19CF /* tourInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A95965D242F3CA2002F19CF /* tourInfo.swift */; };
 		D1C3706A162B94BD94737816 /* Pods_WalkAshland_WalkAshlandUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C734EC90AD374A411D6901A /* Pods_WalkAshland_WalkAshlandUITests.framework */; };
+		FCD2C44C2445032200D702CB /* sample.wav in Resources */ = {isa = PBXBuildFile; fileRef = FCD2C44B2445032200D702CB /* sample.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		963245A9FB1247C801EB67E7 /* Pods-WalkAshland-WalkAshlandUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkAshland-WalkAshlandUITests.debug.xcconfig"; path = "Target Support Files/Pods-WalkAshland-WalkAshlandUITests/Pods-WalkAshland-WalkAshlandUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		E17CC3F90DDBD3A86646061A /* Pods-WalkAshland.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkAshland.release.xcconfig"; path = "Target Support Files/Pods-WalkAshland/Pods-WalkAshland.release.xcconfig"; sourceTree = "<group>"; };
 		F9DA9DACF46712E8055A05C3 /* Pods-WalkAshlandTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkAshlandTests.debug.xcconfig"; path = "Target Support Files/Pods-WalkAshlandTests/Pods-WalkAshlandTests.debug.xcconfig"; sourceTree = "<group>"; };
+		FCD2C44B2445032200D702CB /* sample.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = sample.wav; path = "../../../Desktop/SAMPLESWAP/MELODIC SAMPLES/KEYS ORGAN PIANO/sample.wav"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +159,7 @@
 				6A95962D242B41B0002F19CF /* accountViewController.swift */,
 				6A95965D242F3CA2002F19CF /* tourInfo.swift */,
 				6A95962F242B41B0002F19CF /* Main.storyboard */,
+				FCD2C44B2445032200D702CB /* sample.wav */,
 				6A6E1A1524405E58004B75CE /* playingViewController.swift */,
 				6A959632242B41B1002F19CF /* Assets.xcassets */,
 				6A959659242B421B002F19CF /* GoogleService-Info.plist */,
@@ -294,6 +297,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCD2C44C2445032200D702CB /* sample.wav in Resources */,
 				6A95965A242B421B002F19CF /* GoogleService-Info.plist in Resources */,
 				6A959633242B41B1002F19CF /* Assets.xcassets in Resources */,
 				6A959631242B41B0002F19CF /* Main.storyboard in Resources */,
