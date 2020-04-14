@@ -44,19 +44,24 @@
         <!--Playing View Controller-->
         <scene sceneID="IRW-LW-UDZ">
             <objects>
-                <viewController id="aGu-xx-Lzz" customClass="playingViewController" customModule="WalkAshland" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="aGu-xx-Lzz" customClass="playingViewController" customModule="WalkAshland" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Oot-PU-iFJ" userLabel="view">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SJD-5K-GbP" userLabel="mapView">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xZH-GV-ySW">
-                                <rect key="frame" x="0.0" y="764" width="414" height="0.0"/>
+                                <rect key="frame" x="0.0" y="813" width="414" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" semanticContentAttribute="playback" translatesAutoresizingMaskIntoConstraints="NO" id="v9i-uy-wdl">
-                                <rect key="frame" x="0.0" y="764" width="414" height="49"/>
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
                                 <items>
                                     <barButtonItem systemItem="rewind" id="cqv-g9-Ks3">
                                         <connections>
@@ -102,7 +107,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qJx-Sj-fFW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1731.8840579710147" y="-11.383928571428571"/>
+            <point key="canvasLocation" x="2469.5652173913045" y="-43.526785714285715"/>
         </scene>
         <!--Tours-->
         <scene sceneID="ETN-1n-cpx">
@@ -235,7 +240,7 @@
                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <state key="normal" title="Start"/>
                                             <connections>
-                                                <segue destination="aGu-xx-Lzz" kind="show" id="UFR-7l-ARK"/>
+                                                <segue destination="aGu-xx-Lzz" kind="show" id="TsA-Z2-BwG"/>
                                             </connections>
                                         </button>
                                     </subviews>
