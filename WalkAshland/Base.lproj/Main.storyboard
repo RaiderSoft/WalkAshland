@@ -49,9 +49,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SJD-5K-GbP" userLabel="mapView">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SJD-5K-GbP" userLabel="mapView">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xZH-GV-ySW">
@@ -91,6 +90,7 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="xZH-GV-ySW" firstAttribute="top" secondItem="SJD-5K-GbP" secondAttribute="bottom" id="Dws-GK-4Z9"/>
                             <constraint firstItem="5Ux-r5-M9I" firstAttribute="trailing" secondItem="xZH-GV-ySW" secondAttribute="trailing" id="dIP-zq-s7y"/>
                             <constraint firstItem="v9i-uy-wdl" firstAttribute="bottom" secondItem="5Ux-r5-M9I" secondAttribute="bottom" id="iKT-Ld-Qie"/>
                             <constraint firstItem="v9i-uy-wdl" firstAttribute="top" secondItem="xZH-GV-ySW" secondAttribute="bottom" id="juE-BZ-RLI"/>

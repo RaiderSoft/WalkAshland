@@ -23,20 +23,10 @@ class playingViewController: UIViewController {
         super.viewDidLoad()
         
         let camera = GMSCameraPosition.camera(withLatitude: 42.1972 , longitude: 122.7153, zoom: 9.0)
-        let mapView = GMSMapView.map(withFrame: self.view.frame, camera: camera)
+        let mapView = GMSMapView.map(withFrame: self.view.subviews.first?.frame ?? self.view.frame, camera: camera)
         self.view.addSubview(mapView)
         //placesClient = GMSPlacesClient.shared()
 
-
-        let position = CLLocationCoordinate2D(latitude: 42.1972, longitude: 122.7153)
-
-        let marker = GMSMarker(position: position)
-        marker.title = "HELLO WORLD"
-        marker.map = mapView
-
-        let marker2 = GMSMarker(position: CLLocationCoordinate2D(latitude: 42.5, longitude: 122.7153))
-        marker2.title = "Hll"
-        marker2.map = mapView
         
        //Created by Dylan
        //bring mediabar forward
