@@ -23,7 +23,7 @@ class playingViewController: UIViewController {
         super.viewDidLoad()
         
         let camera = GMSCameraPosition.camera(withLatitude: 42.1972 , longitude: 122.7153, zoom: 9.0)
-        let mapView = GMSMapView.map(withFrame: self.ViewForMap.frame, camera: camera)
+        let mapView = GMSMapView.map(withFrame: self.view.frame, camera: camera)
         self.view.addSubview(mapView)
         //placesClient = GMSPlacesClient.shared()
 
@@ -44,7 +44,7 @@ class playingViewController: UIViewController {
        
        //Do - try - catch audio player for file sample.wav
        do {
-           audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "sample", ofType: "wav")!))
+           audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "Find_Money", ofType: "mp3")!))
            
        } catch {
            print(error)
