@@ -11,6 +11,7 @@ import Firebase
 import FirebaseUI
 import SDWebImage
 import SDWebImageWebPCoder
+import SwiftUI
 
 class toursViewController: UITableViewController {
     
@@ -24,9 +25,7 @@ class toursViewController: UITableViewController {
     
     //Create a reference to the firebase storage
     let storageRef = Storage.storage().reference()
-    
-    
-    
+    /**************************/
     override func viewDidLoad() {
         
         //dataModel?.writeToFireBase()
@@ -38,7 +37,6 @@ class toursViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
         super.viewWillAppear(animated)
-        
 
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -53,10 +51,10 @@ class toursViewController: UITableViewController {
         cell.aboutOut.text = tour.description
         cell.durNumOut.text = "\(tour.duration) mins"
         /*
-         Download the image and view is
+            Download the image and view is
+            Create a reference to this image from the firebase storage
          */
-        //Create a reference to this image from the firebase storage
-        let imageRef = storageRef.child("ashland2.jpg")
+        let imageRef = storageRef.child("ashland2.jpg") //Change this to get from specif folder of images
         
         //a default image
         let defImage = UIImage(named: "ashland1")
@@ -64,10 +62,7 @@ class toursViewController: UITableViewController {
         //load the image
         cell.imgOut!.sd_setImage(with: imageRef, placeholderImage: defImage)
         
-
-
-        
-        
+        //Setup all static images for a cell
         cell.typeImgOut.image = UIImage.init(named: "walking")
         cell.durImgOut.image = UIImage.init(named: "timeicon")
         cell.distImgOut.image = UIImage.init(named: "locationicon")
@@ -75,7 +70,8 @@ class toursViewController: UITableViewController {
     return cell
     }
     
-    /*//SEND the this tour data on clicking
+    /*
+     //SEND the this tour data on clicking
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let tourInfo = segue.destination as? tourInfo,
             
@@ -86,9 +82,17 @@ class toursViewController: UITableViewController {
         tourInfo.tour = tours[index]
     }
     */
+    
+    
+    
 }
 
+
+/* Faisal:
+   This class handles */
 class tourCell: UITableViewCell {
+    
+
     @IBOutlet weak var durImgOut: UIImageView!
     @IBOutlet weak var typeLabelOut: UILabel!
     @IBOutlet weak var typeImgOut: UIImageView!
@@ -103,6 +107,9 @@ class tourCell: UITableViewCell {
     @IBOutlet weak var imgOut: UIImageView!
     @IBOutlet weak var aboutOut: UITextView!
     @IBOutlet weak var titleOut: UILabel!
-
+    
+    
 }
+ 
+
 
