@@ -24,15 +24,15 @@ class playingViewController: UIViewController,
     //List Text for drop down(PickerTextView)
     var audioList: [String] = [String]()
     
+    
+    /* Programmer: Faisal */
+    var camera:GMSCameraPosition?
+    var mapView: GMSMapView?
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let camera = GMSCameraPosition.camera(withLatitude: 42.1972 , longitude: 122.7153, zoom: 9.0)
-        let mapView = GMSMapView.map(withFrame: self.view.subviews.first?.frame ?? self.view.frame, camera: camera)
-        self.view.addSubview(mapView)
-        //placesClient = GMSPlacesClient.shared()
-
-
        //Created by Dylan
        //bring mediabar forward
        MediaBar.layer.zPosition = 1;
@@ -52,9 +52,63 @@ class playingViewController: UIViewController,
         
         //text for Drop down menu(PickerTextView)
         audioList = ["Track 1", "Track 2", "Track 3"]
+        
+        
+        
+        
+        
+        /*  * * * * * * ** * * *  Faisal Alik         * * * * * * ** * * * */
+        //###############################################################
+        camera = GMSCameraPosition.camera(withLatitude: 42.1972 , longitude: 122.7153, zoom: 9.0)
+        //Unwrap the camera
+        if let camera = camera {
+            mapView = GMSMapView.map(withFrame: self.view.subviews.first?.frame ?? self.view.frame, camera: camera)
+            
+        }
+        //Unwraping the mapView
+        if let map = mapView {
+            self.view.addSubview(map)
+            mapView?.addSubview(PickerTextView)
+        }
+        //*********************************
+    }
+    //Action For displaying Drop Down Menu
+    @IBAction func DisplayList(_ sender: Any) {
+        /*#######################  Faisal Alik  */
+        //Handling picker view interactions
+        if PickerTextView.isHidden {
+            PickerTextView.isHidden = false
+            PickerTextView.isUserInteractionEnabled = true
+            
+        }
+        else {
+            PickerTextView.isHidden = true
+            PickerTextView.isUserInteractionEnabled = false
+        }
+        //***********************
+
+
+        
+        
+        
+        
+        
+        
+
+        /* Faisal: Need to be deleted no need
+         
+         //if enable disable and if disable enable on click
+         if PickerTextView.layer.zPosition == 0 {
+         PickerTextView.isUserInteractionEnabled = true
+         PickerTextView.layer.zPosition = 1
+         } else {
+         PickerTextView.isUserInteractionEnabled = false
+         PickerTextView.layer.zPosition = 0
+         }
+         */
+
 
     }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -104,18 +158,7 @@ class playingViewController: UIViewController,
     //Drop Down Menu
     @IBOutlet weak var PickerTextView: UIPickerView!
     
-    //Action For displaying Drop Down Menu
-    @IBAction func DisplayList(_ sender: Any) {
-                
-        //if enable disable and if disable enable on click
-        if PickerTextView.layer.zPosition == 0 {
-            PickerTextView.isUserInteractionEnabled = true
-            PickerTextView.layer.zPosition = 1
-        } else {
-            PickerTextView.isUserInteractionEnabled = false
-            PickerTextView.layer.zPosition = 0
-        }
-    }
+
     
-    @IBOutlet weak var ViewForMap: UIView!
+
 }

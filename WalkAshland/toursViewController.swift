@@ -27,17 +27,17 @@ class toursViewController: UITableViewController {
     let storageRef = Storage.storage().reference()
     /**************************/
     override func viewDidLoad() {
-        
+        super.viewDidLoad()
         //dataModel?.writeToFireBase()
         self.dataModel?.retrieve_data()
-        super.viewDidLoad()
-        
-        
     }
-    override func viewWillAppear(_ animated: Bool) {
-        tableView.reloadData()
-        super.viewWillAppear(animated)
+    
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+        reloadInputViews()
+        
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tours.count
@@ -105,9 +105,19 @@ class tourCell: UITableViewCell {
     
     @IBOutlet weak var durNumOut: UILabel!
     @IBOutlet weak var imgOut: UIImageView!
+    
     @IBOutlet weak var aboutOut: UITextView!
     @IBOutlet weak var titleOut: UILabel!
     
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    }
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        
+        //imgOut.layer.borderWidth = 4.0
+        //imgOut.layer.borderColor = #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)
+    }
     
 }
  
