@@ -118,7 +118,7 @@ class DataModel {
         
         //create s storage ref
         let storageRef = storage.reference()
-        /****/
+        //storageRef.child("")
         
         //LocalFileto upload
         let localFile = URL(string: "./ashland2")
@@ -129,7 +129,7 @@ class DataModel {
         
         //upload file and metadata to the object 'image/ashland2.jpg'
         let uploadTask = storageRef.putFile(from: localFile!, metadata: metadata)
-        
+        */
         //listen for state changes, errors, and completion of the upload
         
         /****/
@@ -137,7 +137,7 @@ class DataModel {
         ///let imageRef = storageRef.child("img/ashland2")
         
         
-        */
+        
 
         
     }

@@ -13,10 +13,6 @@ import AVFoundation
 
 class playingViewController: UIViewController,
     UIPickerViewDataSource, UIPickerViewDelegate{
-    
-    //This is the initial starting point for the tour
-    //var placesClient: GMSPlacesClient!
-    
     //Created by Dylan
     //The audio player
     var audioPlayer = AVAudioPlayer()
@@ -25,11 +21,13 @@ class playingViewController: UIViewController,
     var audioList: [String] = [String]()
     
     
-    /* Programmer: Faisal */
+    
+    
+    /* ##############
+        Programmer: Faisal */
     var camera:GMSCameraPosition?
     var mapView: GMSMapView?
-
-    
+     /*********************/
     override func viewDidLoad() {
         super.viewDidLoad()
         
