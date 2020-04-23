@@ -55,6 +55,12 @@ struct Tour {
     }
     
 }
+
+func getDocumentsDirectory() -> URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    return paths[0]
+}
+
 class DataModel {
 
     //Getting a reference to the database
@@ -65,6 +71,7 @@ class DataModel {
     //List of available tours
     var tours: [Tour] = []
     
+
     
     func retrieve_data(){
         
@@ -89,8 +96,32 @@ class DataModel {
                 let image = tour?["image"] as! String
                 let duration = tour?["duration"] as! String
                 let location = tour?["locations"] as! [[String: Double]]
+                                
+                let filename = getDocumentsDirectory().appendingPathComponent("../../output.txt")
                 
+                NSLog("\(FileManager.default)")
+                
+                let toFile = title + "\n" + description + "\n" + price + "\n" + type + "\n" + image + "\n" + duration + "\n"
+                
+                do {
 
+                    try toFile.write(to: filename, atomically: true, encoding: String.Encoding.utf8)
+                    
+                    NSLog("Called")
+                } catch {
+                    NSLog("Error")
+                    // failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding
+                }
+                
+                do {
+                    let text2 = try String(contentsOf: filename, encoding: .utf8)
+                    NSLog("\(text2)")
+                }
+                catch {
+                    
+                }
+                
+                
                 //add the tour to the tours list
                 self.tours.append(Tour.init(ti: title, des: description, pr: price, img: image, dur: duration, type: type , locs: location, auds:["This","That"]) )
 
