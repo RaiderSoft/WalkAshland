@@ -99,7 +99,7 @@ class DataModel {
                                 
                 let filename = getDocumentsDirectory().appendingPathComponent("../../output.txt")
                 
-                NSLog("\(FileManager.default)")
+  
                 
                 let toFile = title + "\n" + description + "\n" + price + "\n" + type + "\n" + image + "\n" + duration + "\n"
                 
@@ -107,15 +107,15 @@ class DataModel {
 
                     try toFile.write(to: filename, atomically: true, encoding: String.Encoding.utf8)
                     
-                    NSLog("Called")
+       
                 } catch {
-                    NSLog("Error")
+                 
                     // failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding
                 }
                 
                 do {
                     let text2 = try String(contentsOf: filename, encoding: .utf8)
-                    NSLog("\(text2)")
+           
                 }
                 catch {
                     
