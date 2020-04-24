@@ -121,9 +121,10 @@ class DataModel {
                     
                 }
                 
-                
+                //Create a tour
+                let t = Tour.init(ti: title, des: description, pr: price, img: image, dur: duration, type: type , locs: location, auds:["This","That"])
                 //add the tour to the tours list
-                self.tours.append(Tour.init(ti: title, des: description, pr: price, img: image, dur: duration, type: type , locs: location, auds:["This","That"]) )
+                self.tours.append(t)
 
                 
               }) { (error) in
