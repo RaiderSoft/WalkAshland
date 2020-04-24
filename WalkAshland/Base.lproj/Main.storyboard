@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -49,15 +49,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fBj-g4-nbi" userLabel="mapView">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fBj-g4-nbi" userLabel="mapView">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <accessibility key="accessibilityConfiguration" identifier="mapView"/>
+                                <accessibility key="accessibilityConfiguration" identifier="mapView">
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
                             </view>
-                            <pickerView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" restorationIdentifier="picker" translatesAutoresizingMaskIntoConstraints="NO" id="UR2-pi-9qn">
-                                <rect key="frame" x="0.0" y="597" width="414" height="216"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                            </pickerView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" semanticContentAttribute="playback" translatesAutoresizingMaskIntoConstraints="NO" id="v9i-uy-wdl">
                                 <rect key="frame" x="0.0" y="813" width="414" height="49"/>
                                 <items>
@@ -94,19 +92,20 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="p8h-wo-7tn"/>
                                 </items>
                             </toolbar>
+                            <pickerView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" restorationIdentifier="picker" translatesAutoresizingMaskIntoConstraints="NO" id="UR2-pi-9qn">
+                                <rect key="frame" x="0.0" y="597" width="414" height="216"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="fBj-g4-nbi" firstAttribute="leading" secondItem="Oot-PU-iFJ" secondAttribute="leading" id="AO8-Fz-ei5"/>
-                            <constraint firstItem="fBj-g4-nbi" firstAttribute="top" secondItem="Oot-PU-iFJ" secondAttribute="top" id="Dbb-he-Vq0"/>
-                            <constraint firstItem="UR2-pi-9qn" firstAttribute="leading" secondItem="Oot-PU-iFJ" secondAttribute="leading" id="PXi-X4-FAz"/>
-                            <constraint firstItem="v9i-uy-wdl" firstAttribute="top" secondItem="fBj-g4-nbi" secondAttribute="bottom" id="R0t-WR-UO8"/>
-                            <constraint firstItem="v9i-uy-wdl" firstAttribute="top" secondItem="UR2-pi-9qn" secondAttribute="bottom" id="XmC-Bs-TTU"/>
-                            <constraint firstItem="v9i-uy-wdl" firstAttribute="bottom" secondItem="5Ux-r5-M9I" secondAttribute="bottom" id="YtR-hj-OUc"/>
-                            <constraint firstItem="v9i-uy-wdl" firstAttribute="leading" secondItem="5Ux-r5-M9I" secondAttribute="leading" id="cB1-4H-JCt"/>
-                            <constraint firstAttribute="trailing" secondItem="UR2-pi-9qn" secondAttribute="trailing" id="e1p-yn-v3S"/>
-                            <constraint firstItem="v9i-uy-wdl" firstAttribute="trailing" secondItem="5Ux-r5-M9I" secondAttribute="trailing" id="nYj-Mi-NFy"/>
-                            <constraint firstAttribute="trailing" secondItem="fBj-g4-nbi" secondAttribute="trailing" id="ppo-p1-8Pk"/>
+                            <constraint firstItem="UR2-pi-9qn" firstAttribute="trailing" secondItem="5Ux-r5-M9I" secondAttribute="trailing" id="Ehl-p5-iiY"/>
+                            <constraint firstItem="v9i-uy-wdl" firstAttribute="trailing" secondItem="5Ux-r5-M9I" secondAttribute="trailing" id="HEj-IJ-cQ0"/>
+                            <constraint firstItem="UR2-pi-9qn" firstAttribute="leading" secondItem="5Ux-r5-M9I" secondAttribute="leading" id="MpE-hO-Okk"/>
+                            <constraint firstItem="v9i-uy-wdl" firstAttribute="bottom" secondItem="5Ux-r5-M9I" secondAttribute="bottom" id="P9Q-Wd-S3G"/>
+                            <constraint firstItem="v9i-uy-wdl" firstAttribute="top" secondItem="UR2-pi-9qn" secondAttribute="bottom" id="bfv-cg-zmC"/>
+                            <constraint firstItem="v9i-uy-wdl" firstAttribute="top" secondItem="fBj-g4-nbi" secondAttribute="bottom" id="hUx-c6-KOl"/>
+                            <constraint firstItem="v9i-uy-wdl" firstAttribute="leading" secondItem="5Ux-r5-M9I" secondAttribute="leading" id="hja-xz-6Is"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5Ux-r5-M9I"/>
                     </view>
@@ -118,7 +117,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qJx-Sj-fFW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2469.5652173913045" y="-43.526785714285715"/>
+            <point key="canvasLocation" x="2466.666666666667" y="-44.196428571428569"/>
         </scene>
         <!--Tours-->
         <scene sceneID="ETN-1n-cpx">
@@ -223,7 +222,7 @@
                                             </constraints>
                                             <state key="normal">
                                                 <attributedString key="attributedTitle">
-                                                    <fragment content="Download">
+                                                    <fragment content="Purchase">
                                                         <attributes>
                                                             <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <font key="NSFont" metaFont="system" size="15"/>
