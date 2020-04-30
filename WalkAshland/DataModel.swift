@@ -56,9 +56,38 @@ struct Tour {
     
 }
 
-func getDocumentsDirectory() -> URL {
-    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-    return paths[0]
+// Save object in document directory
+func saveObject(fileName: String, object: Any) -> Bool {
+    
+    let filePath = getDirectoryPath().appendingPathComponent(fileName)
+    do {
+        let data = try NSKeyedArchiver.archivedData(withRootObject: object, requiringSecureCoding: false)
+        try data.write(to: filePath)
+        return true
+    } catch {
+        print("error is: \(error.localizedDescription)")
+    }
+    return false
+}
+
+// Get object from document directory
+func getObject(fileName: String) -> Any? {
+    
+    let filePath = getDirectoryPath().appendingPathComponent(fileName)
+    do {
+        let data = try Data(contentsOf: filePath)
+        let object = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)
+        return object
+    } catch {
+        print("error is: \(error.localizedDescription)")
+    }
+    return nil
+}
+
+//Get the document directory path
+func getDirectoryPath() -> URL {
+    let arrayPaths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    return arrayPaths[0]
 }
 
 class DataModel {
@@ -101,32 +130,15 @@ class DataModel {
                 //Create a tour
                 let t = Tour.init(ti: title, des: description, pr: price, img: image, dur: duration, type: type , locs: location, auds:["This","That"])
                 
-                let filename = getDocumentsDirectory().appendingPathComponent("../../output.txt")
-                              
-                
-                              
-                let toFile = title + "\n" + description + "\n" + price + "\n" + type + "\n" + image + "\n" + duration + "\n"
-                              
-                do {
 
-                        try toFile.write(to: filename, atomically: true, encoding: String.Encoding.utf8)
-                                  
-                     
-                    } catch {
-                               
-                                  // failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding
-                    }
-                              
-                do {
-                        let text2 = try String(contentsOf: filename, encoding: .utf8)
-                         
-                    }
-                    catch {
-                                  
-                        }
+//                // Get the saved Car object
+//                if let car = getObject(fileName: "Title") as? Tour {
+//                    print("The title is: \(car)")
+//                }
                 
                 //add the tour to the tours list
                 self.tours.append(t)
+
 
                 
               }) { (error) in
@@ -137,12 +149,15 @@ class DataModel {
             x += 1 //The code will be improved to download all available tours
         }
         
+        if saveObject(fileName: "Title", object: tours) {
+            print("saved")
+        } else {
+            print("not saved")
+        }
         
-        
-        
-        
-        
-        
+        if let t = getObject(fileName: "Title") as? Tour {
+            print("Tour is: \(t)")
+        }
         
         
         
