@@ -196,7 +196,7 @@
                                                 <constraint firstAttribute="width" constant="21" id="NDb-KN-8Qg"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Walking" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JxE-uu-ilG" userLabel="typ">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Walking" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JxE-uu-ilG" userLabel="type">
                                             <rect key="frame" x="322" y="155" width="38" height="12"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                             <nil key="textColor"/>
@@ -488,7 +488,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preview Image: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vB2-v0-9Ed">
-                                <rect key="frame" x="20" y="351" width="82" height="21"/>
+                                <rect key="frame" x="20" y="351" width="121" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="121" id="biB-Yn-NOG"/>
                                     <constraint firstAttribute="height" constant="21" id="jfV-HF-0gi"/>
@@ -498,7 +498,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PhotoLibrary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SGI-XN-9V6">
-                                <rect key="frame" x="147" y="351" width="90" height="21"/>
+                                <rect key="frame" x="186" y="351" width="51" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="NFt-bX-luv"/>
                                     <constraint firstAttribute="width" constant="90" id="mJx-gY-8Z5"/>
@@ -528,7 +528,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cSN-j6-y0l">
-                                <rect key="frame" x="210" y="466" width="48" height="21"/>
+                                <rect key="frame" x="171" y="466" width="48" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="9f5-w8-Crf"/>
                                     <constraint firstAttribute="width" constant="48" id="VU2-n0-Iue"/>
@@ -550,7 +550,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="voB-hD-xsE">
-                                <rect key="frame" x="83" y="459" width="97" height="34"/>
+                                <rect key="frame" x="83" y="459" width="58" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="3J1-e8-a8G"/>
                                     <constraint firstAttribute="width" constant="97" id="cVb-rT-rd2"/>
@@ -559,7 +559,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6IZ-yj-zmR">
-                                <rect key="frame" x="284" y="424" width="58" height="34"/>
+                                <rect key="frame" x="245" y="424" width="97" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="97" id="9dw-ep-j1Q"/>
                                     <constraint firstAttribute="height" constant="34" id="mTq-Fe-BXy"/>
