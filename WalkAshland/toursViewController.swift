@@ -5,40 +5,49 @@
 //  Created by Faisal Alik on 3/25/20.
 //  Copyright © 2020 RaiderSoft. All rights reserved.
 //
-
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
 import UIKit
-import Firebase
-import FirebaseUI
-import SDWebImage
+import Firebase     //needed for using Firebase database and referencing the db
+import FirebaseUI   //
+import SDWebImage   //Needed for using active loading of an image from the firebase storage
 import SDWebImageWebPCoder
 import SwiftUI
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
 
+
+/*  This class is the class for the tours view controller that list the tours   */
 class toursViewController: UITableViewController {
-    
-    //creating a model instance
-    var dataModel: DataModel? = DataModel()
-    
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
+   
+    //Creating variable to be set from the scene delegate for the data
+    var dataModel: DataModel?
     //To store dowloaded tours from the model
     var tours: [Tour] {
-        return dataModel?.tours ?? []
-    }
-    
-    //Create a reference to the firebase storage
+        
+        return dataModel?.tours ?? []   }
+    //Create a reference to the firebase storage for accessing files
     let storageRef = Storage.storage().reference()
-    /**************************/
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        //dataModel?.writeToFireBase()
-        self.dataModel?.retrieve_data()
-    }
-    
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tableView.reloadData()
-        reloadInputViews()
         
     }
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
+    //This function is called before the view will be loaded
+    //I used this function to reload the data on the table
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //dataModel?.retrieve_data()
+        NSLog("in toursviewcont tours count is \(tours.count)")
+        tableView.reloadData()
+        
+        }
+    
+    //This function sets the number of rows in table
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tours.count
     }
@@ -70,20 +79,22 @@ class toursViewController: UITableViewController {
     return cell
     }
     
-    /*
-     //SEND the this tour data on clicking
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
+    /* This function is called upon segue to the other VC ,
+        I used this function to pass data to the seguing view controller
+     */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let tourInfo = segue.destination as? tourInfo,
+            let playsc = segue.destination as? playingViewController,
             
             let index = tableView.indexPathForSelectedRow?.row
             else {
                 return
         }
         tourInfo.tour = tours[index]
+        playsc.tour = tours[index]
     }
-    */
-    
-    
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
     
 }
 
@@ -108,16 +119,6 @@ class tourCell: UITableViewCell {
     
     @IBOutlet weak var aboutOut: UITextView!
     @IBOutlet weak var titleOut: UILabel!
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-    }
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        
-        //imgOut.layer.borderWidth = 4.0
-        //imgOut.layer.borderColor = #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)
-    }
     
 }
  

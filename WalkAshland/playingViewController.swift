@@ -25,33 +25,32 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     var audioList: [String] = [String]()
     
     
-    
-    
-    /* ######################### Faisal Alik  ###########################
-        Declaring necessary variables
-     */
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
+    //Need to recieve the selected tour information
+    var tour: Tour?                  //This will recieve data from the tour list
     var camera:GMSCameraPosition?   //Used to hold a camera object ref
     var mapView: GMSMapView?        //Used to hold a map object ref
     
     //A dummy variable late will store the real values pass of the location points
-    var locationPoints: [[String: Double]] = [  [   "long": 34.3, "lat": 35.3],
-                                                [   "long": 34.4, "lat": 35.2],
-                                                [   "long": 34.1, "lat": 35.5]  ]
+    var locationPoints: [[String: Double]] = [  [   "long": 33.894343, "lat": 35.497061],
+                                                [   "long": 33.894315, "lat": 35.496004],
+                                                [   "long": 33.892569, "lat": 35.495883],
+                                                [   "long": 33.892741,"lat": 35.497423],
+                                                [   "long": 33.893304,"lat": 35.497671],
+                                                [   "long": 33.893397,"lat": 35.496783],
+                                                [   "long": 33.894310,"lat": 35.497068] ]
     //Declare an array that will hold the markers corespoding to the location points
     var tourPointMarkers: [GMSMarker]?
-    
     //create a path
     let tourPath = GMSMutablePath()  //will indicate the path of the tour
     
     //The google api for accessing directions
     var baseURL = "https://maps.googleapis.com/maps/api/directions/json?"
-    //*******************************************************************-Alik
-    
-    
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
     
     /* This is linked to the action button to display and make disapear the picker view*/
     @IBAction func DisplayList(_ sender: Any) {
-        //##################################################################-Faisal
+        //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-Faisal
         //Handling picker view interactions
         if PickerTextView.isHidden {
             PickerTextView.isHidden = false
@@ -60,7 +59,9 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         else {
             PickerTextView.isHidden = true
             PickerTextView.isUserInteractionEnabled = false
-        }//******************************************************************-Alik
+        }//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
+        
+        
     }
     
     func changeMarker(i:Int){
@@ -77,7 +78,7 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             let lat = locationPoints[Int(locationPoints.count/2)]["lat"]
         {
             //Create a camera with the above center focused
-            camera = GMSCameraPosition.camera(withLatitude: lon , longitude: lat, zoom: 4)
+            camera = GMSCameraPosition.camera(withLatitude: lon , longitude: lat, zoom: 17)
         }
         else
         {
@@ -122,24 +123,23 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             
             tourLine.map = mapView
         }
-        
+        NSLog("\n\nTitle of tour is \(tour?.title)\n\n")
         //Setup the maps url
         //USE if need the direction otherwise only draw streaght lines between the points
         //Google charges for direction api call
         baseURL += "origin=\(locationPoints[0])&destination=\(locationPoints[1])&mode=walking&key=AIzaSyDjNpvuv_eW0ogWbHevj3MWwll2El58mW0"
+        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
         
+        
+        //Created by Dylan
 
         
-        //***************************************************************-Alik
         
         
         
         
         
-        
-        
-        
-       //Created by Dylan
+       
        //bring mediabar forward
        MediaBar.layer.zPosition = 1;
        
@@ -169,7 +169,7 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             self.view.addSubview(map)               //Adding the mapview as a subview
             mapView?.addSubview(PickerTextView)     //Adding the pickerview to the mapview
         }
-        //***************************************************************-Alik
+        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
     }
     
 

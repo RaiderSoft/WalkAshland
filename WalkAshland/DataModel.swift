@@ -4,16 +4,21 @@
 //
 //  Created by Faisal Alik on 3/25/20.
 //  Copyright © 2020 RaiderSoft. All rights reserved.
-//
 
+/*** Initial Programmer ::: Faisal Alik        *******/
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
 import Foundation
 import UIKit
-import Firebase
-import FirebaseStorage
+import Firebase             //Needed to create instances of firebase bucket
+import FirebaseStorage      //Needed to create and access file inside firebase storage
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
 
-//A tour consists of multiple attributes
+
+//This class defines a tour object consisting of the required fields
 struct Tour {
-    
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
+    //This is the initializer, that can be used to create object of this class by passing required values
     init(ti: String, des: String, pr: String, img: String, dur: String , type: String, locs: [[String:Double]], auds: [String]) {
         self.title = ti
         self.description = des
@@ -24,23 +29,15 @@ struct Tour {
         self.locationPoints = locs
         self.audioClips = auds
     }
-    
-    var title: String  //The Tour title
-    var description: String  //A description about the tour viewed as about
-    var price: String = "3.00"  //The price of a toure currently 3.00 dollars
-    var imgPath: String  ////An image to be displayed in as a preview image
-
-    
-    var duration: String  //The Duraction of tour in minutes
-    var tourType: String = "Walking"  //To store the type of the tour can be Walking, ByCar, Terain For now just Walking
-    
-    //location points on this tour
-    //location points are labeled with integer numbers that coresponds to a point with latitude and logntitude
-    var locationPoints: [[String: Double]] // location is stored as latitude and longitude
-    
-    //Not sure Need to be edited
-    var audioClips: [String]
-
+    var title: String                           //The Tour title
+    var description: String                     //A description about the tour viewed as about
+    var price: String = "3.00"                  //The price of a toure currently 3.00 dollars
+    var imgPath: String                         //An image to be displayed in as a preview image
+    var duration: String                        //The Duraction of tour in minutes
+    var tourType: String = "Walking"            //To store the type of the tour can be Walking, ByCar, Terain For now just Walking
+    var locationPoints: [[String: Double]]      // location is stored as an array of latitude and longitude
+    var audioClips: [String]                    //Not sure Need to be edited
+    //This function returns a dictiory of values in the object
     var saveTourDetail: [String: String] {
     
         return [
@@ -50,105 +47,62 @@ struct Tour {
         "image": "\(imgPath)",
         "duration": "\(duration)",
         "type": "\(tourType)"
-            
+        
         ]
     }
-    
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
 }
-
-// Save object in document directory
-func saveObject(fileName: String, object: Any) -> Bool {
-    
-    let filePath = getDirectoryPath().appendingPathComponent(fileName)
-    do {
-        let data = try NSKeyedArchiver.archivedData(withRootObject: object, requiringSecureCoding: false)
-        try data.write(to: filePath)
-        return true
-    } catch {
-        print("error is: \(error.localizedDescription)")
-    }
-    return false
-}
-
-// Get object from document directory
-func getObject(fileName: String) -> Any? {
-    
-    let filePath = getDirectoryPath().appendingPathComponent(fileName)
-    do {
-        let data = try Data(contentsOf: filePath)
-        let object = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)
-        return object
-    } catch {
-        print("error is: \(error.localizedDescription)")
-    }
-    return nil
-}
-
-//Get the document directory path
-func getDirectoryPath() -> URL {
-    let arrayPaths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-    return arrayPaths[0]
-}
-
 class DataModel {
-
-    //Getting a reference to the database
-    var databaseRef: DatabaseReference!
-    //Get a reference to the storage
-    let storage = Storage.storage()
-    
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-Faisal
     //List of available tours
     var tours: [Tour] = []
+    //Getting a reference to the database
+    var databaseRef: DatabaseReference!
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
     
-
     
     func retrieve_data(){
+        //
+        //Get a reference to the storage
+        //let storage = Storage.storage()
         
         
         //Reference to the database
-        self.databaseRef = Database.database().reference()
+        databaseRef = Database.database().reference()
 
-        var x : Int = 0
-        while x < 1 {
-            
-            databaseRef.child("db").child("\(x)").observeSingleEvent(of: .value, with: { (data) in
-              // Get user value
-                
-              let tour = data.value as? NSDictionary
-
-                
-                //Get individual values of a tour from the database
-                let title = tour?["title"] as! String
-                let description = tour?["about"] as! String
-                let price = tour?["price"] as! String
-                let type = tour?["type"] as! String
-                let image = tour?["image"] as! String
-                let duration = tour?["duration"] as! String
-                let location = tour?["locations"] as! [[String: Double]]
-                                
-                
-                //Create a tour
-                let t = Tour.init(ti: title, des: description, pr: price, img: image, dur: duration, type: type , locs: location, auds:["This","That"])
-                
-
-//                // Get the saved Car object
-//                if let car = getObject(fileName: "Title") as? Tour {
-//                    print("The title is: \(car)")
-//                }
-                
-                //add the tour to the tours list
-                self.tours.append(t)
-
-
-                
-              }) { (error) in
-                print(error.localizedDescription)
-                
+        databaseRef.child("db").observeSingleEvent(of: .value, with: { (toursData) in
+            let toursCount = toursData.childrenCount - 1
+            var iterator = 0
+            while(iterator <= toursCount){
+                self.databaseRef.child("db").child("\(iterator)").observeSingleEvent(of: .value, with: { (data) in
+                    // Get user value
+                    
+                    let tour = data.value as? NSDictionary
+                    //Get individual values of a tour from the database
+                    let title = tour?["title"] as! String
+                    let description = tour?["about"] as! String
+                    let price = tour?["price"] as! String
+                    let type = tour?["type"] as! String
+                    let image = tour?["image"] as! String
+                    let duration = tour?["duration"] as! String
+                    let location = tour?["locations"] as! [[String: Double]]
+                    //Create a tour
+                    let t = Tour.init(ti: title, des: description, pr: price, img: image, dur: duration, type: type , locs: location, auds:["This","That"])
+                    //add the tour to the tours list
+                    self.tours.append(t)
+                    NSLog("INside the db call toursCount\(self.tours.count)")
+                })
+                { (error) in
+                    //print(error.localizedDescription)
+                    
+                }
+                iterator += 1
             }
-            
-            x += 1 //The code will be improved to download all available tours
+        })
+        {   (error) in
+            //print(error.localizedDescription)
         }
-        
+        /*
         if saveObject(fileName: "Title", object: tours) {
             print("saved")
         } else {
@@ -158,7 +112,7 @@ class DataModel {
         if let t = getObject(fileName: "Title") as? Tour {
             print("Tour is: \(t)")
         }
-        
+        */
         
         
         
@@ -184,11 +138,43 @@ class DataModel {
         /****/
         
         ///let imageRef = storageRef.child("img/ashland2")
-        
-        
-        
 
-        
     }
     
 }
+
+//################################################################-Dylan
+// Save object in document directory
+func saveObject(fileName: String, object: Any) -> Bool {
+    
+    let filePath = getDirectoryPath().appendingPathComponent(fileName)
+    do {
+        let data = try NSKeyedArchiver.archivedData(withRootObject: object, requiringSecureCoding: false)
+        try data.write(to: filePath)
+        return true
+    } catch {
+        print("error is: \(error.localizedDescription)")
+    }
+    return false
+}
+// Get object from document directory
+func getObject(fileName: String) -> Any? {
+    
+    let filePath = getDirectoryPath().appendingPathComponent(fileName)
+    do {
+        let data = try Data(contentsOf: filePath)
+        let object = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)
+        return object
+    } catch {
+        print("error is: \(error.localizedDescription)")
+    }
+    return nil
+}
+                                                                                //SHOULD HAVE THESE FUNCTIONS OUTSIDE ANY CLASS??
+//Get the document directory path
+func getDirectoryPath() -> URL {
+    let arrayPaths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    return arrayPaths[0]
+}
+//*****************************************************************-Pitts
+
