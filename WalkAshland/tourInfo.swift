@@ -27,8 +27,16 @@ class tourInfo: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+         // get image from directory
+               let path = "/ashland1.jpeg"
+               guard   let img = UIImage(named: "ashland1"),
+                       let url = img.save(at: .documentDirectory,
+                                          pathAndImageName: path) else { return }
+               
+               guard let img2 = UIImage(fileURLWithPath: url) else { return }
+        
         TourTitle.text = "Plaza" //tour?.title
-        //TourImage.image = tour?.imgPath
+        TourImage.image = img2
         TourTime.text = "23 mins" //tour?.duration
         TourType.text = "Walking" //tour?.tourType
         TourDistance.text = "500 ft" //tour?.duration

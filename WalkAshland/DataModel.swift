@@ -56,38 +56,56 @@ struct Tour {
     
 }
 
-// Save object in document directory
-func saveObject(fileName: String, object: Any) -> Bool {
-    
-    let filePath = getDirectoryPath().appendingPathComponent(fileName)
-    do {
-        let data = try NSKeyedArchiver.archivedData(withRootObject: object, requiringSecureCoding: false)
-        try data.write(to: filePath)
-        return true
-    } catch {
-        print("error is: \(error.localizedDescription)")
+// save
+extension UIImage {
+
+    func save(at directory: FileManager.SearchPathDirectory,
+              pathAndImageName: String,
+              createSubdirectoriesIfNeed: Bool = true,
+              compressionQuality: CGFloat = 1.0)  -> URL? {
+        do {
+        let documentsDirectory = try FileManager.default.url(for: directory, in: .userDomainMask,
+                                                             appropriateFor: nil,
+                                                             create: false)
+        return save(at: documentsDirectory.appendingPathComponent(pathAndImageName),
+                    createSubdirectoriesIfNeed: createSubdirectoriesIfNeed,
+                    compressionQuality: compressionQuality)
+        } catch {
+            print("-- Error: \(error)")
+            return nil
+        }
     }
-    return false
+
+    func save(at url: URL,
+              createSubdirectoriesIfNeed: Bool = true,
+              compressionQuality: CGFloat = 1.0)  -> URL? {
+        do {
+            if createSubdirectoriesIfNeed {
+                try FileManager.default.createDirectory(at: url.deletingLastPathComponent(),
+                                                        withIntermediateDirectories: true,
+                                                        attributes: nil)
+            }
+            guard let data = jpegData(compressionQuality: compressionQuality) else { return nil }
+            try data.write(to: url)
+            return url
+        } catch {
+            print("-- Error: \(error)")
+            return nil
+        }
+    }
 }
 
-// Get object from document directory
-func getObject(fileName: String) -> Any? {
-    
-    let filePath = getDirectoryPath().appendingPathComponent(fileName)
-    do {
-        let data = try Data(contentsOf: filePath)
-        let object = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)
-        return object
-    } catch {
-        print("error is: \(error.localizedDescription)")
+// load from path
+extension UIImage {
+    convenience init?(fileURLWithPath url: URL, scale: CGFloat = 1.0) {
+        do {
+            let data = try Data(contentsOf: url)
+            self.init(data: data, scale: scale)
+        } catch {
+            print("-- Error: \(error)")
+            return nil
+        }
     }
-    return nil
-}
-
-//Get the document directory path
-func getDirectoryPath() -> URL {
-    let arrayPaths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-    return arrayPaths[0]
 }
 
 class DataModel {
@@ -149,16 +167,12 @@ class DataModel {
             x += 1 //The code will be improved to download all available tours
         }
         
-        if saveObject(fileName: "Title", object: tours) {
-            print("saved")
-        } else {
-            print("not saved")
-        }
-        
-        if let t = getObject(fileName: "Title") as? Tour {
-            print("Tour is: \(t)")
-        }
-        
+        // save image
+        let path = "/ashland1.jpeg"
+        guard   let img = UIImage(named: "ashland1"),
+                let url = img.save(at: .documentDirectory,
+                                   pathAndImageName: path) else { return }
+        print(url)
         
         
         
