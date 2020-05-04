@@ -4,13 +4,18 @@
 //
 //  Created by Faisal Alik on 3/28/20.
 //  Copyright © 2020 RaiderSoft. All rights reserved.
-//
+
+/*** Initial Programmer::: Dylan Pitts      ***/
 
 import Foundation
 import UIKit
 class tourInfo: UIViewController {
     
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
+    //Need to recieve the selected tour information
     var tour: Tour?
+    //This will recieve data from the tour list
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ALik
     
     @IBOutlet weak var TourTitle: UILabel!
     
@@ -41,6 +46,12 @@ class tourInfo: UIViewController {
         TourType.text = "Walking" //tour?.tourType
         TourDistance.text = "500 ft" //tour?.duration
         TourDescription.text = "This is a test Discription" //tour?.description
+        TourTitle.text = tour?.title ?? "Not Data"
+        //TourImage.image =
+        TourTime.text = tour?.duration ?? "00.0 Miles"
+        TourType.text = tour?.tourType ?? "Walking"
+        TourDistance.text = tour?.duration ?? "0.0 minutes"
+        TourDescription.text = tour?.description ?? "Loading"
 
     }
     
