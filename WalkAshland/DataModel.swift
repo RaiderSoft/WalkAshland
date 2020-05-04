@@ -108,29 +108,57 @@ extension UIImage {
 class DataModel {
 
     //Getting a reference to the database
-    var databaseRef: DatabaseReference!
-    //Get a reference to the storage
-    let storage = Storage.storage()
-    
-    //List of available tours
-    var tours: [Tour] = []
-    
-    
-    func retrieve_data(){
-        //
+        var databaseRef: DatabaseReference!
         //Get a reference to the storage
-        //let storage = Storage.storage()
+        let storage = Storage.storage()
         
+        //List of available tours
+        var tours: [Tour] = []
         
-        //Reference to the database
-        databaseRef = Database.database().reference()
-
-                
-              }) { (error) in
-                print(error.localizedDescription)
-                
-            }
+       
+        func retrieve_data(){
             
+            
+            //Reference to the database
+            self.databaseRef = Database.database().reference()
+
+            var x : Int = 0
+            while x < 1 {
+                
+                databaseRef.child("db").child("\(x)").observeSingleEvent(of: .value, with: { (data) in
+                  // Get user value
+                    
+                  let tour = data.value as? NSDictionary
+
+                    
+                    //Get individual values of a tour from the database
+                    let title = tour?["title"] as! String
+                    let description = tour?["about"] as! String
+                    let price = tour?["price"] as! String
+                    let type = tour?["type"] as! String
+                    let image = tour?["image"] as! String
+                    let duration = tour?["duration"] as! String
+                    let location = tour?["locations"] as! [[String: Double]]
+                                    
+                    
+                    //Create a tour
+                    let t = Tour.init(ti: title, des: description, pr: price, img: image, dur: duration, type: type , locs: location, auds:["This","That"])
+                    
+    //                // Get the saved Car object
+    //                if let car = getObject(fileName: "Title") as? Tour {
+    //                    print("The title is: \(car)")
+    //                }
+                    
+                    //add the tour to the tours list
+                    self.tours.append(t)
+
+
+                    
+                  }) { (error) in
+                    print(error.localizedDescription)
+                    
+                }
+                
             x += 1 //The code will be improved to download all available tours
         }
         
