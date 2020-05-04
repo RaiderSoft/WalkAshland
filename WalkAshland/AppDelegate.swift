@@ -13,19 +13,17 @@ import GooglePlaces //To access places, current place
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-
+        
+        //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-Faisal
         //Connecting to Firebase database
         FirebaseApp.configure()
-        
-        //Later Restrict the API key
+        //Later Restrict the API key                                        //>>>><<<K<<<<<<#<#<#<#<#<$<$<<#<#<#
         //providing the google maps Api key
         GMSServices.provideAPIKey("AIzaSyDjNpvuv_eW0ogWbHevj3MWwll2El58mW0")
         GMSPlacesClient.provideAPIKey("AIzaSyDjNpvuv_eW0ogWbHevj3MWwll2El58mW0")
+        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
         
         return true
     }
