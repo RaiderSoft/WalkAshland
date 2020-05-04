@@ -79,22 +79,25 @@ class toursViewController: UITableViewController {
     return cell
     }
     
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
-    /* This function is called upon segue to the other VC ,
-        I used this function to pass data to the seguing view controller
-     */
+    
+     //SEND the this tour data on clicking
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let tourInfo = segue.destination as? tourInfo,
-            let playsc = segue.destination as? playingViewController,
             
             let index = tableView.indexPathForSelectedRow?.row
             else {
+                guard let playSc = segue.destination as? playingViewController,
+                    let index1 = tableView.indexPathForSelectedRow?.row
+                    else {
+                        return
+                }
+                playSc.tour = tours[index1]
                 return
         }
         tourInfo.tour = tours[index]
-        playsc.tour = tours[index]
+        
+        
     }
-    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
     
 }
 
