@@ -40,14 +40,9 @@ class tourInfo: UIViewController {
                
                guard let img2 = UIImage(fileURLWithPath: url) else { return }
         
-        TourTitle.text = "Plaza" //tour?.title
-        TourImage.image = img2
-        TourTime.text = "23 mins" //tour?.duration
-        TourType.text = "Walking" //tour?.tourType
-        TourDistance.text = "500 ft" //tour?.duration
-        TourDescription.text = "This is a test Discription" //tour?.description
+
         TourTitle.text = tour?.title ?? "Not Data"
-        //TourImage.image =
+        TourImage.image = img2
         TourTime.text = tour?.duration ?? "00.0 Miles"
         TourType.text = tour?.tourType ?? "Walking"
         TourDistance.text = tour?.duration ?? "0.0 minutes"
