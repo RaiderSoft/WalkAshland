@@ -32,22 +32,22 @@ class tourInfo: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-         // get image from directory
-               let path = "/ashland1.jpeg"
-               guard   let img = UIImage(named: "ashland1"),
-                       let url = img.save(at: .documentDirectory,
-                                          pathAndImageName: path) else { return }
-               
-               guard let img2 = UIImage(fileURLWithPath: url) else { return }
+        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
+        let nsUserDomainMask    = FileManager.SearchPathDomainMask.userDomainMask
+        let paths               = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+        if let dirPath          = paths.first
+        {
+            let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent("ashland3.jpg")
+            let image    = UIImage(contentsOfFile: imageURL.path)
+            self.TourImage.image = image
+           // Do whatever you want with the image
+        }
         
-
         TourTitle.text = tour?.title ?? "Not Data"
-        TourImage.image = img2
         TourTime.text = tour?.duration ?? "00.0 Miles"
         TourType.text = tour?.tourType ?? "Walking"
         TourDistance.text = tour?.duration ?? "0.0 minutes"
         TourDescription.text = tour?.description ?? "Loading"
-
     }
     
 }
