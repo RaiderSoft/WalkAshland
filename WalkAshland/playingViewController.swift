@@ -24,6 +24,9 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     //List Text for drop down(PickerTextView)
     var audioList: [String] = [String]()
     
+    var audioPath: [String] = [String]()
+
+    
     
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
     //Need to recieve the selected tour information
@@ -69,7 +72,6 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         //###############################################################-Faisal
         //Get the longitude and latitude of the centeral point in the
@@ -132,24 +134,39 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         
         
         //Created by Dylan
+        
+        
+        //let fileManager = FileManager.default
+        let documentsDirectoryPath:String = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
+        let path = documentsDirectoryPath + "/water.mp3"
 
+        audioPath.append(path)
         
+        let path2 = documentsDirectoryPath + "/babymus.mp3"
         
+        audioPath.append(path2)
         
+        let path3 = documentsDirectoryPath + "/rain.mp3"
         
+        audioPath.append(path3)
         
-        
-       
        //bring mediabar forward
        MediaBar.layer.zPosition = 1;
        
        //Do - try - catch audio player for file sample.wav
-       do {
-           audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "Find_Money", ofType: "mp3")!))
-           
-       } catch {
-           print(error)
-       }
+//       do {
+//           audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "Find_Money", ofType: "mp3")!))
+//
+//       } catch {
+//           print(error)
+//       }
+        
+        do {
+             audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: path))
+             
+         } catch {
+             print(error)
+         }
         
         //mapView.settings.setAllGesturesEnabled(false)
         //used for Drop down menu(PickerTextView)
@@ -157,7 +174,7 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         self.PickerTextView.dataSource = self
         
         //text for Drop down menu(PickerTextView)
-        audioList = ["Track 1", "Track 2", "Track 3"]
+        audioList = ["Find_Money", "water", "rain"]
         
         
         
@@ -202,6 +219,17 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return audioList[row]
     }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: audioPath[row]))
+            
+        } catch {
+            print(error)
+        }
+        
+    }
+    
     //Created By Dylan
     //audio player outlets and actions
     //media tool bar
@@ -219,9 +247,10 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     //rewind
     @IBAction func Rewind(_ sender: Any) {
-    }
+        audioPlayer.currentTime -= 10    }
     //fastforward
     @IBAction func FastForward(_ sender: Any) {
+        audioPlayer.currentTime += 10
     }
     
     //Drop Down Menu

@@ -14,6 +14,9 @@ import Firebase             //Needed to create instances of firebase bucket
 import FirebaseStorage      //Needed to create and access file inside firebase storage
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
 
+let storage = Storage.storage()
+ 
+let storageRef = storage.reference()
 
 //This class defines a tour object consisting of the required fields
 struct Tour {
@@ -46,77 +49,24 @@ struct Tour {
         "price": "\(price)",
         "image": "\(imgPath)",
         "duration": "\(duration)",
-        "type": "\(tourType)"
-            
+        "type": "\(tourType)",
+        "audio": "\(audioClips)"
         ]
     }
     
 }
 
-// save
-extension UIImage {
-
-    func save(at directory: FileManager.SearchPathDirectory,
-              pathAndImageName: String,
-              createSubdirectoriesIfNeed: Bool = true,
-              compressionQuality: CGFloat = 1.0)  -> URL? {
-        do {
-        let documentsDirectory = try FileManager.default.url(for: directory, in: .userDomainMask,
-                                                             appropriateFor: nil,
-                                                             create: false)
-        return save(at: documentsDirectory.appendingPathComponent(pathAndImageName),
-                    createSubdirectoriesIfNeed: createSubdirectoriesIfNeed,
-                    compressionQuality: compressionQuality)
-        } catch {
-            print("-- Error: \(error)")
-            return nil
-        }
-    }
-
-    func save(at url: URL,
-              createSubdirectoriesIfNeed: Bool = true,
-              compressionQuality: CGFloat = 1.0)  -> URL? {
-        do {
-            if createSubdirectoriesIfNeed {
-                try FileManager.default.createDirectory(at: url.deletingLastPathComponent(),
-                                                        withIntermediateDirectories: true,
-                                                        attributes: nil)
-            }
-            guard let data = jpegData(compressionQuality: compressionQuality) else { return nil }
-            try data.write(to: url)
-            return url
-        } catch {
-            print("-- Error: \(error)")
-            return nil
-        }
-    }
-}
-
-// load from path
-extension UIImage {
-    convenience init?(fileURLWithPath url: URL, scale: CGFloat = 1.0) {
-        do {
-            let data = try Data(contentsOf: url)
-            self.init(data: data, scale: scale)
-        } catch {
-            print("-- Error: \(error)")
-            return nil
-        }
-    }
-}
-
 class DataModel {
 
     //Getting a reference to the database
-        var databaseRef: DatabaseReference!
-        //Get a reference to the storage
-        let storage = Storage.storage()
-        
-        //List of available tours
-        var tours: [Tour] = []
-        
-       
-        func retrieve_data(){
+    var databaseRef: DatabaseReference!
+    //Get a reference to the storage
+ 
+    
+    //List of available tours
+    var tours: [Tour] = []
+    
+    func retrieve_data(){
             
             
             //Reference to the database
@@ -139,19 +89,82 @@ class DataModel {
                     let image = tour?["image"] as! String
                     let duration = tour?["duration"] as! String
                     let location = tour?["locations"] as! [[String: Double]]
-                                    
+                    let audio = tour?["audios"] as! [String]
                     
                     //Create a tour
-                    let t = Tour.init(ti: title, des: description, pr: price, img: image, dur: duration, type: type , locs: location, auds:["This","That"])
+                    let t = Tour.init(ti: title, des: description, pr: price, img: image, dur: duration, type: type , locs: location, auds: audio)
                     
-    //                // Get the saved Car object
-    //                if let car = getObject(fileName: "Title") as? Tour {
-    //                    print("The title is: \(car)")
-    //                }
                     
                     //add the tour to the tours list
                     self.tours.append(t)
 
+                    //? - 8 = offset
+                    
+                    let strlen = image.count
+                    
+                    let strOffset = strlen - 8
+                    
+                    let strSub1 = image.suffix(strOffset)
+                    
+                    let strSub2 = strSub1.prefix(strOffset - 4)
+                                        
+                    print(strlen)
+                    
+                    print(image)
+                    
+                    print(strSub1)
+                    
+                    print(strSub2)
+                    
+//                    self.databaseRef.child("audios").observeSingleEvent(of: .value) { (data) in
+//
+//                        let track = tour?["audios"] as! [String]
+//
+//                        print(track)
+//
+//                    }
+                    
+                    
+                    for aud in audio {
+                        
+                        let audDocumentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                        let audLocalURL = audDocumentsURL.appendingPathComponent(aud)
+                        
+                        // Create a reference to the file you want to download
+                        let audRef = storageRef.child(aud)
+
+                        // Download to the local filesystem
+                        _ = audRef.write(toFile: audLocalURL) { (URL, error) -> Void in
+                          if (error != nil) {
+                            // Uh-oh, an error occurred!
+                            print("Error: File Not Saved")
+                          } else {
+                            // Local file URL for "images/island.jpg" is returned
+                            print("File Saved")
+                            print(audLocalURL)
+                          }
+                        }
+                        
+                    }
+                    
+                    
+                    let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                    let localURL = documentsURL.appendingPathComponent(image)
+                    
+                    // Create a reference to the file you want to download
+                    let islandRef = storageRef.child(image)
+
+                    // Download to the local filesystem
+                    _ = islandRef.write(toFile: localURL) { (URL, error) -> Void in
+                      if (error != nil) {
+                        // Uh-oh, an error occurred!
+                        print("Error: File Not Saved")
+                      } else {
+                        // Local file URL for "images/island.jpg" is returned
+                        print("File Saved")
+                        print(localURL)
+                      }
+                    }
 
                     
                   }) { (error) in
@@ -161,42 +174,6 @@ class DataModel {
                 
             x += 1 //The code will be improved to download all available tours
         }
-        
-        // save image
-        let path = "/ashland1.jpeg"
-        guard   let img = UIImage(named: "ashland1"),
-                let url = img.save(at: .documentDirectory,
-                                   pathAndImageName: path) else { return }
-        print(url)
-        
-        
-        
-        /* Getting a file from the Firebase storage
-        var img = UIImage.init(named: "ashland2")
-        
-        //create s storage ref
-        let storageRef = storage.reference()
-        //storageRef.child("")
-        
-        //LocalFileto upload
-        let localFile = URL(string: "./ashland2")
-        
-        //create the file metadata
-        let metadata = StorageMetadata()
-        metadata.contentType = "ashland2/jpeg"
-        
-        //upload file and metadata to the object 'image/ashland2.jpg'
-        let uploadTask = storageRef.putFile(from: localFile!, metadata: metadata)
-        */
-        //listen for state changes, errors, and completion of the upload
-        
-        /****/
-        
-        ///let imageRef = storageRef.child("img/ashland2")
-        
-        
-        
-
         
     }
     

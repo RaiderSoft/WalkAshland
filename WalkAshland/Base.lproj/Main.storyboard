@@ -344,7 +344,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="8bw-aM-Euj" userLabel="TopHalfStack">
                                 <rect key="frame" x="0.0" y="23.333333333333343" width="375" height="371.33333333333326"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ashland2" translatesAutoresizingMaskIntoConstraints="NO" id="my3-lW-1RE">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="my3-lW-1RE">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="306"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <constraints>
@@ -497,7 +497,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preview Image: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vB2-v0-9Ed">
-                                <rect key="frame" x="20" y="351" width="82" height="21"/>
+                                <rect key="frame" x="20" y="351" width="121" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="121" id="biB-Yn-NOG"/>
                                     <constraint firstAttribute="height" constant="21" id="jfV-HF-0gi"/>
@@ -507,7 +507,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PhotoLibrary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SGI-XN-9V6">
-                                <rect key="frame" x="147" y="351" width="90" height="21"/>
+                                <rect key="frame" x="186" y="351" width="51" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="NFt-bX-luv"/>
                                     <constraint firstAttribute="width" constant="90" id="mJx-gY-8Z5"/>
@@ -537,7 +537,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cSN-j6-y0l">
-                                <rect key="frame" x="210" y="466" width="48" height="21"/>
+                                <rect key="frame" x="171" y="466" width="48" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="9f5-w8-Crf"/>
                                     <constraint firstAttribute="width" constant="48" id="VU2-n0-Iue"/>
@@ -559,7 +559,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="voB-hD-xsE">
-                                <rect key="frame" x="83" y="459" width="97" height="34"/>
+                                <rect key="frame" x="83" y="459" width="58" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="3J1-e8-a8G"/>
                                     <constraint firstAttribute="width" constant="97" id="cVb-rT-rd2"/>
@@ -568,7 +568,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6IZ-yj-zmR">
-                                <rect key="frame" x="284" y="424" width="58" height="34"/>
+                                <rect key="frame" x="245" y="424" width="97" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="97" id="9dw-ep-j1Q"/>
                                     <constraint firstAttribute="height" constant="34" id="mTq-Fe-BXy"/>
@@ -705,7 +705,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ashland2" width="450" height="306"/>
         <image name="icloud.and.arrow.up.fill" catalog="system" width="128" height="106"/>
         <image name="locationicon" width="360" height="360"/>
         <image name="timeicon" width="300" height="300"/>
