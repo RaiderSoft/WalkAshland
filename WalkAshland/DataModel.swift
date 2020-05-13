@@ -69,7 +69,6 @@ class DataModel {
         
         //Reference to the database
         databaseRef = Database.database().reference()
-
         databaseRef.child("db").observeSingleEvent(of: .value, with: { (toursData) in
             let toursCount = toursData.childrenCount - 1
             var iterator = 0

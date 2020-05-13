@@ -12,22 +12,14 @@ import GoogleMaps
 import GooglePlaces
 import SDWebImage
 import SDWebImageWebPCoder
+import MapKit
 
-
-class addLocationsViewController: UIViewController {
+class addLocationsViewController: UIViewController, MKMapViewDelegate {
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //create a camera and position it to a certain place
-        let camera = GMSCameraPosition.camera(withLatitude: 42.1972 , longitude: 122.7153, zoom: 9.0)
-        //create a mapview and add the camera
-        let mapView = GMSMapView.map(withFrame: self.view.frame, camera: camera)
-        //add the mapview to the viewcontroller
-        self.view.addSubview(mapView)
-        
-        mapView.isMyLocationEnabled = true
-        mapView.isMultipleTouchEnabled = true
+
 
     }
     
