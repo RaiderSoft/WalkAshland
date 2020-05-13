@@ -28,20 +28,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 return
         }
         for (index, viewController) in viewControllers.enumerated(){
-            
             if let navigationController = viewController as? UINavigationController,
                 let tourViewController = navigationController.viewControllers.first as? toursViewController
             {
                 
-                dataModel.retrieve_data()
-                
                 tourViewController.dataModel = dataModel
+                dataModel.retrieve_data()
+
                 
-                
-                NSLog("From scene delegate tourscoun in tourvc \(tourViewController.dataModel?.tours.count)")
-                NSLog("the number of tour in Datamodel \(dataModel.tours.count)")
+              //  NSLog("From scene delegate tourscoun in tourvc \(tourViewController.dataModel?.tours.count)")
+                //NSLog("the number of tour in Datamodel \(dataModel.tours.count)")
             }
-        }
+        }//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
         guard let _ = (scene as? UIWindowScene) else { return }
         
     }

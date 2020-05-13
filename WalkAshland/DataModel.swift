@@ -67,20 +67,23 @@ class DataModel {
     var tours: [Tour] = []
     
     func retrieve_data(){
-            
-            
-            //Reference to the database
-            self.databaseRef = Database.database().reference()
 
-            var x : Int = 0
-            while x < 1 {
-                
-                databaseRef.child("db").child("\(x)").observeSingleEvent(of: .value, with: { (data) in
-                  // Get user value
+        //
+        //Get a reference to the storage
+        //let storage = Storage.storage()
+        
+        
+        //Reference to the database
+        databaseRef = Database.database().reference()
+        databaseRef.child("db").observeSingleEvent(of: .value, with: { (toursData) in
+            let toursCount = toursData.childrenCount - 1
+            var iterator = 0
+            while(iterator <= toursCount){
+                self.databaseRef.child("db").child("\(iterator)").observeSingleEvent(of: .value, with: { (data) in
+                    // Get user value
                     
-                  let tour = data.value as? NSDictionary
+                    let tour = data.value as? NSDictionary
 
-                    
                     //Get individual values of a tour from the database
                     let title = tour?["title"] as! String
                     let description = tour?["about"] as! String
