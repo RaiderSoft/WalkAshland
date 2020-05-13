@@ -22,7 +22,7 @@ let storageRef = storage.reference()
 struct Tour {
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
     //This is the initializer, that can be used to create object of this class by passing required values
-    init(ti: String, des: String, pr: String, img: String, dur: String , type: String, locs: [[String:Double]], auds: [String]) {
+    init(ti: String, des: String, pr: String, img: String, dur: String , type: String, locs: [[String:Double]], auds: [String], flag: String) {
         self.title = ti
         self.description = des
         self.price = pr
@@ -31,6 +31,9 @@ struct Tour {
         self.tourType = type
         self.locationPoints = locs
         self.audioClips = auds
+        self.flag = flag
+        
+        
     }
     var title: String                           //The Tour title
     var description: String                     //A description about the tour viewed as about
@@ -40,6 +43,9 @@ struct Tour {
     var tourType: String = "Walking"            //To store the type of the tour can be Walking, ByCar, Terain For now just Walking
     var locationPoints: [[String: Double]]      // location is stored as an array of latitude and longitude
     var audioClips: [String]                    //Not sure Need to be edited
+    
+    var flag: String                            //Possible [D,P,ND,NP]
+    
     //This function returns a dictiory of values in the object
     var saveTourDetail: [String: String] {
     
@@ -65,6 +71,7 @@ class DataModel {
     
     //List of available tours
     var tours: [Tour] = []
+    // Array of files
     
     func retrieve_data(){
 
@@ -95,38 +102,11 @@ class DataModel {
                     let audio = tour?["audios"] as! [String]
                     
                     //Create a tour
-                    let t = Tour.init(ti: title, des: description, pr: price, img: image, dur: duration, type: type , locs: location, auds: audio)
+                    let t = Tour.init(ti: title, des: description, pr: price, img: image, dur: duration, type: type , locs: location, auds: audio, flag: "ND")
                     
                     
                     //add the tour to the tours list
                     self.tours.append(t)
-
-                    //? - 8 = offset
-                    
-                    let strlen = image.count
-                    
-                    let strOffset = strlen - 8
-                    
-                    let strSub1 = image.suffix(strOffset)
-                    
-                    let strSub2 = strSub1.prefix(strOffset - 4)
-                                        
-                    print(strlen)
-                    
-                    print(image)
-                    
-                    print(strSub1)
-                    
-                    print(strSub2)
-                    
-//                    self.databaseRef.child("audios").observeSingleEvent(of: .value) { (data) in
-//
-//                        let track = tour?["audios"] as! [String]
-//
-//                        print(track)
-//
-//                    }
-                    
                     
                     for aud in audio {
                         
@@ -170,14 +150,16 @@ class DataModel {
                     }
 
                     
-                  }) { (error) in
-                    print(error.localizedDescription)
+                  })
+                  { (error) in
+                        NSLog("ERROR: Unable to open Firebase database")
+                    }
+                iterator += 1
                     
-                }
-                
-            x += 1 //The code will be improved to download all available tours
+            }
+        })
+        { (error) in
+            NSLog("ERROR: Unable to open Firebase database")
         }
-        
     }
-    
 }

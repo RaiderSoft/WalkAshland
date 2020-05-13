@@ -79,14 +79,17 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
             Download the image and view is
             Create a reference to this image from the firebase storage
          */
-        let imageRef = storageRef.child("ashland2.jpg") //Change this to get from specif folder of images
+        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
+        let nsUserDomainMask    = FileManager.SearchPathDomainMask.userDomainMask
+        let paths               = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+        if let dirPath          = paths.first
+        {
+            let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(tour.imgPath)
+            let image    = UIImage(contentsOfFile: imageURL.path)
+            cell.imgOut.image = image
+           // Do whatever you want with the image
+        }
         
-        //a default image
-        
-        let defImage = UIImage(named: "ashland1")
-        
-        //load the image
-        cell.imgOut!.sd_setImage(with: imageRef, placeholderImage: defImage)
         cell.startOut.tag = indexPath.row
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
     return cell

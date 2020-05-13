@@ -25,8 +25,6 @@
 		6A95965C242B4323002F19CF /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A95965B242B4323002F19CF /* DataModel.swift */; };
 		6A95965E242F3CA2002F19CF /* tourInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A95965D242F3CA2002F19CF /* tourInfo.swift */; };
 		D1C3706A162B94BD94737816 /* Pods_WalkAshland_WalkAshlandUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C734EC90AD374A411D6901A /* Pods_WalkAshland_WalkAshlandUITests.framework */; };
-		FC8FF1B32463C6C70096245F /* rain.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FC8FF1B22463C6C70096245F /* rain.mp3 */; };
-		FC8FF1B52463C7660096245F /* water.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FC8FF1B42463C7650096245F /* water.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,8 +75,6 @@
 		963245A9FB1247C801EB67E7 /* Pods-WalkAshland-WalkAshlandUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkAshland-WalkAshlandUITests.debug.xcconfig"; path = "Target Support Files/Pods-WalkAshland-WalkAshlandUITests/Pods-WalkAshland-WalkAshlandUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		E17CC3F90DDBD3A86646061A /* Pods-WalkAshland.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkAshland.release.xcconfig"; path = "Target Support Files/Pods-WalkAshland/Pods-WalkAshland.release.xcconfig"; sourceTree = "<group>"; };
 		F9DA9DACF46712E8055A05C3 /* Pods-WalkAshlandTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkAshlandTests.debug.xcconfig"; path = "Target Support Files/Pods-WalkAshlandTests/Pods-WalkAshlandTests.debug.xcconfig"; sourceTree = "<group>"; };
-		FC8FF1B22463C6C70096245F /* rain.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = rain.mp3; path = ../../../Desktop/rain.mp3; sourceTree = "<group>"; };
-		FC8FF1B42463C7650096245F /* water.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = water.mp3; path = ../../../Desktop/water.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,12 +158,10 @@
 				6A95962B242B41B0002F19CF /* toursViewController.swift */,
 				6A95965B242B4323002F19CF /* DataModel.swift */,
 				6A95962D242B41B0002F19CF /* accountViewController.swift */,
-				FC8FF1B22463C6C70096245F /* rain.mp3 */,
 				6A153D5124453A8100EC6927 /* Find_Money.mp3 */,
 				6A6E1A1524405E58004B75CE /* playingViewController.swift */,
 				6A95965D242F3CA2002F19CF /* tourInfo.swift */,
 				6A95962F242B41B0002F19CF /* Main.storyboard */,
-				FC8FF1B42463C7650096245F /* water.mp3 */,
 				6A1CEB4C243FDC310013A3F5 /* createTour.swift */,
 				6A153D5324453B1900EC6927 /* addLocationsViewControllers.swift */,
 				6A959632242B41B1002F19CF /* Assets.xcassets */,
@@ -307,8 +301,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A153D5224453A8100EC6927 /* Find_Money.mp3 in Resources */,
-				FC8FF1B32463C6C70096245F /* rain.mp3 in Resources */,
-				FC8FF1B52463C7660096245F /* water.mp3 in Resources */,
 				6A95965A242B421B002F19CF /* GoogleService-Info.plist in Resources */,
 				6A959633242B41B1002F19CF /* Assets.xcassets in Resources */,
 				6A959631242B41B0002F19CF /* Main.storyboard in Resources */,

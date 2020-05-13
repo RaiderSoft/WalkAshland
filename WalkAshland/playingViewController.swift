@@ -63,7 +63,6 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     */
     
 
-=======
     var audioPath: [String] = [String]()
 
     
@@ -92,22 +91,25 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         
         //Created by Dylan
 
-=======
         
         
         //let fileManager = FileManager.default
         let documentsDirectoryPath:String = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
-        let path = documentsDirectoryPath + "/water.mp3"
+        
+        if let tours = tour?.audioClips {
+            print("\n\nGot here\n\n")
+            for aud in tours {
+                
+                let audDocumentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                let audLocalURL = audDocumentsURL.appendingPathComponent(aud)
+                //text for Drop down menu(PickerTextView)
+                audioList.append(aud)
+                let path = documentsDirectoryPath + "/" + aud
+                print("\n \n \(aud) \n \n")
+                audioPath.append(path)
+            }
+        }
 
-        audioPath.append(path)
-        
-        let path2 = documentsDirectoryPath + "/babymus.mp3"
-        
-        audioPath.append(path2)
-        
-        let path3 = documentsDirectoryPath + "/rain.mp3"
-        
-        audioPath.append(path3)
         
 
        //bring mediabar forward
@@ -122,7 +124,7 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
 //       }
         
         do {
-             audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: path))
+             audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: audioPath[0]))
              
          } catch {
              print(error)
@@ -133,8 +135,7 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         self.PickerTextView.delegate = self
         self.PickerTextView.dataSource = self
         
-        //text for Drop down menu(PickerTextView)
-        audioList = ["Find_Money", "water", "rain"]
+
         
         
         
