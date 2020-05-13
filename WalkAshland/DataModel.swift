@@ -14,6 +14,9 @@ import Firebase             //Needed to create instances of firebase bucket
 import FirebaseStorage      //Needed to create and access file inside firebase storage
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
 
+let storage = Storage.storage()
+ 
+let storageRef = storage.reference()
 
 //This class defines a tour object consisting of the required fields
 struct Tour {
@@ -46,22 +49,25 @@ struct Tour {
         "price": "\(price)",
         "image": "\(imgPath)",
         "duration": "\(duration)",
-        "type": "\(tourType)"
-        
+        "type": "\(tourType)",
+        "audio": "\(audioClips)"
         ]
     }
-    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
+    
 }
+
 class DataModel {
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-Faisal
-    //List of available tours
-    var tours: [Tour] = []
+
     //Getting a reference to the database
     var databaseRef: DatabaseReference!
-    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
+    //Get a reference to the storage
+ 
     
+    //List of available tours
+    var tours: [Tour] = []
     
     func retrieve_data(){
+
         //
         //Get a reference to the storage
         //let storage = Storage.storage()
@@ -77,6 +83,7 @@ class DataModel {
                     // Get user value
                     
                     let tour = data.value as? NSDictionary
+
                     //Get individual values of a tour from the database
                     let title = tour?["title"] as! String
                     let description = tour?["about"] as! String
@@ -85,95 +92,92 @@ class DataModel {
                     let image = tour?["image"] as! String
                     let duration = tour?["duration"] as! String
                     let location = tour?["locations"] as! [[String: Double]]
+                    let audio = tour?["audios"] as! [String]
+                    
                     //Create a tour
-                    let t = Tour.init(ti: title, des: description, pr: price, img: image, dur: duration, type: type , locs: location, auds:["This","That"])
+                    let t = Tour.init(ti: title, des: description, pr: price, img: image, dur: duration, type: type , locs: location, auds: audio)
+                    
+                    
                     //add the tour to the tours list
                     self.tours.append(t)
-                    NSLog("INside the db call toursCount\(self.tours.count)")
-                })
-                { (error) in
-                    //print(error.localizedDescription)
+
+                    //? - 8 = offset
+                    
+                    let strlen = image.count
+                    
+                    let strOffset = strlen - 8
+                    
+                    let strSub1 = image.suffix(strOffset)
+                    
+                    let strSub2 = strSub1.prefix(strOffset - 4)
+                                        
+                    print(strlen)
+                    
+                    print(image)
+                    
+                    print(strSub1)
+                    
+                    print(strSub2)
+                    
+//                    self.databaseRef.child("audios").observeSingleEvent(of: .value) { (data) in
+//
+//                        let track = tour?["audios"] as! [String]
+//
+//                        print(track)
+//
+//                    }
+                    
+                    
+                    for aud in audio {
+                        
+                        let audDocumentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                        let audLocalURL = audDocumentsURL.appendingPathComponent(aud)
+                        
+                        // Create a reference to the file you want to download
+                        let audRef = storageRef.child(aud)
+
+                        // Download to the local filesystem
+                        _ = audRef.write(toFile: audLocalURL) { (URL, error) -> Void in
+                          if (error != nil) {
+                            // Uh-oh, an error occurred!
+                            print("Error: File Not Saved")
+                          } else {
+                            // Local file URL for "images/island.jpg" is returned
+                            print("File Saved")
+                            print(audLocalURL)
+                          }
+                        }
+                        
+                    }
+                    
+                    
+                    let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                    let localURL = documentsURL.appendingPathComponent(image)
+                    
+                    // Create a reference to the file you want to download
+                    let islandRef = storageRef.child(image)
+
+                    // Download to the local filesystem
+                    _ = islandRef.write(toFile: localURL) { (URL, error) -> Void in
+                      if (error != nil) {
+                        // Uh-oh, an error occurred!
+                        print("Error: File Not Saved")
+                      } else {
+                        // Local file URL for "images/island.jpg" is returned
+                        print("File Saved")
+                        print(localURL)
+                      }
+                    }
+
+                    
+                  }) { (error) in
+                    print(error.localizedDescription)
                     
                 }
-                iterator += 1
-            }
-        })
-        {   (error) in
-            //print(error.localizedDescription)
-        }
-        /*
-        if saveObject(fileName: "Title", object: tours) {
-            print("saved")
-        } else {
-            print("not saved")
+                
+            x += 1 //The code will be improved to download all available tours
         }
         
-        if let t = getObject(fileName: "Title") as? Tour {
-            print("Tour is: \(t)")
-        }
-        */
-        
-        
-        
-        /* Getting a file from the Firebase storage
-        var img = UIImage.init(named: "ashland2")
-        
-        //create s storage ref
-        let storageRef = storage.reference()
-        //storageRef.child("")
-        
-        //LocalFileto upload
-        let localFile = URL(string: "./ashland2")
-        
-        //create the file metadata
-        let metadata = StorageMetadata()
-        metadata.contentType = "ashland2/jpeg"
-        
-        //upload file and metadata to the object 'image/ashland2.jpg'
-        let uploadTask = storageRef.putFile(from: localFile!, metadata: metadata)
-        */
-        //listen for state changes, errors, and completion of the upload
-        
-        /****/
-        
-        ///let imageRef = storageRef.child("img/ashland2")
-
     }
     
 }
-
-//################################################################-Dylan
-// Save object in document directory
-func saveObject(fileName: String, object: Any) -> Bool {
-    
-    let filePath = getDirectoryPath().appendingPathComponent(fileName)
-    do {
-        let data = try NSKeyedArchiver.archivedData(withRootObject: object, requiringSecureCoding: false)
-        try data.write(to: filePath)
-        return true
-    } catch {
-        print("error is: \(error.localizedDescription)")
-    }
-    return false
-}
-// Get object from document directory
-func getObject(fileName: String) -> Any? {
-    
-    let filePath = getDirectoryPath().appendingPathComponent(fileName)
-    do {
-        let data = try Data(contentsOf: filePath)
-        let object = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)
-        return object
-    } catch {
-        print("error is: \(error.localizedDescription)")
-    }
-    return nil
-}
-                                                                                //SHOULD HAVE THESE FUNCTIONS OUTSIDE ANY CLASS??
-//Get the document directory path
-func getDirectoryPath() -> URL {
-    let arrayPaths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-    return arrayPaths[0]
-}
-//*****************************************************************-Pitts
-

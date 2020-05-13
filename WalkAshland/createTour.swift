@@ -41,8 +41,8 @@ class createTour: UIViewController {
             let desc = descriptionField.text,
             let type = typeField.text,
             let price = priceField.text {
-            
-            tour = Tour.init(ti: title, des: desc, pr: price, img: "Arbitrary for now", dur: "23", type: type, locs: [["Longitude":33.4, "Latitude": 34.4]], auds: ["theis","That"])
+//
+//            tour = Tour.init(ti: title, des: desc, pr: price, img: "Arbitrary for now", dur: "23", type: type, locs: [["Longitude":33.4, "Latitude": 34.4]], auds: ["theis","That"])
             //Get the reference to the database
             self.databaseRef = Database.database().reference()
             
