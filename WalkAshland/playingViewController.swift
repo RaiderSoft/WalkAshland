@@ -30,12 +30,12 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     let directionRequest = MKDirections.Request()            //Creating a request of direction
     var locationPoints: [Ano] {
         var locationPs : [Ano]!
-        
+        var i = 0
         for point in tour!.locationPoints {                                                     //loop through the locationpoints array
             //Unwrap both longitude and latitude
             if let long = point["Longitude"], let lat = point["Latitude"]
             {
-                let an = Ano(name: "Ti", lat: lat, long: long)                                                  //create an annotations
+                let an = Ano(id:(tour?.audioClips[i])! ,name: "Ti", lat: lat, long: long)                                                  //create an annotations
 
                 if locationPs == nil {
                     locationPs = [an]
@@ -45,7 +45,8 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
                 }
                 //change the icon or color of the annotation
             }
-            else{           NSLog("ERROR: Unable to get the location points for the tour.")                }
+            else{  NSLog("ERROR: Unable to get the location points for the tour.")                }
+            i = i + 1
         }
         return locationPs
     }
@@ -58,22 +59,73 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     
     //List Text for drop down(PickerTextView)
     var audioList: [String] = [String]()
-    /*  ::Problem with [plugin]
-     https://stackoverflow.com/questions/58360765/swift-5-1-error-plugin-addinstanceforfactory-no-factory-registered-for-id-c
-    */
-    
 
     var audioPath: [String] = [String]()
 
-    
+    override func didReceiveMemoryWarning() {
+            super.didReceiveMemoryWarning()
+            // Dispose of any resources that can be recreated.
+        }
+        
+        //number of components in the drop down(PickerTextView)
+        func numberOfComponents(in pickerView: UIPickerView) -> Int {
+            return 1
+        }
+        
+        //number of rows for drop down(PickerTextView)
+        //equal to the amount of elements in audiolist
+        func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+            return audioList.count
+        }
+        
+    //    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    //        PickerTextView.text = audioList[row]
+    //    }
+        
+        //Names of the elements in drop down(PickerTextView) equal to elements in audioList
+        func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+            return audioList[row]
+        }
+        
+        func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+            do {
+                audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: audioPath[row]))
+                
+            } catch {
+                print(error)
+            }
+            
+        }
+        
+        //Created By Dylan
+        //audio player outlets and actions
+        //media tool bar
+        @IBOutlet weak var MediaBar: UIToolbar!
 
+        //play
+        @IBAction func Play(_ sender: Any) {
+            audioPlayer.play()
+        }
+        //pause
+        @IBAction func Pause(_ sender: Any) {
+            if audioPlayer.isPlaying {
+                audioPlayer.pause()
+            }
+        }
+        //rewind
+        @IBAction func Rewind(_ sender: Any) {
+            audioPlayer.currentTime -= 10    }
+        //fastforward
+        @IBAction func FastForward(_ sender: Any) {
+            audioPlayer.currentTime += 10
+        }
+        
+        //Drop Down Menu
+        @IBOutlet weak var PickerTextView: UIPickerView!
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
-
         //###############################################################-Faisal
         //get the consent of the user for accessing current location
         locationManager.requestWhenInUseAuthorization()
@@ -90,9 +142,6 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         
         
         //Created by Dylan
-
-        
-        
         //let fileManager = FileManager.default
         let documentsDirectoryPath:String = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
         
@@ -114,14 +163,6 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
 
        //bring mediabar forward
        MediaBar.layer.zPosition = 1;
-       
-       //Do - try - catch audio player for file sample.wav
-//       do {
-//           audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "Find_Money", ofType: "mp3")!))
-//
-//       } catch {
-//           print(error)
-//       }
         
         do {
              audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: audioPath[0]))
@@ -129,7 +170,6 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
          } catch {
              print(error)
          }
-        
         //mapView.settings.setAllGesturesEnabled(false)
         //used for Drop down menu(PickerTextView)
         self.PickerTextView.delegate = self
@@ -142,78 +182,10 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         
         
         //###############################################################-Faisal
-
         mapView?.addSubview(PickerTextView)     //Adding the pickerview to the mapview
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
     }
-    
 
-    
-    
-    
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    //number of components in the drop down(PickerTextView)
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    //number of rows for drop down(PickerTextView)
-    //equal to the amount of elements in audiolist
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return audioList.count
-    }
-    
-//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        PickerTextView.text = audioList[row]
-//    }
-    
-    //Names of the elements in drop down(PickerTextView) equal to elements in audioList
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return audioList[row]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: audioPath[row]))
-            
-        } catch {
-            print(error)
-        }
-        
-    }
-    
-    //Created By Dylan
-    //audio player outlets and actions
-    //media tool bar
-    @IBOutlet weak var MediaBar: UIToolbar!
-
-    //play
-    @IBAction func Play(_ sender: Any) {
-        audioPlayer.play()
-    }
-    //pause
-    @IBAction func Pause(_ sender: Any) {
-        if audioPlayer.isPlaying {
-            audioPlayer.pause()
-        }
-    }
-    //rewind
-    @IBAction func Rewind(_ sender: Any) {
-        audioPlayer.currentTime -= 10    }
-    //fastforward
-    @IBAction func FastForward(_ sender: Any) {
-        audioPlayer.currentTime += 10
-    }
-    
-    //Drop Down Menu
-    @IBOutlet weak var PickerTextView: UIPickerView!
-    
 }
 
 
@@ -256,28 +228,24 @@ extension playingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     //  let locationPoints = gets from tour             //Get the location points create annotations
         
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        
         currentLocation = locValue
         
         
         //more than 11 meters
-       
         /*
-         
          if( locationPoints[0]["lat"]! + CLLocationCoordinate2D.init(latitude: 0.00015, longitude: 0.0015).latitude > locValue.latitude
             && locValue.latitude > locationPoints[0]["lat"]! - CLLocationCoordinate2D.init(latitude: 0.00015, longitude: 0.0015).latitude)
         {
             print(" \n\n\nlocations = \(locValue.latitude) \(locValue.longitude) \n\n")
         }
-        
         */
         
         //Set the region where the mapview should focus on
         //Get the longitude and latitude of the centeral point in the
         //tour and set as the center of the camera
-        let span = MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
+        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         NSLog("\n\n\(locValue.latitude) ,\t \(locValue.longitude) \n\n")
-        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: locValue.latitude , longitude: locValue.longitude), span: span)
+        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: locationPoints[Int(locationPoints.count / 2)].coordinate.latitude , longitude: locationPoints[Int(locationPoints.count / 2)].coordinate.longitude), span: span)
         
         mapView.setRegion(region, animated: true)
         if locationPoints.count > 0 {
@@ -337,17 +305,25 @@ extension playingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         return view
     }
     
-    func changePinColor(id : Int) {
+    func changePinColor(id : String) {
         
     }
 }
 
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-Faisal
+/*
+    This class is for customizing the anotation displayed on the map
+    
+*/
 class Ano: NSObject, MKAnnotation{
-    var identifier = "Places"
+    var identifier: String!
     var title: String?
     var coordinate: CLLocationCoordinate2D
-    init(name:String,lat:CLLocationDegrees,long:CLLocationDegrees){
+    init(id: String, name:String,lat:CLLocationDegrees,long:CLLocationDegrees){
+        identifier = id
         title = name
         coordinate = CLLocationCoordinate2DMake(lat, long)
     }
+    
 }
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
