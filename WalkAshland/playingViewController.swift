@@ -28,7 +28,7 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     var route : [MKRoute]!                                   //Stores the routes from start to destination
     let locationManager = CLLocationManager()                //Creating a location manager to manage accessing user's location
     let directionRequest = MKDirections.Request()            //Creating a request of direction
-    var locationPoints: [Ano] {
+    var locationPoints: [Ano]{
         var locationPs : [Ano]!
         var i = 0
         for point in tour!.locationPoints {                                                     //loop through the locationpoints array
@@ -243,7 +243,7 @@ extension playingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         //Set the region where the mapview should focus on
         //Get the longitude and latitude of the centeral point in the
         //tour and set as the center of the camera
-        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
         NSLog("\n\n\(locValue.latitude) ,\t \(locValue.longitude) \n\n")
         let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: locationPoints[Int(locationPoints.count / 2)].coordinate.latitude , longitude: locationPoints[Int(locationPoints.count / 2)].coordinate.longitude), span: span)
         
@@ -256,11 +256,14 @@ extension playingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         }
         else{           NSLog("ERROR: Unable to get the location points for the tour.")                }
 
-        if  let destinationLat = tour!.locationPoints[0]["Latitude"],            //
-            let destinationLong = tour!.locationPoints[0]["Longitude"]           //get the longitude of the last location point
+        if  let destinationLat = tour?.locationPoints[(tour?.locationPoints.count)! - 1]["Latitude"],            //
+            let destinationLong = tour?.locationPoints[(tour?.locationPoints.count)! - 1]["Longitude"],
+            let sourceLong = tour!.locationPoints[0]["Longitude"]           //get the longitude of the last
+            ,let sourceLat = tour!.locationPoints[0]["Latitude"]
+            
         {                                                                                                   //The source and distenation of the requested direction
-            directionRequest.source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: locValue.latitude , longitude: locValue.longitude)))
-            directionRequest.destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: destinationLat , longitude: destinationLong)))
+            directionRequest.source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: sourceLat , longitude: sourceLong)))
+            directionRequest.destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: locValue.latitude , longitude: locValue.longitude)))
             
         }
         
