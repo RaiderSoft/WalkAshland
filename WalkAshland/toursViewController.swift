@@ -69,9 +69,39 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
         cell.typeImgOut.image = UIImage.init(named: "walking")
         cell.durImgOut.image = UIImage.init(named: "timeicon")
         cell.distImgOut.image = UIImage.init(named: "locationicon")
-        //****
-        cell.titleOut.text = tour.title                 //Set the title of the tour
-        cell.aboutOut.text = tour.description           //Set description of the tour
+        
+        let t : String = tour.title
+        var title = ""
+        if t.count > 15 {
+            let index = t.index(t.startIndex, offsetBy: 25)
+            
+            let ti = t[..<index] 
+            for i in ti {
+                title = "\(title)\(i)"
+            }
+            print("\n\n\n ti \(title) \n\n")
+            cell.titleOut.text = title
+        }
+        else {
+            cell.titleOut.text = tour.title                 //Set the title of the tour
+        }
+        
+        let d : String = tour.description
+        var description = ""
+        if d.count > 15 {
+            let index = d.index(d.startIndex, offsetBy: 100)
+            
+            let de = d[..<index]
+            for i in de {
+                description = "\(description)\(i)"
+            }
+            print("\n\n\n ti \(description) \n\n")
+            cell.aboutOut.text = description
+        }
+        else {
+            cell.aboutOut.text = tour.description               //Set description of the tour
+        }
+        
         cell.durNumOut.text = "\(tour.duration) mins"   //Set the duration of the tour
         cell.typeLabelOut.text = tour.tourType          //Set the type of the tour
         
@@ -131,7 +161,7 @@ class tourCell: UITableViewCell {
     @IBOutlet weak var durNumOut: UILabel!
     @IBOutlet weak var imgOut: UIImageView!
     
-    @IBOutlet weak var aboutOut: UITextView!
+    @IBOutlet weak var aboutOut: UILabel!
     @IBOutlet weak var titleOut: UILabel!
     
     
