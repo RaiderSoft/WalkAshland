@@ -143,14 +143,15 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         //Created by Dylan
         //let fileManager = FileManager.default
         let documentsDirectoryPath:String = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
+      
+        var i = 0
+        
         if let tours = tour?.audioClips {
             print("\n\nGot here\n\n")
             for aud in tours {
-                
-                let audDocumentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-                let audLocalURL = audDocumentsURL.appendingPathComponent(aud)
+                i += 1
                 //text for Drop down menu(PickerTextView)
-                audioList.append(aud)
+                audioList.append("Chapter " + String(i))
                 let path = documentsDirectoryPath + "/" + aud
                 print("\n \n \(aud) \n \n")
                 audioPath.append(path)
