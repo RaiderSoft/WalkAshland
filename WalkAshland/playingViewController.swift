@@ -15,7 +15,6 @@
 import UIKit
 import MapKit
 import CoreLocation
-
 import AVFoundation //Dylan
 
 
@@ -23,6 +22,7 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
     //Need to recieve the selected tour information
     var tour: Tour?                                          //This will recieve data from the tour list
+    var distanceAway: Double!                                //The distance of the user from the starting of the tour is set from tourslist
     @IBOutlet weak var mapView: MKMapView!                   //An outlet to the mapkit view
     var currentLocation: CLLocationCoordinate2D!             //stores the current location of the user
     var route : [MKRoute]!                                   //Stores the routes from start to destination
@@ -51,6 +51,7 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         return locationPs
     }
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
+    
     
     
     //Created by Dylan
@@ -122,8 +123,6 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         
         //Drop Down Menu
         @IBOutlet weak var PickerTextView: UIPickerView!
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         //###############################################################-Faisal
@@ -144,7 +143,6 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         //Created by Dylan
         //let fileManager = FileManager.default
         let documentsDirectoryPath:String = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
-        
         if let tours = tour?.audioClips {
             print("\n\nGot here\n\n")
             for aud in tours {
@@ -158,9 +156,6 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
                 audioPath.append(path)
             }
         }
-
-        
-
        //bring mediabar forward
        MediaBar.layer.zPosition = 1;
         
@@ -183,7 +178,29 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         
         //###############################################################-Faisal
         mapView?.addSubview(PickerTextView)     //Adding the pickerview to the mapview
+        let alertController = UIAlertController(title: "Distance", message: "You are far away \nFor navigation click on map,\nor click dismiss. \nWhen you get near the starting location,\n the tour will start automatically,\nOr you can play each audio tour manually.", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
+        alertController.addAction(UIAlertAction(title: "Navigate", style: .default, handler: {
+            
+            action in
+            //Apple Maps
+            if (UIApplication.shared.canOpenURL(URL.init(string: "http://maps.apple.com")! )) {
+                UIApplication.shared.open(URL.init(string: "http://maps.apple.com/?sll=\(self.currentLocation.latitude),\(self.currentLocation.longitude),&dll=\(self.tour?.locationPoints[0]["Latitude"]),\(self.tour?.locationPoints[0]["Longitude"])")!)
+                
+            }else {
+                NSLog("Can't use Apple Maps")
+            }
+            //Segue to map
+            
+        }))
+        self.present(alertController,animated: true, completion: nil)
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
+        
+        
+    reloadInputViews()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        reloadInputViews()
     }
 
 }
@@ -212,7 +229,6 @@ extension playingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             PickerTextView.isUserInteractionEnabled = false
         }
     }
-
     /*      In this function we check for user authorization of using the location  >>>>Faisal    */
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus){
         if status == .authorizedWhenInUse {             //check if the user has given authorization
@@ -244,7 +260,9 @@ extension playingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         //Get the longitude and latitude of the centeral point in the
         //tour and set as the center of the camera
         let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-        NSLog("\n\n\(locValue.latitude) ,\t \(locValue.longitude) \n\n")
+        
+        
+        
         let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: locationPoints[Int(locationPoints.count / 2)].coordinate.latitude , longitude: locationPoints[Int(locationPoints.count / 2)].coordinate.longitude), span: span)
         
         mapView.setRegion(region, animated: true)
@@ -255,15 +273,23 @@ extension playingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             
         }
         else{           NSLog("ERROR: Unable to get the location points for the tour.")                }
-
-        if  let destinationLat = tour?.locationPoints[(tour?.locationPoints.count)! - 1]["Latitude"],            //
-            let destinationLong = tour?.locationPoints[(tour?.locationPoints.count)! - 1]["Longitude"],
+        //Start with ziro change somehow
+        if  let destinationLat = tour?.locationPoints[((tour?.locationPoints.count)! - 1)]["Latitude"],            //
+            let destinationLong = tour?.locationPoints[((tour?.locationPoints.count)! - 1)]["Longitude"],
             let sourceLong = tour!.locationPoints[0]["Longitude"]           //get the longitude of the last
             ,let sourceLat = tour!.locationPoints[0]["Latitude"]
             
         {                                                                                                   //The source and distenation of the requested direction
-            directionRequest.source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: sourceLat , longitude: sourceLong)))
-            directionRequest.destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: locValue.latitude , longitude: locValue.longitude)))
+            if distanceAway < 1.0 {
+                directionRequest.destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: sourceLat , longitude: sourceLong)))
+                directionRequest.source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: locValue.latitude , longitude: locValue.longitude)))
+            }
+            else {
+                directionRequest.destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: destinationLat , longitude: destinationLong)))
+                directionRequest.source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: sourceLat , longitude: sourceLong)))
+                //Set an Alert
+            }
+
             
         }
         
@@ -271,7 +297,10 @@ extension playingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         
         directionRequest.requestsAlternateRoutes = false                //Set alternative paths to none
         directionRequest.transportType = .walking                       //Default transport type is walking
+        
+        
         let directions = MKDirections(request: directionRequest)        //request a direction from the source to the direction
+        
         directions.calculate { (response, error) in                     //Get an process the respons to the the direction request
             guard let directionResponse = response else {
                 if let error = error {
@@ -280,6 +309,7 @@ extension playingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                 return
             }
             let route = directionResponse.routes[0]                     //Get the first posible route
+            
             self.mapView.addOverlay(route.polyline)                     //Add this rout to the map
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
         }
@@ -314,10 +344,7 @@ extension playingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
 }
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-Faisal
-/*
-    This class is for customizing the anotation displayed on the map
-    
-*/
+/*      This class is for customizing the anotation displayed on the map    */
 class Ano: NSObject, MKAnnotation{
     var identifier: String!
     var title: String?
@@ -327,6 +354,5 @@ class Ano: NSObject, MKAnnotation{
         title = name
         coordinate = CLLocationCoordinate2DMake(lat, long)
     }
-    
-}
-//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
+}//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
+
