@@ -13,6 +13,7 @@
 		6A153D5424453B1900EC6927 /* addLocationsViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A153D5324453B1900EC6927 /* addLocationsViewControllers.swift */; };
 		6A1CEB4D243FDC310013A3F5 /* createTour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1CEB4C243FDC310013A3F5 /* createTour.swift */; };
 		6A6E1A1624405E58004B75CE /* playingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6E1A1524405E58004B75CE /* playingViewController.swift */; };
+		6A85BE0E247AF13F00A2ABA6 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A85BE0D247AF13F00A2ABA6 /* StoreKit.framework */; };
 		6A959628242B41B0002F19CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A959627242B41B0002F19CF /* AppDelegate.swift */; };
 		6A95962A242B41B0002F19CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A959629242B41B0002F19CF /* SceneDelegate.swift */; };
 		6A95962C242B41B0002F19CF /* toursViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A95962B242B41B0002F19CF /* toursViewController.swift */; };
@@ -51,6 +52,8 @@
 		6A153D5324453B1900EC6927 /* addLocationsViewControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addLocationsViewControllers.swift; sourceTree = "<group>"; };
 		6A1CEB4C243FDC310013A3F5 /* createTour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createTour.swift; sourceTree = "<group>"; };
 		6A6E1A1524405E58004B75CE /* playingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = playingViewController.swift; sourceTree = "<group>"; };
+		6A85BE0C247AEC2A00A2ABA6 /* WalkAshland.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WalkAshland.entitlements; sourceTree = "<group>"; };
+		6A85BE0D247AF13F00A2ABA6 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		6A959624242B41B0002F19CF /* WalkAshland.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkAshland.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A959627242B41B0002F19CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6A959629242B41B0002F19CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +86,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				60B4BFC87E2E1B4E75356EAB /* Pods_WalkAshland.framework in Frameworks */,
+				6A85BE0E247AF13F00A2ABA6 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +125,7 @@
 		4602C0EE7ED871C7BD8A32E3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6A85BE0D247AF13F00A2ABA6 /* StoreKit.framework */,
 				8A5AD611FCA8A39D578510AA /* Pods_WalkAshland.framework */,
 				6C734EC90AD374A411D6901A /* Pods_WalkAshland_WalkAshlandUITests.framework */,
 				42CE7BA39036BDD1CF39859B /* Pods_WalkAshlandTests.framework */,
@@ -153,6 +158,7 @@
 		6A959626242B41B0002F19CF /* WalkAshland */ = {
 			isa = PBXGroup;
 			children = (
+				6A85BE0C247AEC2A00A2ABA6 /* WalkAshland.entitlements */,
 				6A959627242B41B0002F19CF /* AppDelegate.swift */,
 				6A959629242B41B0002F19CF /* SceneDelegate.swift */,
 				6A95962B242B41B0002F19CF /* toursViewController.swift */,
@@ -639,16 +645,19 @@
 			baseConfigurationReference = 6F7C389BCFF5BB6307BCC1C0 /* Pods-WalkAshland.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WalkAshland/WalkAshland.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9L45KS8D7L;
+				DEVELOPMENT_TEAM = 5TH9JFS4L6;
 				INFOPLIST_FILE = WalkAshland/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.WalkAshland;
+				PRODUCT_BUNDLE_IDENTIFIER = com.walkashland.walkashland;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -659,16 +668,19 @@
 			baseConfigurationReference = E17CC3F90DDBD3A86646061A /* Pods-WalkAshland.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WalkAshland/WalkAshland.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9L45KS8D7L;
+				DEVELOPMENT_TEAM = 5TH9JFS4L6;
 				INFOPLIST_FILE = WalkAshland/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.WalkAshland;
+				PRODUCT_BUNDLE_IDENTIFIER = com.walkashland.walkashland;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

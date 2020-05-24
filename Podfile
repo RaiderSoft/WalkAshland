@@ -8,6 +8,8 @@ target 'WalkAshland' do
   # Pods for WalkAshland
     pod 'Firebase/Database'
     pod 'Firebase/Auth'
+    pod 'FirebaseUI/Auth'
+    pod 'FirebaseUI/Google'
     pod 'Firebase/Storage'
     pod 'FirebaseUI/Storage'
     pod 'SDWebImage'
