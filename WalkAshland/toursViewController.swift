@@ -26,6 +26,7 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
     var tours: [Tour] {
         return dataModel?.tours ?? []
     }
+    var user : User!
     var distance: Double!
     //Create a reference to the firebase storage for accessing files
     let storageRef = Storage.storage().reference()
@@ -38,15 +39,18 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NSLog("Reached \(user)")
+        
         locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
         }
-        
-        
-        
+
+
+        reloadInputViews()
+
         
     }
     
@@ -55,7 +59,7 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
     //I used this function to reload the data on the table
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        reloadInputViews()
+        
         
     }
     /*      In this function we check for user authorization of using the location  >>>>Faisal    */
@@ -138,7 +142,7 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
             let toFeet = 3.28084                                        //one meters in feet
             let toMile = 5280.0                                         //one mile in feets
             self.distance = (route.distance * toFeet) / toMile           //distance in miles
-            cell.distLabelOut.text = "\( round(self.distance / 0.01 ) * 0.01) miles away"        //Set the distance label in the view
+            cell.distLabelOut.text = "\( round((self.distance / 0.01 ) * 0.01)) miles away"        //Set the distance label in the view
         }
         let t : String = tour.title                                     //These steps are for truncating the title to a file size
         var title = ""

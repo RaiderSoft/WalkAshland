@@ -12,21 +12,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-Faisal
-    var dataModel: DataModel! = DataModel()   //Create an instance of the the datamodel
+    //var dataModel: DataModel! = DataModel()   //Create an instance of the the datamodel
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
 
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-
+    func download () {
         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-Faisal
         //This section is needed to create a shared instance of the dataModel between view controller
+        /*
         guard let tabBarController = window?.rootViewController as? UITabBarController,
             let viewControllers = tabBarController.viewControllers
             else {
                 return
         }
+        
         for (index, viewController) in viewControllers.enumerated(){
             if let navigationController = viewController as? UINavigationController,
                 let tourViewController = navigationController.viewControllers.first as? toursViewController
@@ -34,12 +32,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 
                 tourViewController.dataModel = dataModel
                 dataModel.retrieve_data()
-
+                NSLog("WENT through this")
                 
               //  NSLog("From scene delegate tourscoun in tourvc \(tourViewController.dataModel?.tours.count)")
                 //NSLog("the number of tour in Datamodel \(dataModel.tours.count)")
             }
-        }//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
+        }
+ */ //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
+    }
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
+        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
+        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        download()
         guard let _ = (scene as? UIWindowScene) else { return }
         
     }
@@ -55,7 +60,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
-        
+
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
@@ -66,12 +71,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
+
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
+
     }
 
 

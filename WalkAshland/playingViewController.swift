@@ -106,6 +106,7 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         //play
         @IBAction func Play(_ sender: Any) {
             audioPlayer.play()
+            
         }
         //pause
         @IBAction func Pause(_ sender: Any) {
@@ -169,12 +170,7 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         //used for Drop down menu(PickerTextView)
         self.PickerTextView.delegate = self
         self.PickerTextView.dataSource = self
-        
 
-        
-        
-        
-        
         
         //###############################################################-Faisal
         mapView?.addSubview(PickerTextView)     //Adding the pickerview to the mapview
@@ -185,7 +181,7 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             action in
             //Apple Maps
             if (UIApplication.shared.canOpenURL(URL.init(string: "http://maps.apple.com")! )) {
-                UIApplication.shared.open(URL.init(string: "http://maps.apple.com/?sll=\(self.currentLocation.latitude),\(self.currentLocation.longitude),&dll=\(self.tour?.locationPoints[0]["Latitude"]),\(self.tour?.locationPoints[0]["Longitude"])")!)
+                UIApplication.shared.open(URL.init(string: "http://maps.apple.com/?dll=\(self.tour?.locationPoints[0]["Latitude"]),\(self.tour?.locationPoints[0]["Longitude"])")!)
                 
             }else {
                 NSLog("Can't use Apple Maps")

@@ -13,12 +13,16 @@ import GooglePlaces //To access places, current place
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-Faisal
+    var dataModel: DataModel! = DataModel()   //Create an instance of the the datamodel
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-Faisal
         //Connecting to Firebase database
         FirebaseApp.configure()
+        Database.database().isPersistenceEnabled = true
         //Later Restrict the API key                                        //>>>><<<K<<<<<<#<#<#<#<#<$<$<<#<#<#
         //providing the google maps Api key
         GMSServices.provideAPIKey("AIzaSyDjNpvuv_eW0ogWbHevj3MWwll2El58mW0")

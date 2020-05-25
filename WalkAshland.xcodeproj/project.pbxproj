@@ -14,6 +14,10 @@
 		6A1CEB4D243FDC310013A3F5 /* createTour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1CEB4C243FDC310013A3F5 /* createTour.swift */; };
 		6A6E1A1624405E58004B75CE /* playingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6E1A1524405E58004B75CE /* playingViewController.swift */; };
 		6A85BE0E247AF13F00A2ABA6 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A85BE0D247AF13F00A2ABA6 /* StoreKit.framework */; };
+		6A85BE10247B88E600A2ABA6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A85BE0F247B88E600A2ABA6 /* User.swift */; };
+		6A85BE12247B8A0800A2ABA6 /* signin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A85BE11247B8A0800A2ABA6 /* signin.swift */; };
+		6A85BE18247BA4EF00A2ABA6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A85BE17247BA4EF00A2ABA6 /* GoogleService-Info.plist */; };
+		6A85BE1A247BA80B00A2ABA6 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A85BE19247BA80B00A2ABA6 /* TabBarViewController.swift */; };
 		6A959628242B41B0002F19CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A959627242B41B0002F19CF /* AppDelegate.swift */; };
 		6A95962A242B41B0002F19CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A959629242B41B0002F19CF /* SceneDelegate.swift */; };
 		6A95962C242B41B0002F19CF /* toursViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A95962B242B41B0002F19CF /* toursViewController.swift */; };
@@ -22,7 +26,6 @@
 		6A959633242B41B1002F19CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A959632242B41B1002F19CF /* Assets.xcassets */; };
 		6A959641242B41B1002F19CF /* WalkAshlandTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A959640242B41B1002F19CF /* WalkAshlandTests.swift */; };
 		6A95964C242B41B1002F19CF /* WalkAshlandUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A95964B242B41B1002F19CF /* WalkAshlandUITests.swift */; };
-		6A95965A242B421B002F19CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A959659242B421B002F19CF /* GoogleService-Info.plist */; };
 		6A95965C242B4323002F19CF /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A95965B242B4323002F19CF /* DataModel.swift */; };
 		6A95965E242F3CA2002F19CF /* tourInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A95965D242F3CA2002F19CF /* tourInfo.swift */; };
 		D1C3706A162B94BD94737816 /* Pods_WalkAshland_WalkAshlandUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C734EC90AD374A411D6901A /* Pods_WalkAshland_WalkAshlandUITests.framework */; };
@@ -54,6 +57,10 @@
 		6A6E1A1524405E58004B75CE /* playingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = playingViewController.swift; sourceTree = "<group>"; };
 		6A85BE0C247AEC2A00A2ABA6 /* WalkAshland.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WalkAshland.entitlements; sourceTree = "<group>"; };
 		6A85BE0D247AF13F00A2ABA6 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		6A85BE0F247B88E600A2ABA6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		6A85BE11247B8A0800A2ABA6 /* signin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signin.swift; sourceTree = "<group>"; };
+		6A85BE17247BA4EF00A2ABA6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6A85BE19247BA80B00A2ABA6 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		6A959624242B41B0002F19CF /* WalkAshland.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkAshland.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A959627242B41B0002F19CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6A959629242B41B0002F19CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,7 +75,6 @@
 		6A959647242B41B1002F19CF /* WalkAshlandUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WalkAshlandUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A95964B242B41B1002F19CF /* WalkAshlandUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkAshlandUITests.swift; sourceTree = "<group>"; };
 		6A95964D242B41B1002F19CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6A959659242B421B002F19CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6A95965B242B4323002F19CF /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		6A95965D242F3CA2002F19CF /* tourInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tourInfo.swift; sourceTree = "<group>"; };
 		6C734EC90AD374A411D6901A /* Pods_WalkAshland_WalkAshlandUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalkAshland_WalkAshlandUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -164,14 +170,17 @@
 				6A95962B242B41B0002F19CF /* toursViewController.swift */,
 				6A95965B242B4323002F19CF /* DataModel.swift */,
 				6A95962D242B41B0002F19CF /* accountViewController.swift */,
+				6A85BE11247B8A0800A2ABA6 /* signin.swift */,
+				6A85BE17247BA4EF00A2ABA6 /* GoogleService-Info.plist */,
+				6A85BE0F247B88E600A2ABA6 /* User.swift */,
 				6A153D5124453A8100EC6927 /* Find_Money.mp3 */,
 				6A6E1A1524405E58004B75CE /* playingViewController.swift */,
 				6A95965D242F3CA2002F19CF /* tourInfo.swift */,
 				6A95962F242B41B0002F19CF /* Main.storyboard */,
+				6A85BE19247BA80B00A2ABA6 /* TabBarViewController.swift */,
 				6A1CEB4C243FDC310013A3F5 /* createTour.swift */,
 				6A153D5324453B1900EC6927 /* addLocationsViewControllers.swift */,
 				6A959632242B41B1002F19CF /* Assets.xcassets */,
-				6A959659242B421B002F19CF /* GoogleService-Info.plist */,
 				6A959637242B41B1002F19CF /* Info.plist */,
 			);
 			path = WalkAshland;
@@ -306,8 +315,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A85BE18247BA4EF00A2ABA6 /* GoogleService-Info.plist in Resources */,
 				6A153D5224453A8100EC6927 /* Find_Money.mp3 in Resources */,
-				6A95965A242B421B002F19CF /* GoogleService-Info.plist in Resources */,
 				6A959633242B41B1002F19CF /* Assets.xcassets in Resources */,
 				6A959631242B41B0002F19CF /* Main.storyboard in Resources */,
 			);
@@ -475,10 +484,13 @@
 				6A6E1A1624405E58004B75CE /* playingViewController.swift in Sources */,
 				6A95965E242F3CA2002F19CF /* tourInfo.swift in Sources */,
 				6A1CEB4D243FDC310013A3F5 /* createTour.swift in Sources */,
+				6A85BE1A247BA80B00A2ABA6 /* TabBarViewController.swift in Sources */,
 				6A95962E242B41B0002F19CF /* accountViewController.swift in Sources */,
 				6A95962C242B41B0002F19CF /* toursViewController.swift in Sources */,
 				6A959628242B41B0002F19CF /* AppDelegate.swift in Sources */,
+				6A85BE12247B8A0800A2ABA6 /* signin.swift in Sources */,
 				6A95962A242B41B0002F19CF /* SceneDelegate.swift in Sources */,
+				6A85BE10247B88E600A2ABA6 /* User.swift in Sources */,
 				6A153D5424453B1900EC6927 /* addLocationsViewControllers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

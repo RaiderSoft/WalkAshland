@@ -14,6 +14,7 @@ class tourInfo: UIViewController {
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
     //Need to recieve the selected tour information
     var tour: Tour?
+    var distance: Double?
     //This will recieve data from the tour list
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ALik
     
@@ -46,7 +47,7 @@ class tourInfo: UIViewController {
         TourTitle.text = tour?.title ?? "Not Data"
         TourTime.text = tour?.duration ?? "00.0 Miles"
         TourType.text = tour?.tourType ?? "Walking"
-        TourDistance.text = tour?.duration ?? "0.0 minutes"
+        TourDistance.text = "\(distance)" + "minutes" ?? "0.0 minutes"
         TourDescription.text = tour?.description ?? "Loading"
     }
     
