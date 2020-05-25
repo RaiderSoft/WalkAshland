@@ -74,7 +74,7 @@ class DataModel {
     // Array of files
     
     func retrieve_data(){
-
+        NSLog("Datamodel is called")
         //
         //Get a reference to the storage
         //let storage = Storage.storage()
@@ -82,11 +82,14 @@ class DataModel {
         
         //Reference to the database
         databaseRef = Database.database().reference()
+
+        
         databaseRef.child("db").observeSingleEvent(of: .value, with: { (toursData) in
             let toursCount = toursData.childrenCount - 1
             var iterator = 0
             while(iterator <= toursCount){
                 self.databaseRef.child("db").child("\(iterator)").observeSingleEvent(of: .value, with: { (data) in
+                    
                     // Get user value
                     
                     let tour = data.value as? NSDictionary
@@ -103,7 +106,9 @@ class DataModel {
                     
                     //Create a tour
                     let t = Tour.init(ti: title, des: description, pr: price, img: image, dur: duration, type: type , locs: location, auds: audio, flag: "ND")
+                   
                     
+
                     
                     //add the tour to the tours list
                     self.tours.append(t)
