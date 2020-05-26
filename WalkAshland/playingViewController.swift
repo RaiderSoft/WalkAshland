@@ -98,6 +98,27 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             
         }
         
+        func openMapForPlace() {
+
+            let lat1 = self.tour?.locationPoints[0]["Latitude"]
+            let lng1 = self.tour?.locationPoints[0]["Longitude"]
+
+            let latitude:CLLocationDegrees =  lat1 ?? 42.2
+            let longitude:CLLocationDegrees =  lng1 ?? 122.7
+
+            let regionDistance:CLLocationDistance = 10000
+            let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+            let regionSpan = MKCoordinateRegion(center: coordinates, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
+            let options = [
+                MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+                MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
+            ]
+            let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+            let mapItem = MKMapItem(placemark: placemark)
+            mapItem.name = "current location"
+            mapItem.openInMaps(launchOptions: options)
+
+        }
         //Created By Dylan
         //audio player outlets and actions
         //media tool bar
@@ -181,13 +202,15 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             
             action in
             //Apple Maps
-            if (UIApplication.shared.canOpenURL(URL.init(string: "http://maps.apple.com")! )) {
-                UIApplication.shared.open(URL.init(string: "http://maps.apple.com/?dll=\(self.tour?.locationPoints[0]["Latitude"]),\(self.tour?.locationPoints[0]["Longitude"])")!)
-                
-            }else {
-                NSLog("Can't use Apple Maps")
-            }
+//            if (UIApplication.shared.canOpenURL(URL.init(string: "http://maps.apple.com")! )) {
+//                UIApplication.shared.open(URL.init(string: "http://maps.apple.com/?dll=\(self.tour?.locationPoints[0]["Latitude"]),\(self.tour?.locationPoints[0]["Longitude"])")!)
+//
+//            }else {
+//                NSLog("Can't use Apple Maps")
+//            }
             //Segue to map
+            
+            self.openMapForPlace()
             
         }))
         self.present(alertController,animated: true, completion: nil)
