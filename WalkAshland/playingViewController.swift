@@ -102,6 +102,27 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             
         }
         
+        func openMapForPlace() {
+
+            let lat1 = self.tour?.locationPoints[0]["Latitude"]
+            let lng1 = self.tour?.locationPoints[0]["Longitude"]
+
+            let latitude:CLLocationDegrees =  lat1 ?? 42.2
+            let longitude:CLLocationDegrees =  lng1 ?? 122.7
+
+            let regionDistance:CLLocationDistance = 10000
+            let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+            let regionSpan = MKCoordinateRegion(center: coordinates, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
+            let options = [
+                MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+                MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
+            ]
+            let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+            let mapItem = MKMapItem(placemark: placemark)
+            mapItem.name = "current location"
+            mapItem.openInMaps(launchOptions: options)
+
+        }
         //Created By Dylan
         //audio player outlets and actions
         //media tool bar
@@ -160,13 +181,14 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         //Created by Dylan
         //let fileManager = FileManager.default
         let documentsDirectoryPath:String = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
+      
+        var i = 0
+        
         if let tours = tour?.audioClips {
             for aud in tours {
-                
-                let audDocumentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-                let audLocalURL = audDocumentsURL.appendingPathComponent(aud)
+                i += 1
                 //text for Drop down menu(PickerTextView)
-                audioList.append(aud)
+                audioList.append("Chapter " + String(i))
                 let path = documentsDirectoryPath + "/" + aud
                 print("\n \n \(aud) \n \n")
                 audioPath.append(path)
@@ -191,26 +213,24 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         mapView?.addSubview(PickerTextView)     //Adding the pickerview to the mapview
         
         if distanceAway > 1.0 {
-            let alertController = UIAlertController(title: "Distance", message: "You are far away \nFor navigation click on map,\nor click dismiss. \nWhen you get near the starting location,\n the tour will start automatically,\nOr you can play each audio tour manually.", preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
-            alertController.addAction(UIAlertAction(title: "Navigate", style: .default, handler: {
-                
-                action in
-                //Apple Maps
-                if (UIApplication.shared.canOpenURL(URL.init(string: "http://maps.apple.com")! )) {
-                    UIApplication.shared.open(URL.init(string: "http://maps.apple.com/?sll=\(self.tour?.locationPoints[0]["Latitude"]),\(self.tour?.locationPoints[0]["Longitude"])")!)
-
-                    NSLog("longitude : \(self.tour?.locationPoints[0]["Longitude"]) \n Latitude: \(self.tour?.locationPoints[0]["Latitude"])")
-                    
-                }else {
-                    NSLog("Can't use Apple Maps")
-                }
-                //Segue to map
-                
-            }))
-            self.present(alertController,animated: true, completion: nil)
-        }
-        
+          let alertController = UIAlertController(title: "Distance", message: "You are far away \nFor navigation click on map,\nor click dismiss. \nWhen you get near the starting location,\n the tour will start automatically,\nOr you can play each audio tour manually.", preferredStyle: .alert)
+          alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
+          alertController.addAction(UIAlertAction(title: "Navigate", style: .default, handler: {
+            
+            action in
+            //Apple Maps
+//            if (UIApplication.shared.canOpenURL(URL.init(string: "http://maps.apple.com")! )) {
+//                UIApplication.shared.open(URL.init(string: "http://maps.apple.com/?dll=\(self.tour?.locationPoints[0]["Latitude"]),\(self.tour?.locationPoints[0]["Longitude"])")!)
+//
+//            }else {
+//                NSLog("Can't use Apple Maps")
+//            }
+            //Segue to map
+            
+            self.openMapForPlace()
+            
+        }))
+        self.present(alertController,animated: true, completion: nil)
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
         
         
