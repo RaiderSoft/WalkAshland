@@ -25,7 +25,6 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     var distanceAway: Double!                                //The distance of the user from the starting of the tour is set from tourslist
     @IBOutlet weak var mapView: MKMapView!                   //An outlet to the mapkit view
     var currentLocation: CLLocationCoordinate2D!             //stores the current location of the user
-    var routes : [MKRoute]!                                   //Stores the routes from start to destination
     let locationManager = CLLocationManager()                //Creating a location manager to manage accessing user's location
     let directionRequest = MKDirections.Request()            //Creating a request of direction
     var locationPoints: [Ano]{
@@ -51,9 +50,14 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         return locationPs
     }
     var currentPin : Ano?
-    var route : MKRoute?
     var nextPoint: CLLocationCoordinate2D?
-    var counter = 0;
+    var counter = 1;
+    var notVisited : Bool = true  //For tracking is a location is visited
+    var span : MKCoordinateSpan?
+    var direction: MKDirections?
+
+    
+    
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
     
     
@@ -131,7 +135,7 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         //play
         @IBAction func Play(_ sender: Any) {
             audioPlayer.play()
-            
+            getRout()
         }
         //pause
         @IBAction func Pause(_ sender: Any) {
@@ -153,27 +157,26 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         super.viewDidLoad()
         //###############################################################-Faisal
         
-        if  let startLong = tour!.locationPoints[0]["Longitude"]           //get the longitude of the last
-            ,let startLat = tour!.locationPoints[0]["Latitude"]
-        {
-            nextPoint = locationPoints[counter].coordinate
-        }
-        
+        nextPoint = locationPoints[0].coordinate
+        directionRequest.transportType = .walking
         //get the consent of the user for accessing current location
-        currentPin = locationPoints[0]                      //The first pinned location
         
         locationManager.requestWhenInUseAuthorization()
         //Update current location
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
         }
         mapView.isZoomEnabled = true
+        mapView.isMultipleTouchEnabled = true
         mapView.isUserInteractionEnabled = true
         if distanceAway == nil {
-            distanceAway = 23.00
+            distanceAway = 23.00    //This is in miles
         }
+        span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
+        
+
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
         
         
@@ -183,7 +186,6 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         let documentsDirectoryPath:String = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
       
         var i = 0
-        
         if let tours = tour?.audioClips {
             for aud in tours {
                 i += 1
@@ -218,23 +220,13 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
           alertController.addAction(UIAlertAction(title: "Navigate", style: .default, handler: {
             
             action in
-            //Apple Maps
-//            if (UIApplication.shared.canOpenURL(URL.init(string: "http://maps.apple.com")! )) {
-//                UIApplication.shared.open(URL.init(string: "http://maps.apple.com/?dll=\(self.tour?.locationPoints[0]["Latitude"]),\(self.tour?.locationPoints[0]["Longitude"])")!)
-//
-//            }else {
-//                NSLog("Can't use Apple Maps")
-//            }
-            //Segue to map
-            
             self.openMapForPlace()
             
         }))
         self.present(alertController,animated: true, completion: nil)
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
-        
-        
-    reloadInputViews()
+            reloadInputViews()
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
         reloadInputViews()
@@ -273,25 +265,8 @@ extension playingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         NSLog("ERROR:: \(error) ")
     }
-    /*  This function updates the user's location      >>>>Faisal */
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    //  let locationPoints = gets from tour             //Get the location points create annotations
-        
-        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        currentLocation = locValue
-        
-        
-        //more than 11 meters
-        
-        
-        //Set the region where the mapview should focus on
-        //Get the longitude and latitude of the centeral point in the
-        //tour and set as the center of the camera
-        
-        let span = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
-
-        
-        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: locationPoints[0].coordinate.latitude , longitude: locationPoints[0].coordinate.longitude), span: span)
+    func getRout(){
+        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: locationPoints[0].coordinate.latitude , longitude: locationPoints[0].coordinate.longitude), span: span!)
         
         mapView.setRegion(region, animated: true)
         if locationPoints.count > 0 {
@@ -303,7 +278,40 @@ extension playingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         else{           NSLog("ERROR: Unable to get the location points for the tour.")                }
         
         
+        //11.1 meters
+        let spread = CLLocationCoordinate2D.init(latitude: 0.0002, longitude: 0.0002)
         
+        if let nextP = self.nextPoint {
+            if (self.currentLocation.latitude > nextP.latitude - spread.latitude &&
+                self.currentLocation.longitude < nextP.latitude + spread.latitude )
+                && (self.currentLocation.longitude > nextP.longitude - spread.longitude &&
+                    self.currentLocation.longitude < nextP.longitude + spread.longitude)
+            {
+                if self.counter < self.locationPoints.count && !(self.audioPlayer.isPlaying){
+                    do {
+                        self.audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: self.audioPath[self.counter-1]))
+                        self.audioPlayer.play()
+                        
+                        self.nextPoint = self.locationPoints[self.counter].coordinate
+                        NSLog("\n \n \(self.counter) \n\n")
+                        self.counter = self.counter + 1
+                        
+                    } catch {
+                        print(error)
+                    }
+                }
+                else {
+                    do {
+                        //A Thank or something
+                        self.audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: self.audioPath[self.counter-1]))
+                        self.audioPlayer.play()
+                        
+                    } catch {
+                        print(error)
+                    }
+                }
+            }
+        }
         
         //Start with ziro change somehow
         if  let destinationLat = tour?.locationPoints[((tour?.locationPoints.count)! - 1)]["Latitude"],            //
@@ -313,6 +321,7 @@ extension playingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             
         {                                                                                                   //The source and distenation of the requested direction
             if distanceAway > 1.0 {
+                
                 directionRequest.destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: destinationLat , longitude: destinationLong)))
                 directionRequest.source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: sourceLat , longitude: sourceLong)))
 
@@ -321,50 +330,49 @@ extension playingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             else {
                 directionRequest.destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: nextPoint!.latitude , longitude: nextPoint!.longitude)))
                 
-                directionRequest.source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: locValue.latitude , longitude: locValue.longitude)))
+                directionRequest.source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: currentLocation.latitude , longitude: currentLocation.longitude)))
                     
             }
             directionRequest.requestsAlternateRoutes = false                //Set alternative paths to none
             directionRequest.transportType = .walking                       //Default transport type is walking
             
             
-            let directions = MKDirections(request: directionRequest)        //request a direction from the source to the direction
+            direction = MKDirections(request: directionRequest)        //request a direction from the source to the direction
             
-            directions.calculate { (response, error) in                     //Get an process the respons to the the direction request
+            direction?.calculate { (response, error) in                     //Get an process the respons to the the direction request
                 guard let directionResponse = response else {
                     if let error = error {
                         NSLog("ERROR: \t Failed on unwrapping response: \(error)")
                     }
                     return
                 }
-                self.route = directionResponse.routes[0]                     //Get the first posible route
-                let toFeet = 3.28084                                        //one meters in feet
-                let distance = self.route!.distance * toFeet         //distance in miles
-                if distance <= 20.0 {
-                    if self.counter < self.locationPoints.count {
-                        do {
-                            self.audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: self.audioPath[self.counter]))
-                            self.audioPlayer.play()
-                            
-                        } catch {
-                            print(error)
-                        }
-                        
-                        self.counter = self.counter + 1
-                        self.nextPoint = self.locationPoints[self.counter].coordinate
-                        
-                    }
-                }
+                let route = directionResponse.routes[0]                     //Get the first posible route
+                // NSLog("next point lat : \(self.nextPoint?.latitude) \n next point long : \(self.nextPoint?.longitude)")
+                //one meters in feet
+                //let distance = route.distance          //distance in miles
+                //NSLog("Calculated   distance \(distance)")
+                
+                self.mapView.addOverlay(route.polyline)
                 
                 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
-                }
+            }
 
             
         }
-        if let route = route {
-            self.mapView.addOverlay(route.polyline)                     //Add this rout to the map
-
-        }
+    }
+    
+    /*  This function updates the user's location      >>>>Faisal */
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    //  let locationPoints = gets from tour             //Get the location points create annotations
+        
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        currentLocation = locValue
+        
+        //Set the region where the mapview should focus on
+        //Get the longitude and latitude of the centeral point in the
+        //tour and set as the center of the camera
+        getRout()
+        reloadInputViews()
     }
     
     /*      */
@@ -408,3 +416,6 @@ class Ano: NSObject, MKAnnotation{
     }
 }//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
 
+extension playingViewController {
+    
+}

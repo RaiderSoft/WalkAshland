@@ -16,7 +16,21 @@ import MapKit
 import CoreLocation //For accesing the curent location
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
 
-
+extension toursViewController {
+    /*      In this function we check for user authorization of using the location  >>>>Faisal    */
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus){
+        if status == .authorizedWhenInUse {             //check if the user has given authorization
+            locationManager.requestLocation()           //Request the location of user
+        }
+        else {
+            NSLog("COULD not access location")
+        }
+    }
+    /*      In this function we take action for errors from     >>>>Faisal  */
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        NSLog("ERROR:: \(error) ")
+    }
+}
 /*  This class is the class for the tours view controller that list the tours   */
 class toursViewController: UITableViewController, CLLocationManagerDelegate{
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
@@ -39,12 +53,14 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         NSLog("Reached \(user)")
         
         locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            
             locationManager.startUpdatingLocation()
         }
 
@@ -52,6 +68,9 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
         reloadInputViews()
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "toinfo", sender: nil)
+    }
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
     //This function is called before the view will be loaded
     //I used this function to reload the data on the table
@@ -60,19 +79,7 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
         
         
     }
-    /*      In this function we check for user authorization of using the location  >>>>Faisal    */
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus){
-        if status == .authorizedWhenInUse {             //check if the user has given authorization
-            locationManager.requestLocation()           //Request the location of user
-        }
-        else {
-            NSLog("COULD not access location")
-        }
-    }
-    /*      In this function we take action for errors from     >>>>Faisal  */
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        NSLog("ERROR:: \(error) ")
-    }
+
     /*  This function updates the user's location      >>>>Faisal */
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     //  let locationPoints = gets from tour             //Get the location points create annotations
@@ -126,7 +133,7 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
 
                
         directionRequest.requestsAlternateRoutes = false                //Set alternative paths to none
-        directionRequest.transportType = .automobile                       //Default transport type is walking
+        directionRequest.transportType = .walking                       //Default transport type is walking
         let directions = MKDirections(request: directionRequest)        //request a direction from the source to the direction
         directions.calculate { (response, error) in                     //Get an process the respons to the the direction request
             guard let directionResponse = response else {
@@ -136,6 +143,7 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
                 return
             }
             let route = directionResponse.routes[0]                     //Get the first posible route
+            NSLog("Number of route :  \(directionResponse.routes.count)\n")
             //Foot const
             let toFeet = 3.28084                                        //one meters in feet
             let toMile = 5280.0                                         //one mile in feets
