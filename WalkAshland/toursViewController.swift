@@ -15,8 +15,10 @@ import SwiftUI
 import MapKit
 import CoreLocation //For accesing the curent location
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
+import StoreKit
 
 extension toursViewController {
+        
     /*      In this function we check for user authorization of using the location  >>>>Faisal    */
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus){
         if status == .authorizedWhenInUse {             //check if the user has given authorization
@@ -33,6 +35,8 @@ extension toursViewController {
 }
 /*  This class is the class for the tours view controller that list the tours   */
 class toursViewController: UITableViewController, CLLocationManagerDelegate{
+    
+    
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
     //Creating variable to be set from the scene delegate for the data
     var dataModel: DataModel?
@@ -64,7 +68,7 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
             locationManager.startUpdatingLocation()
         }
 
-
+        
         reloadInputViews()
     }
     
@@ -113,6 +117,9 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
         let tour = tours[indexPath.row]             //For each row create a cell  with cell class
         let cell = tableView.dequeueReusableCell(withIdentifier: "tourCell", for: indexPath) as! tourCell
+        
+        SKPaymentQueue.default().add(cell)
+
         //Setup all static images for a cell
         cell.typeImgOut.image = UIImage.init(named: "walking")
         cell.durImgOut.image = UIImage.init(named: "timeicon")
@@ -214,14 +221,16 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
         }
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
     }
+
 }
 
 
 /* Faisal:
    This class handles */
-class tourCell: UITableViewCell {
+class tourCell: UITableViewCell, SKPaymentTransactionObserver {
     
-
+    let productID = "com.walkashland.walkashland.route1" //productID from appConnect
+    
     @IBOutlet weak var durImgOut: UIImageView!
     @IBOutlet weak var typeLabelOut: UILabel!
     @IBOutlet weak var typeImgOut: UIImageView!
@@ -238,7 +247,45 @@ class tourCell: UITableViewCell {
     @IBOutlet weak var aboutOut: UILabel!
     @IBOutlet weak var titleOut: UILabel!
     
-    
+    //@dylan pitts June 2, 2020
+    //checks each transaction if the item purchased
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        
+        //disable purchase button enable start button for each transaction purchased
+        for transaction in transactions {
+            if transaction.transactionState == .purchased {
+                print("Item purchased")
+                
+                PDSButtonOut.isEnabled = false
+                PDSButtonOut.isHidden = true
+                startOut.isEnabled = true
+                startOut.isHidden = false
+             
+            //if failed do something
+            } else if transaction.transactionState == .failed {
+                print("transaction failed")
+            }
+        }
+    }
+    //@dylan pitts June 2, 2020
+    //if purchase button prssed
+    @IBAction func purchasePressed(_ sender: Any) {
+        
+        //check if user is eligible to make purchase
+        if SKPaymentQueue.canMakePayments() {
+            
+            //create payment rquest for a product
+            let paymentRequest = SKMutablePayment()
+            paymentRequest.productIdentifier = productID
+            
+            //attempt purchase
+            SKPaymentQueue.default().add(paymentRequest)
+            
+        //if user unable to make purchases
+        } else {
+            print("user unable to make payements")
+        }
+    }
 }
  
 
