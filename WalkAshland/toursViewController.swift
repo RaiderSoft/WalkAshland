@@ -68,7 +68,6 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
             locationManager.startUpdatingLocation()
         }
 
-        
         reloadInputViews()
     }
     
@@ -118,8 +117,8 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
         let tour = tours[indexPath.row]             //For each row create a cell  with cell class
         let cell = tableView.dequeueReusableCell(withIdentifier: "tourCell", for: indexPath) as! tourCell
         
-        SKPaymentQueue.default().add(cell)
-
+        //SKPaymentQueue.default().add(cell)
+        cell.fetchAvailableProducts()
         //Setup all static images for a cell
         cell.typeImgOut.image = UIImage.init(named: "walking")
         cell.durImgOut.image = UIImage.init(named: "timeicon")
@@ -227,9 +226,12 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
 
 /* Faisal:
    This class handles */
-class tourCell: UITableViewCell, SKPaymentTransactionObserver {
-    
-    let productID = "com.walkashland.walkashland.route1" //productID from appConnect
+class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransactionObserver {
+
+    //let productID = "com.walkashland.walkashland.route2" //productID from appConnect
+    var productsRequest = SKProductsRequest()
+    var validProducts = [SKProduct]()
+    var productIndex = 0
     
     @IBOutlet weak var durImgOut: UIImageView!
     @IBOutlet weak var typeLabelOut: UILabel!
@@ -249,44 +251,131 @@ class tourCell: UITableViewCell, SKPaymentTransactionObserver {
     
     //@dylan pitts June 2, 2020
     //checks each transaction if the item purchased
-    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        
-        //disable purchase button enable start button for each transaction purchased
-        for transaction in transactions {
-            if transaction.transactionState == .purchased {
-                print("Item purchased")
-                
-                PDSButtonOut.isEnabled = false
-                PDSButtonOut.isHidden = true
-                startOut.isEnabled = true
-                startOut.isHidden = false
-             
-            //if failed do something
-            } else if transaction.transactionState == .failed {
-                print("transaction failed")
-            }
-        }
-    }
+//    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+//
+//        var productsRequest = SKProductsRequest()
+//        var validProducts = [SKProduct]()
+//        var productIndex = 0
+//
+//        PDSButtonOut.isHidden = true
+//        startOut.isHidden = true
+//
+//
+//
+//
+//        //disable purchase button enable start button for each transaction purchased
+//        for transaction in transactions {
+//            if transaction.transactionState == .purchased {
+//                print("Item purchased")
+//
+//                PDSButtonOut.isEnabled = false
+//                PDSButtonOut.isHidden = true
+//                startOut.isEnabled = true
+//                startOut.isHidden = false
+//
+//            //if failed do something
+//            } else if transaction.transactionState == .failed {
+//                print("transaction failed")
+//            }
+//        }
+//    }
     //@dylan pitts June 2, 2020
     //if purchase button prssed
     @IBAction func purchasePressed(_ sender: Any) {
         
-        //check if user is eligible to make purchase
-        if SKPaymentQueue.canMakePayments() {
-            
-            //create payment rquest for a product
-            let paymentRequest = SKMutablePayment()
-            paymentRequest.productIdentifier = productID
-            
-            //attempt purchase
-            SKPaymentQueue.default().add(paymentRequest)
-            
-        //if user unable to make purchases
-        } else {
-            print("user unable to make payements")
+        productIndex = 0
+        purchaseMyProduct(validProducts[productIndex])
+        
+        //        //check if user is eligible to make purchase
+//        if SKPaymentQueue.canMakePayments() {
+//
+//            //create payment rquest for a product
+//            let paymentRequest = SKMutablePayment()
+//            paymentRequest.productIdentifier = productID
+//
+//            //attempt purchase
+//            SKPaymentQueue.default().add(paymentRequest)
+//
+//        //if user unable to make purchases
+//        } else {
+//            print("user unable to make payements")
+//        }
+    }
+    
+    func fetchAvailableProducts()  {
+        let productIdentifiers = NSSet(objects:
+            "com.walkashland.walkashland.route2"         // 0
+        )
+        
+        productsRequest = SKProductsRequest(productIdentifiers: productIdentifiers as! Set<String>)
+        productsRequest.delegate = self
+        productsRequest.start()
+    }
+    
+    func productsRequest (_ request:SKProductsRequest, didReceive response:SKProductsResponse) {
+        if (response.products.count > 0) {
+            validProducts = response.products
+                
+            let route1 = response.products[0] as SKProduct
+            print("1st rpoduct: " + route1.localizedDescription)
+
         }
     }
+    
+    func paymentQueue(_ queue: SKPaymentQueue, shouldAddStorePayment payment: SKPayment, for product: SKProduct) -> Bool {
+        return true
+    }
+    
+    func canMakePurchases() -> Bool {  return SKPaymentQueue.canMakePayments()  }
+    
+    func purchaseMyProduct(_ product: SKProduct) {
+        if self.canMakePurchases() {
+            let payment = SKPayment(product: product)
+            SKPaymentQueue.default().add(self)
+            SKPaymentQueue.default().add(payment)
+        } else { print("Purchases are disabled in your device!") }
+    }
+    
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+            for transaction:AnyObject in transactions {
+                if let trans:SKPaymentTransaction = transaction as? SKPaymentTransaction {
+                    switch trans.transactionState {
+                        
+                    case .purchased:
+                        SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
+                        if productIndex == 0 {
+                            print("You've bought route 1")
+                            PDSButtonOut.isEnabled = false
+                            PDSButtonOut.isOpaque = true
+                            startOut.isEnabled = true
+                            startOut.isOpaque = false
+                        } else {
+                           //other purchase
+                        }
+                        break
+                        
+                    case .failed:
+                        SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
+                        print("Payment has failed.")
+                        
+                        break
+                    case .restored:
+                        SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
+                        print("Purchase has been successfully restored!")
+                        break
+                        
+                    default: break
+            }}}
+    }
+    
+    func restorePurchase() {
+            SKPaymentQueue.default().add(self as SKPaymentTransactionObserver)
+            SKPaymentQueue.default().restoreCompletedTransactions()
+    }
+        
+    func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
+            print("The Payment was successfull!")
+    }
+    
 }
- 
-
 
