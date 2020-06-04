@@ -67,7 +67,7 @@ extension SigninViewController: ASAuthorizationControllerDelegate, ASAuthorizati
         switch authorization.credential {
         case let credentials as ASAuthorizationAppleIDCredential:
             let user = User(credentials: credentials)
-
+            NSLog("in tab view \(user)")
             performSegue(withIdentifier: "segue", sender: user)
             
         default: break 

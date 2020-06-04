@@ -53,6 +53,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J3k-Tb-SG4" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vDX-eg-k2E">
+                                <rect key="frame" x="277" y="102" width="117" height="108"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="vDX-eg-k2E" secondAttribute="height" multiplier="13:12" id="4l6-ec-HlE"/>
+                                    <constraint firstAttribute="width" constant="117" id="FKa-ZX-Dv2"/>
+                                    <constraint firstAttribute="height" constant="108" id="cSZ-De-UhC"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="ashland1"/>
+                                <connections>
+                                    <action selector="photosGo:" destination="aGu-xx-Lzz" eventType="touchUpInside" id="62F-Mc-0Um"/>
+                                    <segue destination="siF-iY-jqo" kind="show" identifier="tophotos" id="tcy-2M-cdu"/>
+                                </connections>
+                            </button>
                             <pickerView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" restorationIdentifier="picker" translatesAutoresizingMaskIntoConstraints="NO" id="UR2-pi-9qn">
                                 <rect key="frame" x="0.0" y="513" width="414" height="299"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -96,21 +113,21 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="p8h-wo-7tn"/>
                                 </items>
                             </toolbar>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J3k-Tb-SG4" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="v9i-uy-wdl" firstAttribute="trailing" secondItem="5Ux-r5-M9I" secondAttribute="trailing" id="0CO-pq-u4T"/>
                             <constraint firstItem="v9i-uy-wdl" firstAttribute="bottom" secondItem="5Ux-r5-M9I" secondAttribute="bottom" id="0LY-ec-tNV"/>
                             <constraint firstItem="J3k-Tb-SG4" firstAttribute="top" secondItem="Oot-PU-iFJ" secondAttribute="top" id="28R-4d-Oj7"/>
+                            <constraint firstItem="UR2-pi-9qn" firstAttribute="top" secondItem="vDX-eg-k2E" secondAttribute="bottom" constant="303" id="3Mb-bP-0NJ"/>
+                            <constraint firstItem="5Ux-r5-M9I" firstAttribute="trailing" secondItem="vDX-eg-k2E" secondAttribute="trailing" constant="20" id="CcI-lc-KGM"/>
                             <constraint firstItem="v9i-uy-wdl" firstAttribute="top" secondItem="UR2-pi-9qn" secondAttribute="bottom" constant="1" id="Ce0-Lh-ECN"/>
+                            <constraint firstItem="v9i-uy-wdl" firstAttribute="top" secondItem="J3k-Tb-SG4" secondAttribute="bottom" id="Cw8-bU-F7N"/>
                             <constraint firstItem="v9i-uy-wdl" firstAttribute="bottom" secondItem="5Ux-r5-M9I" secondAttribute="bottom" id="X1A-nE-ltS"/>
+                            <constraint firstItem="vDX-eg-k2E" firstAttribute="top" secondItem="5Ux-r5-M9I" secondAttribute="top" constant="14" id="dGq-II-eAC"/>
                             <constraint firstItem="J3k-Tb-SG4" firstAttribute="trailing" secondItem="5Ux-r5-M9I" secondAttribute="trailing" id="fSB-WJ-NMT"/>
                             <constraint firstItem="UR2-pi-9qn" firstAttribute="trailing" secondItem="5Ux-r5-M9I" secondAttribute="trailing" id="gFD-j4-0sB"/>
-                            <constraint firstItem="v9i-uy-wdl" firstAttribute="top" secondItem="J3k-Tb-SG4" secondAttribute="bottom" id="hWR-A5-Jmk"/>
+                            <constraint firstItem="vDX-eg-k2E" firstAttribute="leading" secondItem="5Ux-r5-M9I" secondAttribute="leading" constant="277" id="huo-b0-vqp"/>
                             <constraint firstItem="J3k-Tb-SG4" firstAttribute="leading" secondItem="5Ux-r5-M9I" secondAttribute="leading" id="iXb-2N-kVS"/>
                             <constraint firstItem="UR2-pi-9qn" firstAttribute="leading" secondItem="5Ux-r5-M9I" secondAttribute="leading" id="idf-fc-XTe"/>
                             <constraint firstItem="UR2-pi-9qn" firstAttribute="top" secondItem="5Ux-r5-M9I" secondAttribute="top" constant="425" id="qbw-DO-Wh8"/>
@@ -123,11 +140,45 @@
                         <outlet property="MediaBar" destination="v9i-uy-wdl" id="scj-bf-LOR"/>
                         <outlet property="PickerTextView" destination="UR2-pi-9qn" id="og8-Wf-LrL"/>
                         <outlet property="mapView" destination="J3k-Tb-SG4" id="gfR-yr-xas"/>
+                        <outlet property="photosOut" destination="vDX-eg-k2E" id="6Of-3i-FhE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qJx-Sj-fFW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2148" y="1543"/>
+            <point key="canvasLocation" x="2147.826086956522" y="1542.8571428571429"/>
+        </scene>
+        <!--Photos View Controller-->
+        <scene sceneID="ENu-1r-Qcy">
+            <objects>
+                <viewController id="siF-iY-jqo" customClass="photosViewController" customModule="WalkAshland" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LxR-dO-XUa">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VpE-cA-LbQ">
+                                <rect key="frame" x="0.0" y="257" width="414" height="377"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="VpE-cA-LbQ" secondAttribute="height" multiplier="414:377" id="feJ-n3-l2h"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="b1d-7U-M5b" firstAttribute="bottom" secondItem="VpE-cA-LbQ" secondAttribute="bottom" constant="179" id="Dx1-z6-SQo"/>
+                            <constraint firstItem="VpE-cA-LbQ" firstAttribute="leading" secondItem="b1d-7U-M5b" secondAttribute="leading" id="QQX-Kk-sqS"/>
+                            <constraint firstItem="VpE-cA-LbQ" firstAttribute="top" secondItem="b1d-7U-M5b" secondAttribute="top" constant="169" id="lhR-0r-4gm"/>
+                            <constraint firstItem="VpE-cA-LbQ" firstAttribute="trailing" secondItem="b1d-7U-M5b" secondAttribute="trailing" id="wUf-jm-TCp"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="b1d-7U-M5b"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="opR-M2-y0q"/>
+                    <connections>
+                        <outlet property="photosStack" destination="VpE-cA-LbQ" id="nbk-sW-XBf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rWb-Zi-Qta" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2860.8695652173915" y="1542.8571428571429"/>
         </scene>
         <!--toursNavigationViewController-->
         <scene sceneID="ETN-1n-cpx">
@@ -1099,6 +1150,7 @@
         <segue reference="cNd-SW-68H"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="ashland1" width="2000" height="1000"/>
         <image name="icloud.and.arrow.up.fill" catalog="system" width="128" height="106"/>
         <image name="locationicon" width="360" height="360"/>
         <image name="timeicon" width="300" height="300"/>

@@ -19,7 +19,7 @@ import CoreLocation //For accesing the curent location
 extension toursViewController {
     /*      In this function we check for user authorization of using the location  >>>>Faisal    */
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus){
-        if status == .authorizedWhenInUse {             //check if the user has given authorization
+        if status != .authorizedWhenInUse {             //check if the user has given authorization
             locationManager.requestLocation()           //Request the location of user
         }
         else {
@@ -54,23 +54,56 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let user = dataModel?.user {
+            self.user = user
+        }
         
-        NSLog("Reached \(user)")
-        
-        locationManager.requestWhenInUseAuthorization()
+        var firstName = ""
+
+         if let result = dataModel?.saveuserinfo(user: user){
+            if result {
+                if user.firstName != "" {
+                    firstName = user.firstName
+                }
+                else {
+                    firstName = "UnknownUser"
+                }
+
+                let alertController = UIAlertController(title: "Greeting", message: "Hi \(firstName) \n Thanks for creating an account \n Enjoy.", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
+                self.present(alertController,animated: true, completion: nil)
+            }
+            else {
+                let alertController = UIAlertController(title: "Greeting", message: "Hi \n Welcome Back \n Enjoy.", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: {
+                    action in
+
+                    }))
+                self.present(alertController,animated: true, completion: nil)
+            }
+
+        }
+        self.locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            self.locationManager.delegate = self
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
             
-            locationManager.startUpdatingLocation()
+            self.locationManager.startUpdatingLocation()
         }
 
+        NSLog("Reached \(user)")
         
-        //reloadInputViews()
+
+        
+
+
+        
+//        reloadInputViews()
+        loadView()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "tourinfo", sender: nil)
+//        performSegue(withIdentifier: "tourinfo", sender: nil)
     }
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
     //This function is called before the view will be loaded
@@ -177,17 +210,11 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
             Download the image and view is
             Create a reference to this image from the firebase storage
          */
-        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
-        let nsUserDomainMask    = FileManager.SearchPathDomainMask.userDomainMask
-        let paths               = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
-        if let dirPath          = paths.first
-        {
-            let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(tour.imgPath)
-            let image    = UIImage(contentsOfFile: imageURL.path)
-            cell.imgOut.image = image
-           // Do whatever you want with the image
-        }
-        
+                
+        let documentsDirectoryPath: String = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
+        let prevImagePath =  URL(fileURLWithPath: documentsDirectoryPath).appendingPathComponent(tour.photos[0])
+        let image = UIImage(contentsOfFile: prevImagePath.path)
+        cell.imgOut.image = image
         cell.startOut.tag = indexPath.row                               //A way to p
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
     return cell

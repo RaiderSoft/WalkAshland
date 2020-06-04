@@ -22,13 +22,11 @@ class TabBarViewController: UITabBarController {
         //Retreive public data
         dataModel.retrieve_data()
         //Get store user information and download purchased items
+        
         if let user = user {
-
-            
             dataModel.user = user
-            print(user)
-            dataModel.saveuserinfo(user: user)
-            dataModel.getPurchasedFor(userId: user.id, tours: dataModel.tours)
+            //dataModel.savePurchase(user: user, tour: 0)                             //THese needs removed
+            dataModel.getPurchasedFor(userId: user.id, tours: dataModel.tours)      //sharing not sharing email, has different ids
         }
         else {
             //alert

@@ -42,6 +42,33 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     let directionsAPIKey = "AIzaSyALhYJ57z7cqPzn8jLMMM1pxmhZIgmiG-8"
     var waypoints: String = ""
     var camera : GMSCameraPosition?
+    @IBOutlet weak var photosOut: UIButton!
+    @IBAction func photosGo(_ sender: UIButton) {
+
+    }
+     //SEND this tour data on clicking
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
+    let documentsDirectoryPath: String = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
+        if let pvc = segue.destination as? photosViewController {
+            var images: [UIImage] = []
+            var i = 0
+
+            if let tour = tour {
+                while (i < tour.photos.count){
+                    let prevImagePath =  URL(fileURLWithPath: documentsDirectoryPath).appendingPathComponent(tour.photos[i])
+                    let image = UIImage(contentsOfFile: prevImagePath.path)
+                    if let image = image {
+                        images.append(image) //Add image
+                    }
+                    i += 1
+                }
+            }
+            
+            pvc.images = images
+        }
+        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
+    }
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
     
     //Created by Dylan
@@ -50,6 +77,8 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     //List Text for drop down(PickerTextView)
     var audioList: [String] = [String]()
     var audioPath: [String] = [String]()
+
+
     override func didReceiveMemoryWarning() {
             super.didReceiveMemoryWarning()
             // Dispose of any resources that can be recreated.
@@ -130,7 +159,15 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         @IBOutlet weak var PickerTextView: UIPickerView!
     override func viewDidLoad() {
         super.viewDidLoad()
+            let documentsDirectoryPath: String = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
         //###############################################################-Faisal
+        if let tour = tour {
+            let prevImagePath =  URL(fileURLWithPath: documentsDirectoryPath).appendingPathComponent(tour.photos[0])
+            var image = UIImage(contentsOfFile: prevImagePath.path)
+            photosOut.imageView?.image = image
+            view.addSubview(photosOut)
+        }
+        
         //>>>>Google STUFF
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
@@ -141,11 +178,13 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
                 //Unwrap both longitude and latitude
                 if let long = point["Longitude"], let lat = point["Latitude"]
                 {
-                    var an =  GMSMarker(position: CLLocationCoordinate2D.init(latitude: lat, longitude: long))
+                    let an =  GMSMarker(position: CLLocationCoordinate2D.init(latitude: lat, longitude: long))
                     
                     an.title = tour.audioClips[x] as? String
-            
+                    
+                    an.accessibilityHint = "!"
                     an.iconView?.tintColor = UIColor.red
+                    
 //                    baseURL = baseURL + "origin=\(),\()&destination=\(destinationLat),\(destinationLong)&sensor=true&mode=walking&key=\(directionsAPIKey)")
 //
                     if locationPoints == nil {
@@ -183,6 +222,7 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             self.present(alertController,animated: true, completion: nil)
         }
         nextPoint = locationPoints[0].position
+        
         //get the consent of the user for accessing current location
         
         locationManager.requestWhenInUseAuthorization()
@@ -213,7 +253,8 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         mapView.isBuildingsEnabled = true
         mapView.isMultipleTouchEnabled = true
         mapView.isUserInteractionEnabled = true
-        
+
+
         
         
 //        mapView.isMultipleTouchEnabled = true
@@ -245,11 +286,12 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
                                 DispatchQueue.main.async {
                                     let path = GMSPath(fromEncodedPath: polyline!)
                                     
-                                    var lines = GMSPolyline(path: path)
+                                    let lines = GMSPolyline(path: path)
                                     lines.strokeWidth = 4.0
                                     lines.strokeColor = UIColor.blue
                                     
                                     lines.map = self.mapView
+
                                 }
                             }
                         }
@@ -266,8 +308,7 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         
         //Created by Dylan
         //let fileManager = FileManager.default
-        let documentsDirectoryPath:String = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
-      
+
         var i = 0
         if let tours = tour?.audioClips {
             for aud in tours {
@@ -280,7 +321,7 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             }
         }
        //bring mediabar forward
-       MediaBar.layer.zPosition = 1;
+       MediaBar.layer.zPosition = 3;
         
         do {
              audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: audioPath[0]))
@@ -316,13 +357,13 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             mapView.camera = camera
         }
         
-        for i in locationPoints {
-            i.map = mapView
-        }
+
     }
     override func viewWillAppear(_ animated: Bool) {
         reloadInputViews()
     }
+    
+
 }
 
 /*
@@ -389,11 +430,12 @@ extension playingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                         self.nextPoint = self.locationPoints[self.counter].position
                         self.counter = self.counter + 1
                         
+
                     } catch {
                         print(error)
                     }
                 }
-                else {
+                else if !(self.audioPlayer.isPlaying) {
                     do {
                         //A Thank or something
                         self.audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: self.audioPath[self.counter-1]))
@@ -402,6 +444,9 @@ extension playingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                     } catch {
                         print(error)
                     }
+                }
+                else {
+                    
                 }
             }
         }
@@ -444,6 +489,9 @@ extension playingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             }
 
             
+        }
+        for i in locationPoints {
+            i.map = mapView
         }
     }
     

@@ -175,16 +175,10 @@ class accountViewController: UITableViewController, CLLocationManagerDelegate{
             Download the image and view is
             Create a reference to this image from the firebase storage
          */
-        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
-        let nsUserDomainMask    = FileManager.SearchPathDomainMask.userDomainMask
-        let paths               = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
-        if let dirPath          = paths.first
-        {
-            let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(tour.imgPath)
-            let image    = UIImage(contentsOfFile: imageURL.path)
-            cell.imgOut.image = image
-           // Do whatever you want with the image
-        }
+        let documentsDirectoryPath: String = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
+        let prevImagePath =  URL(fileURLWithPath: documentsDirectoryPath).appendingPathComponent(tour.photos[0])
+        let image = UIImage(contentsOfFile: prevImagePath.path)
+        cell.imgOut.image = image
         
         cell.startOut.tag = indexPath.row                               //A way to p
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
