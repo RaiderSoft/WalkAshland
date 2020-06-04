@@ -17,7 +17,7 @@ import CoreLocation //For accesing the curent location
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
 import StoreKit
 
-extension toursViewController {
+extension toursViewController : tourCellDelegate {
         
     /*      In this function we check for user authorization of using the location  >>>>Faisal    */
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus){
@@ -31,6 +31,14 @@ extension toursViewController {
     /*      In this function we take action for errors from     >>>>Faisal  */
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         NSLog("ERROR:: \(error) ")
+    }
+    
+    func tourCell(_ tourCell: tourCell, msg: String, title: String) {
+        
+        let alertController = UIAlertController(title: "\(title)", message: "\(msg)", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
+
+        self.present(alertController,animated: true, completion: nil)
     }
 }
 /*  This class is the class for the tours view controller that list the tours   */
@@ -117,6 +125,7 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
         let tour = tours[indexPath.row]             //For each row create a cell  with cell class
         let cell = tableView.dequeueReusableCell(withIdentifier: "tourCell", for: indexPath) as! tourCell
         
+        cell.delegate = self
         //SKPaymentQueue.default().add(cell)
         cell.fetchAvailableProducts()
         //Setup all static images for a cell
@@ -228,6 +237,7 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
    This class handles */
 class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransactionObserver {
 
+    weak var delegate : tourCellDelegate?
     //let productID = "com.walkashland.walkashland.route2" //productID from appConnect
     var productsRequest = SKProductsRequest()
     var validProducts = [SKProduct]()
@@ -329,14 +339,26 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
     func canMakePurchases() -> Bool {  return SKPaymentQueue.canMakePayments()  }
     
     func purchaseMyProduct(_ product: SKProduct) {
+        var msg = ""
+        var title = ""
         if self.canMakePurchases() {
             let payment = SKPayment(product: product)
             SKPaymentQueue.default().add(self)
             SKPaymentQueue.default().add(payment)
-        } else { print("Purchases are disabled in your device!") }
+        } else {
+            
+            msg = "Purchases are disabled in your device!"
+            title = "Transaction Error!"
+            
+            self.delegate?.tourCell(self, msg: msg, title: title)
+        }
     }
     
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        
+        var msg = ""
+        var title = ""
+        
             for transaction:AnyObject in transactions {
                 if let trans:SKPaymentTransaction = transaction as? SKPaymentTransaction {
                     switch trans.transactionState {
@@ -345,6 +367,7 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
                         SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
                         if productIndex == 0 {
                             print("You've bought route 1")
+                            
                             PDSButtonOut.isEnabled = false
                             PDSButtonOut.isOpaque = true
                             startOut.isEnabled = true
@@ -356,7 +379,11 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
                         
                     case .failed:
                         SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
-                        print("Payment has failed.")
+                        
+                        msg = "Payment has failed."
+                        title = "Transaction Error!"
+                        
+                        self.delegate?.tourCell(self, msg: msg, title: title)
                         
                         break
                     case .restored:
@@ -374,8 +401,14 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
     }
         
     func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
-            print("The Payment was successfull!")
+            
+        let msg = "Purchase Completed."
+        let title = "Transaction Success!"
+        
+        self.delegate?.tourCell(self, msg: msg, title: title)
     }
-    
 }
 
+protocol tourCellDelegate: AnyObject {
+    func tourCell(_ tourCell: tourCell, msg: String, title: String)
+}
