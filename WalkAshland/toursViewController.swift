@@ -98,7 +98,7 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
 
 
         
-//        reloadInputViews()
+        reloadInputViews()
         loadView()
     }
     

@@ -185,6 +185,7 @@ class DataModel {
                                     print("i is : \(i)")
                                     self.databaseRef.child("db").child("\(i)").observeSingleEvent(of: .value, with: { (data) in
                                                       
+                                        print("enter 1 ")
                                         // Get user value
                                                       
                                         let tour = data.value as? NSDictionary
@@ -197,19 +198,21 @@ class DataModel {
                                         let duration = tour?["duration"] as! String
                                         let location = tour?["locations"] as! [[String: Double]]
                                         let audio = tour?["audios"] as! [String]
+                                        print("enter 2 ")
                                         let photos = tour?["photos"] as! [String]
 
                                         //Check if there is more photos than the default preview image al
-                                        if photos.count > 1 {
-                                            var x = 1
+                                        if true {
+                                            var x = 0
                                             while x < photos.count {
+                                                print("enter 3 ")
                                                 let photo = photos[x]
                                                 //Get local storage reference
                                                 let documentsPhotoURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
                                                 //create a reference to the file
                                                 let localPhotoURL = documentsPhotoURL.appendingPathComponent(photo)
                                                 //get firestore reference for the image
-                                                let photoRef = storageRef.child("photos").child("\(i)").child(photo)
+                                                let photoRef = storageRef.child(photo)
                                                 
                                                 let _ = photoRef.write(toFile: localPhotoURL) { (URL, error) -> Void in
                                                     if (error == nil) {
@@ -223,6 +226,7 @@ class DataModel {
                                                         NSLog("Error occured")
                                                     }
                                                 }
+                                                x += 1
                                             }
                                             
                                         }
