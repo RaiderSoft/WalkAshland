@@ -16,50 +16,7 @@ import MapKit
 import CoreLocation //For accesing the curent location
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
 
-
-/*  This class is the class for the tours view controller that list the tours   */
-class toursViewController: UITableViewController, CLLocationManagerDelegate{
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
-    //Creating variable to be set from the scene delegate for the data
-    var dataModel: DataModel?
-    //To store dowloaded tours from the model
-    var tours: [Tour] {
-        return dataModel?.tours ?? []
-    }
-    var user : User!
-    var distance: Double!
-    //Create a reference to the firebase storage for accessing files
-    let storageRef = Storage.storage().reference()
-    let locationManager = CLLocationManager()
-    var currentLocation : CLLocationCoordinate2D?
-    let directionRequest = MKDirections.Request()            //Creating a request of direction
-    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
-    
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        NSLog("Reached \(user)")
-        
-        locationManager.requestWhenInUseAuthorization()
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.startUpdatingLocation()
-        }
-
-
-        reloadInputViews()
-    }
-    
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
-    //This function is called before the view will be loaded
-    //I used this function to reload the data on the table
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        
-    }
+extension toursViewController {
     /*      In this function we check for user authorization of using the location  >>>>Faisal    */
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus){
         if status == .authorizedWhenInUse {             //check if the user has given authorization
@@ -73,35 +30,80 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         NSLog("ERROR:: \(error) ")
     }
+}
+/*  This class is the class for the tours view controller that list the tours   */
+class toursViewController: UITableViewController, CLLocationManagerDelegate{
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
+    //Creating variable to be set from the scene delegate for the data
+    var dataModel: DataModel?
+    //To store dowloaded tours from the model
+    var tours: [Tour] {
+        return dataModel?.tours ?? []
+    }
+    var user : User!
+    var distance: Double!
+    var duration: Double!
+    //Create a reference to the firebase storage for accessing files
+    let storageRef = Storage.storage().reference()
+    let locationManager = CLLocationManager()
+    var currentLocation : CLLocationCoordinate2D?
+    let directionRequest = MKDirections.Request()            //Creating a request of direction
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
+    
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        NSLog("Reached \(user)")
+        
+        locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            
+            locationManager.startUpdatingLocation()
+        }
+
+        
+        //reloadInputViews()
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "tourinfo", sender: nil)
+    }
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
+    //This function is called before the view will be loaded
+    //I used this function to reload the data on the table
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadInputViews()
+        loadView()
+        
+    }
+
     /*  This function updates the user's location      >>>>Faisal */
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     //  let locationPoints = gets from tour             //Get the location points create annotations
         
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         currentLocation = locValue
-        
-        
-        //more than 11 meters
-        /*
-         if( locationPoints[0]["lat"]! + CLLocationCoordinate2D.init(latitude: 0.00015, longitude: 0.0015).latitude > locValue.latitude
-            && locValue.latitude > locationPoints[0]["lat"]! - CLLocationCoordinate2D.init(latitude: 0.00015, longitude: 0.0015).latitude)
-        {
-            print(" \n\n\nlocations = \(locValue.latitude) \(locValue.longitude) \n\n")
-        }
-        */
-        
+        locationManager.stopUpdatingLocation()
+
         //Set the region where the mapview should focus on
         //Get the longitude and latitude of the centeral point in the
         //tour and set as the center of the camera
         loadView()
         
     }
-    
     //This function sets the number of rows in table
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tours.count
     }
     
+    
+    
+    //Settup the contents of a tour dynamically
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
         let tour = tours[indexPath.row]             //For each row create a cell  with cell class
@@ -122,11 +124,8 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
                 directionRequest.source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: destinationLat , longitude: destinationLong)))
                 directionRequest.destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: sourceLat , longitude: sourceLong)))
             }
-               
-
-               
         directionRequest.requestsAlternateRoutes = false                //Set alternative paths to none
-        directionRequest.transportType = .automobile                       //Default transport type is walking
+        directionRequest.transportType = .walking                       //Default transport type is walking
         let directions = MKDirections(request: directionRequest)        //request a direction from the source to the direction
         directions.calculate { (response, error) in                     //Get an process the respons to the the direction request
             guard let directionResponse = response else {
@@ -142,6 +141,7 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
             self.distance = (route.distance * toFeet) / toMile           //distance in miles
             cell.distLabelOut.text = "\( round((self.distance / 0.01 ) * 0.01)) miles away"        //Set the distance label in the view
         }
+        //Trim the title to a fitting size
         let t : String = tour.title                                     //These steps are for truncating the title to a file size
         var title = ""
         if t.count > 15 {
@@ -154,11 +154,12 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
         }
         else {
             cell.titleOut.text = tour.title                             //Set the title of the tour
-        }                                                               //These steps are to truncate the desription to fine size
-        let d : String = tour.description
+        }
+        //Trim the description to a fitting size
+        let d : String = tour.description                               //These steps are to truncate the desription to fine size
         var description = ""
-        if d.count > 15 {
-            let index = d.index(d.startIndex, offsetBy: 100)
+        if d.count > 150 {
+            let index = d.index(d.startIndex, offsetBy: 150)
             let de = d[..<index]
             for i in de {
                 description = "\(description)\(i)"
@@ -167,7 +168,9 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
         else {
             cell.aboutOut.text = tour.description                       //Set description of the tour
         }
-        cell.durNumOut.text = "\(tour.duration) mins"                   //Set the duration of the tour
+        
+        cell.durNumOut.text = "\(tour.duration)"                   //Set the duration of the tour
+        
         cell.typeLabelOut.text = tour.tourType                          //Set the type of the tour
         
         /*

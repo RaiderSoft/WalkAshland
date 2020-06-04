@@ -44,7 +44,7 @@ struct Tour {
     var locationPoints: [[String: Double]]      // location is stored as an array of latitude and longitude
     var audioClips: [String]                    //Not sure Need to be edited
     
-    var flag: String                            //Possible [D,P,ND,NP]
+    var flag: String = "NP"                     //Possible [D,P,ND,NP]      if D then P / if NP then ND / P -> D | ND / IF ND -> P | NP
     
     //This function returns a dictiory of values in the object
     var saveTourDetail: [String: String] {
@@ -57,6 +57,7 @@ struct Tour {
         "duration": "\(duration)",
         "type": "\(tourType)",
         "audio": "\(audioClips)"
+        
         ]
     }
     
@@ -71,11 +72,192 @@ class DataModel {
     
     //List of available tours
     var tours: [Tour] = []
+    var purchasedTours: [Tour] = []
+    var user : User?        //To hold the login information
     // Array of files
     
+    func savePurchase(user uid: User, tour tid: Int){
+            self.databaseRef = Database.database().reference()
+                    
+                    //Update the user info can user this code
+            
+    //
+    //                self.databaseRef.updateChildValues(
+    //                    [
+    //                        "/users/": user.saveUserDetail]
+    //                )
+
+            //Check if the user exists in the database
+        self.databaseRef.child("purchaseditems").child("\(uid.id)").child("tours").observeSingleEvent(of: .value, with: { (data) in
+                //add the user to the database if not exists
+                
+                if data.childrenCount == 0 {
+                    //Set the very first purchased item of the user
+                    self.databaseRef.child("purchaseditems").child("\(uid.id)").child("tours").child("0").setValue(tid)
+                    
+                }
+                else {
+                    
+                    self.databaseRef.child("purchaseditems").child("\(uid.id)").observeSingleEvent(of: .value, with: { (dat) in
+                        
+                        
+                        
+                        let tourids = dat.value as? NSDictionary
+                        
+                        if let tourids = tourids  {
+                            let toursc = tourids["tours"] as? [Int]
+
+                            var numPurchasedTours = 0
+
+                            
+                            if let num = toursc?.count {
+                                numPurchasedTours = num
+                            }
+
+
+                            if let ts = toursc {
+                                //CHeck if the purchased tour is already added
+                                if !(toursc!.contains(tid)){
+                                    self.databaseRef.child("purchaseditems").child("\(uid.id)").child("tours").child("\(numPurchasedTours)").setValue(tid)
+                                }
+                            }
+
+                        }
+                    })
+                }
+            })
+            { (error) in
+                NSLog("ERROR: Unable to open Firebase database")
+            }
+        }
+    
+    //Save user login
+    func saveuserinfo(user u: User){
+        self.databaseRef = Database.database().reference()
+                
+                //Update the user info can user this code
+        
+//
+//                self.databaseRef.updateChildValues(
+//                    [
+//                        "/users/": user.saveUserDetail]
+//                )
+
+        //Check if the user exists in the database
+        self.databaseRef.child("user").child("\(u.id)").observeSingleEvent(of: .value, with: { (data) in
+            //add the user to the database if not exists
+            if data.childrenCount == 0 {
+                self.databaseRef.child("users").child("\(u.id)").setValue(u.saveUserDetail)
+            }
+            else {
+                
+            }
+        })
+        { (error) in
+            NSLog("ERROR: Unable to open Firebase database")
+        }
+        
+    }
+    func getPurchasedFor(userId id: String, tours t: [Tour]){
+        //Reference to the database
+        databaseRef = Database.database().reference()
+        
+            //Check if the user exists in the database
+        
+        self.databaseRef.child("purchaseditems").child("\(id)").child("tours").observeSingleEvent(of: .value, with: { (data) in
+                //add the user to the database if not exists
+                
+                if data.childrenCount != 0 {
+                    //Set the very first purchased item of the user
+                    
+                    self.databaseRef.child("purchaseditems").child("\(id)").observeSingleEvent(of: .value, with: { (dat) in
+                        
+                        let tourids = dat.value as? NSDictionary
+
+                        if let tourids = tourids  {
+                            //Get the list of the purchased tours
+                            
+                            if let toursc = tourids["tours"] as? [Int] {
+                                //CHeck if the purchased tour is already added
+                                NSLog("count of toursc is \(toursc.count)" )
+                                print(tourids)
+                                NSLog("RE HERE \n id is \(id) \n ")
+                                
+                                for i in toursc {
+                                    print("i is : \(i)")
+                                    self.databaseRef.child("db").child("\(i)").observeSingleEvent(of: .value, with: { (data) in
+                                                      
+                                        // Get user value
+                                                      
+                                        let tour = data.value as? NSDictionary
+                                        //Get individual values of a tour from the database
+                                        let title = tour?["title"] as! String
+                                        let description = tour?["about"] as! String
+                                        let price = tour?["price"] as! String
+                                        let type = tour?["type"] as! String
+                                        let image = tour?["image"] as! String
+                                        let duration = tour?["duration"] as! String
+                                        let location = tour?["locations"] as! [[String: Double]]
+                                        let audio = tour?["audios"] as! [String]
+                                        
+                                        //Create a tour
+                                        let x = Tour.init(ti: title, des: description, pr: price, img: image, dur: duration, type: type , locs: location, auds: audio, flag: "ND")
+                                        print(x.saveTourDetail)
+                                        //add the tour to the tours list
+                                        self.purchasedTours.append(x)
+                                                      
+                                        for aud in audio {
+                                                          
+                                            let audDocumentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                                            let audLocalURL = audDocumentsURL.appendingPathComponent(aud)
+                                                
+                                                // Create a reference to the file you want to download
+                                            let audRef = storageRef.child(aud)
+                                            
+                                            // Download to the local filesystem
+                                            _ = audRef.write(toFile: audLocalURL)
+                                            { (URL, error) -> Void in
+                                                if (error != nil) {
+                                                    // Uh-oh, an error occurred!
+                                                    print("Error: File Not Saved")
+                                                } else {
+                                                    // Local file URL for "images/island.jpg" is returned
+                                                    print("File Saved")
+                                                    print(audLocalURL)
+                                                }
+                                            }
+                                        }
+                                        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                                        let localURL = documentsURL.appendingPathComponent(image)
+                                                    
+                                        // Create a reference to the file you want to download
+                                        let islandRef = storageRef.child(image)
+                                        // Download to the local filesystem
+                                        _ = islandRef.write(toFile: localURL) { (URL, error) -> Void in
+                                        if (error != nil) {
+                                                          // Uh-oh, an error occurred!
+                                            print("Error: File Not Saved")
+                                        } else {
+                                        // Local file URL for "images/island.jpg" is returned
+                                            print("File Saved")
+                                            print(localURL)
+                                        }
+                                        }
+
+                                                      
+                                    })
+                                    { (error) in
+                                        NSLog("ERROR: Unable to open Firebase database")
+                                    }
+                                }
+                            }
+                        }
+                    })
+                }
+        })
+    }
     func retrieve_data(){
         NSLog("Datamodel is called")
-        //
         //Get a reference to the storage
         //let storage = Storage.storage()
         
@@ -153,8 +335,6 @@ class DataModel {
                         print(localURL)
                       }
                     }
-
-                    
                   })
                   { (error) in
                         NSLog("ERROR: Unable to open Firebase database")

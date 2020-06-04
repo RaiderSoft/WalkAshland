@@ -17,11 +17,31 @@ struct User {
     
     //Initialize the user with the given credentials or empty strings
     init(credentials: ASAuthorizationAppleIDCredential) {
-        self.id = credentials.user
+        
+        
+        //Fire base does not allow chillds to have . , [ , ], #
+        var uId : String = ""
+        for var i in credentials.user {
+            
+            if i == "." {
+                i = "!"
+            }
+            uId = uId + String(i)
+        }
+        self.id = uId
         self.firstName = credentials.fullName?.givenName ?? ""
         self.lastName = credentials.fullName?.familyName ?? ""
         self.email = credentials.email ?? ""
         
+    }
+    var saveUserDetail: [String: String] {
+    //This return the jason formated of the a user data
+        return [
+        "email" :"\(email)",
+        "firstname": "\(firstName)",
+        "lastname": "\(lastName)",
+
+        ]
     }
 }
 //For debuging purposes

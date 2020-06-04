@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		02F45408AE6D73925D9317D3 /* Pods_WalkAshlandTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42CE7BA39036BDD1CF39859B /* Pods_WalkAshlandTests.framework */; };
 		60B4BFC87E2E1B4E75356EAB /* Pods_WalkAshland.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A5AD611FCA8A39D578510AA /* Pods_WalkAshland.framework */; };
-		6A153D5224453A8100EC6927 /* Find_Money.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6A153D5124453A8100EC6927 /* Find_Money.mp3 */; };
 		6A153D5424453B1900EC6927 /* addLocationsViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A153D5324453B1900EC6927 /* addLocationsViewControllers.swift */; };
 		6A1CEB4D243FDC310013A3F5 /* createTour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1CEB4C243FDC310013A3F5 /* createTour.swift */; };
 		6A6E1A1624405E58004B75CE /* playingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6E1A1524405E58004B75CE /* playingViewController.swift */; };
@@ -51,7 +50,6 @@
 /* Begin PBXFileReference section */
 		42CE7BA39036BDD1CF39859B /* Pods_WalkAshlandTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalkAshlandTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6916F5E884C5702772D198E5 /* Pods-WalkAshlandTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkAshlandTests.release.xcconfig"; path = "Target Support Files/Pods-WalkAshlandTests/Pods-WalkAshlandTests.release.xcconfig"; sourceTree = "<group>"; };
-		6A153D5124453A8100EC6927 /* Find_Money.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Find_Money.mp3; sourceTree = "<group>"; };
 		6A153D5324453B1900EC6927 /* addLocationsViewControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addLocationsViewControllers.swift; sourceTree = "<group>"; };
 		6A1CEB4C243FDC310013A3F5 /* createTour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createTour.swift; sourceTree = "<group>"; };
 		6A6E1A1524405E58004B75CE /* playingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = playingViewController.swift; sourceTree = "<group>"; };
@@ -173,7 +171,6 @@
 				6A85BE11247B8A0800A2ABA6 /* signin.swift */,
 				6A85BE17247BA4EF00A2ABA6 /* GoogleService-Info.plist */,
 				6A85BE0F247B88E600A2ABA6 /* User.swift */,
-				6A153D5124453A8100EC6927 /* Find_Money.mp3 */,
 				6A6E1A1524405E58004B75CE /* playingViewController.swift */,
 				6A95965D242F3CA2002F19CF /* tourInfo.swift */,
 				6A95962F242B41B0002F19CF /* Main.storyboard */,
@@ -316,7 +313,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A85BE18247BA4EF00A2ABA6 /* GoogleService-Info.plist in Resources */,
-				6A153D5224453A8100EC6927 /* Find_Money.mp3 in Resources */,
 				6A959633242B41B1002F19CF /* Assets.xcassets in Resources */,
 				6A959631242B41B0002F19CF /* Main.storyboard in Resources */,
 			);
@@ -662,7 +658,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5TH9JFS4L6;
 				INFOPLIST_FILE = WalkAshland/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -686,7 +682,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5TH9JFS4L6;
 				INFOPLIST_FILE = WalkAshland/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
