@@ -19,7 +19,7 @@ import AVFoundation //Dylan
 import GooglePlaces
 import GoogleMaps
 
-class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
+class nplayingViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
     //Need to recieve the selected tour information
     var tour: Tour?                                          //This will recieve data from the tour list
@@ -42,6 +42,9 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     let directionsAPIKey = "AIzaSyALhYJ57z7cqPzn8jLMMM1pxmhZIgmiG-8"
     var waypoints: String = ""
     var camera : GMSCameraPosition?
+    let documentsDirectoryPath: String = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
+   
+    @IBOutlet weak var photOut: UIImageView!
     @IBOutlet weak var photosOut: UIButton!
     @IBAction func photosGo(_ sender: UIButton) {
 
@@ -53,7 +56,7 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         if let pvc = segue.destination as? photosViewController {
             var images: [UIImage] = []
             var i = 0
-
+            
             if let tour = tour {
                 while (i < tour.photos.count){
                     let prevImagePath =  URL(fileURLWithPath: documentsDirectoryPath).appendingPathComponent(tour.photos[i])
@@ -159,13 +162,15 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         @IBOutlet weak var PickerTextView: UIPickerView!
     override func viewDidLoad() {
         super.viewDidLoad()
-            let documentsDirectoryPath: String = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
+
         //###############################################################-Faisal
         if let tour = tour {
             let prevImagePath =  URL(fileURLWithPath: documentsDirectoryPath).appendingPathComponent(tour.photos[0])
             var image = UIImage(contentsOfFile: prevImagePath.path)
-            photosOut.imageView?.image = image
-            view.addSubview(photosOut)
+            photOut.image = image
+            view.addSubview(photOut)
+            photosOut.tag = 0
+
         }
         
         //>>>>Google STUFF
@@ -370,7 +375,7 @@ class playingViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-Faisal
     This extension takes care of all location tracking
  */
-extension playingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
+extension nplayingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     
     /* This is linked to the action button to display and make disapear the picker view >>>Faisal */
     @IBAction func DisplayList(_ sender: Any) {
@@ -428,6 +433,24 @@ extension playingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                         self.audioPlayer.play()
                         
                         self.nextPoint = self.locationPoints[self.counter].position
+                        
+                        if let tour = tour {
+                            
+                            if ( photosOut.tag <= tour.photos.count){
+                                
+                                let prevImagePath =  URL(fileURLWithPath: documentsDirectoryPath).appendingPathComponent(tour.photos[photosOut.tag])
+                                let image = UIImage(contentsOfFile: prevImagePath.path)
+                                if let image = image {
+                                    print(" \n\n\n IN PHOTO ARES ")
+                                    self.photOut.image = image
+                                    self.view.addSubview(photOut)
+                                     //Add image
+                                    self.photosOut.tag = self.photosOut.tag + 1
+                                }
+                            }
+                        }
+                        
+                        
                         self.counter = self.counter + 1
                         
 
@@ -440,6 +463,9 @@ extension playingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                         //A Thank or something
                         self.audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: self.audioPath[self.counter-1]))
                         self.audioPlayer.play()
+                        self.counter = 0
+                        self.nextPoint = self.locationPoints[self.counter].position
+                        
                         
                     } catch {
                         print(error)

@@ -103,7 +103,7 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        performSegue(withIdentifier: "tourinfo", sender: nil)
+        performSegue(withIdentifier: "tourinfo", sender: nil)
     }
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
     //This function is called before the view will be loaded
@@ -228,7 +228,7 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
                tourInfo.tour = tours[index]
             }
         }
-        if let playSc = segue.destination as? playingViewController {
+        if let playSc = segue.destination as? nplayingViewController {
             if let obj = sender as? UIButton {
                 playSc.tour = tours[obj.tag]
                 playSc.distanceAway = distance

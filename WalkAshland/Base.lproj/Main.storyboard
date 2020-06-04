@@ -48,7 +48,7 @@
         <!--playingViewController-->
         <scene sceneID="IRW-LW-UDZ">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="aGu-xx-Lzz" userLabel="playingViewController" customClass="playingViewController" customModule="WalkAshland" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="aGu-xx-Lzz" userLabel="playingViewController" customClass="nplayingViewController" customModule="WalkAshland" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Oot-PU-iFJ" userLabel="view">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -57,14 +57,20 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vDX-eg-k2E">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U9h-kb-13l">
+                                <rect key="frame" x="277" y="102" width="117" height="108"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="108" id="8dZ-Ai-nRh"/>
+                                    <constraint firstAttribute="width" constant="117" id="PYB-i4-845"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vDX-eg-k2E">
                                 <rect key="frame" x="277" y="102" width="117" height="108"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="vDX-eg-k2E" secondAttribute="height" multiplier="13:12" id="4l6-ec-HlE"/>
                                     <constraint firstAttribute="width" constant="117" id="FKa-ZX-Dv2"/>
                                     <constraint firstAttribute="height" constant="108" id="cSZ-De-UhC"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="ashland1"/>
                                 <connections>
                                     <action selector="photosGo:" destination="aGu-xx-Lzz" eventType="touchUpInside" id="62F-Mc-0Um"/>
                                     <segue destination="siF-iY-jqo" kind="show" identifier="tophotos" id="tcy-2M-cdu"/>
@@ -127,9 +133,13 @@
                             <constraint firstItem="vDX-eg-k2E" firstAttribute="top" secondItem="5Ux-r5-M9I" secondAttribute="top" constant="14" id="dGq-II-eAC"/>
                             <constraint firstItem="J3k-Tb-SG4" firstAttribute="trailing" secondItem="5Ux-r5-M9I" secondAttribute="trailing" id="fSB-WJ-NMT"/>
                             <constraint firstItem="UR2-pi-9qn" firstAttribute="trailing" secondItem="5Ux-r5-M9I" secondAttribute="trailing" id="gFD-j4-0sB"/>
+                            <constraint firstItem="U9h-kb-13l" firstAttribute="leading" secondItem="5Ux-r5-M9I" secondAttribute="leading" constant="277" id="h1Z-h9-rf4"/>
                             <constraint firstItem="vDX-eg-k2E" firstAttribute="leading" secondItem="5Ux-r5-M9I" secondAttribute="leading" constant="277" id="huo-b0-vqp"/>
                             <constraint firstItem="J3k-Tb-SG4" firstAttribute="leading" secondItem="5Ux-r5-M9I" secondAttribute="leading" id="iXb-2N-kVS"/>
                             <constraint firstItem="UR2-pi-9qn" firstAttribute="leading" secondItem="5Ux-r5-M9I" secondAttribute="leading" id="idf-fc-XTe"/>
+                            <constraint firstItem="UR2-pi-9qn" firstAttribute="top" secondItem="U9h-kb-13l" secondAttribute="bottom" constant="303" id="km9-tK-88S"/>
+                            <constraint firstItem="U9h-kb-13l" firstAttribute="top" secondItem="5Ux-r5-M9I" secondAttribute="top" constant="14" id="n6I-p4-Go0"/>
+                            <constraint firstItem="5Ux-r5-M9I" firstAttribute="trailing" secondItem="U9h-kb-13l" secondAttribute="trailing" constant="20" id="p42-Ai-oPE"/>
                             <constraint firstItem="UR2-pi-9qn" firstAttribute="top" secondItem="5Ux-r5-M9I" secondAttribute="top" constant="425" id="qbw-DO-Wh8"/>
                             <constraint firstItem="v9i-uy-wdl" firstAttribute="leading" secondItem="5Ux-r5-M9I" secondAttribute="leading" id="rni-wk-crb"/>
                         </constraints>
@@ -140,6 +150,7 @@
                         <outlet property="MediaBar" destination="v9i-uy-wdl" id="scj-bf-LOR"/>
                         <outlet property="PickerTextView" destination="UR2-pi-9qn" id="og8-Wf-LrL"/>
                         <outlet property="mapView" destination="J3k-Tb-SG4" id="gfR-yr-xas"/>
+                        <outlet property="photOut" destination="U9h-kb-13l" id="CRy-vk-lge"/>
                         <outlet property="photosOut" destination="vDX-eg-k2E" id="6Of-3i-FhE"/>
                     </connections>
                 </viewController>
@@ -147,7 +158,7 @@
             </objects>
             <point key="canvasLocation" x="2147.826086956522" y="1542.8571428571429"/>
         </scene>
-        <!--Photos View Controller-->
+        <!--Photos-->
         <scene sceneID="ENu-1r-Qcy">
             <objects>
                 <viewController id="siF-iY-jqo" customClass="photosViewController" customModule="WalkAshland" customModuleProvider="target" sceneMemberID="viewController">
@@ -162,7 +173,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="b1d-7U-M5b" firstAttribute="bottom" secondItem="VpE-cA-LbQ" secondAttribute="bottom" constant="179" id="Dx1-z6-SQo"/>
                             <constraint firstItem="VpE-cA-LbQ" firstAttribute="leading" secondItem="b1d-7U-M5b" secondAttribute="leading" id="QQX-Kk-sqS"/>
@@ -171,7 +182,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="b1d-7U-M5b"/>
                     </view>
-                    <navigationItem key="navigationItem" id="opR-M2-y0q"/>
+                    <navigationItem key="navigationItem" title="Photos" id="opR-M2-y0q"/>
                     <connections>
                         <outlet property="photosStack" destination="VpE-cA-LbQ" id="nbk-sW-XBf"/>
                     </connections>
@@ -1150,7 +1161,6 @@
         <segue reference="cNd-SW-68H"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="ashland1" width="2000" height="1000"/>
         <image name="icloud.and.arrow.up.fill" catalog="system" width="128" height="106"/>
         <image name="locationicon" width="360" height="360"/>
         <image name="timeicon" width="300" height="300"/>

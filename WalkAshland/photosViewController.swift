@@ -17,13 +17,20 @@ class photosViewController: UIViewController {
     override func viewDidLoad() {
         print("\n\n\nnumber of images \(images?.count) \n\n\n")
         //unwrap the image
+
         if let images = images {
             var stviews : [UIImageView] = []
             for image in images {
-                photosStack.addArrangedSubview(UIImageView.init(image: image))
+                stviews.append(UIImageView.init(image: image))
             }
+            for u in stviews {
+                photosStack.addArrangedSubview(u)
+            }
+            print("\(photosStack.arrangedSubviews.count)")
+            self.photosStack.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(photosStack)
             
         }
+        
     }
-    
 }

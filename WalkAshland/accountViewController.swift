@@ -67,7 +67,7 @@ class accountViewController: UITableViewController, CLLocationManagerDelegate{
         }
 
 
-        //reloadInputViews()
+        reloadInputViews()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -136,8 +136,18 @@ class accountViewController: UITableViewController, CLLocationManagerDelegate{
             //Foot const
             let toFeet = 3.28084                                        //one meters in feet
             let toMile = 5280.0                                         //one mile in feets
-            self.distance = (route.distance * toFeet) / toMile           //distance in miles
-            cell.distLabelOut.text = "\( round((self.distance / 0.01 ) * 0.01)) miles away"        //Set the distance label in the view
+            if route.distance * toFeet < toMile {
+                self.distance = (route.distance * toFeet) / toMile           //distance in miles
+                cell.distLabelOut.text = "\( round((self.distance / 0.01 ) * 0.01)) miles away"
+            }
+            else{
+                self.distance = route.distance * toFeet
+                cell.distLabelOut.text = "\( round((self.distance / 0.01 ) * 0.01)) fts away"
+            }
+            
+            
+            
+                //Set the distance label in the view
         }
         //Trim the title to a fitting size
         let t : String = tour.title                                     //These steps are for truncating the title to a file size
@@ -193,7 +203,7 @@ class accountViewController: UITableViewController, CLLocationManagerDelegate{
                tourInfo.tour = tours[index]
             }
         }
-        if let playSc = segue.destination as? playingViewController {
+        if let playSc = segue.destination as? nplayingViewController {
             if let obj = sender as? UIButton {
                 playSc.tour = tours[obj.tag]
                 playSc.distanceAway = distance
