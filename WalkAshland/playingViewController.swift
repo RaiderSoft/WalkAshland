@@ -31,7 +31,7 @@ class nplayingViewController: UIViewController, UIPickerViewDataSource, UIPicker
     
     var locationPoints: [GMSMarker]!
     var nextPoint: CLLocationCoordinate2D?
-    var counter = 1;
+    var counter = 0;
 //    var notVisited : Bool = true  //For tracking is a location is visited
 //
 //    var direction: MKDirections?
@@ -142,7 +142,7 @@ class nplayingViewController: UIViewController, UIPickerViewDataSource, UIPicker
         //play
         @IBAction func Play(_ sender: Any) {
             audioPlayer.play()
-            getRout()
+            //getRout()    only if from one location to the other
         }
         //pause
         @IBAction func Pause(_ sender: Any) {
@@ -184,22 +184,35 @@ class nplayingViewController: UIViewController, UIPickerViewDataSource, UIPicker
                 //Unwrap both longitude and latitude
                 if let long = point["Longitude"], let lat = point["Latitude"]
                 {
-                    print("x is \(x)")
-                    let an =  GMSMarker(position: CLLocationCoordinate2D.init(latitude: lat, longitude: long))
                     
-                    an.title = String(x)            //tour.audioClips[x] as? String
+                    let an =  GMSMarker(position: CLLocationCoordinate2D.init(latitude: lat, longitude: long))
                     
                     
                     an.iconView?.tintColor = UIColor.red
-                    
 //                    baseURL = baseURL + "origin=\(),\()&destination=\(destinationLat),\(destinationLong)&sensor=true&mode=walking&key=\(directionsAPIKey)")
 //
                     if locationPoints == nil {
+                        an.title = String(x)            //tour.audioClips[x] as? String
                         locationPoints = [an]
 //                        baseURL = baseURL + "origin=\(an.position.latitude),\(an.position.longitude)"
                     }
                     else {
-                        locationPoints.append(an)
+                        var exists = false
+                        var anexist : GMSMarker?
+                        for a in locationPoints {
+                            if (a.position.latitude == an.position.latitude) && (a.position.longitude == an.position.longitude) {
+                                exists = true
+                                a.title = a.title! + String(x)
+                            }
+                        }
+                        if !exists {
+                            locationPoints.append(an)
+                            an.title = String(x)            //tour.audioClips[x] as? String
+                            print("added")
+                        }else {
+                            print("Exists")
+                        }
+
                         if x < tour.locationPoints.count - 1 {
                             
                             waypoints = waypoints + "\(an.position.latitude)%2C\(an.position.longitude)%7Cvia:"
@@ -210,6 +223,7 @@ class nplayingViewController: UIViewController, UIPickerViewDataSource, UIPicker
                         }
                         
                     }
+                    
                     //change the icon or color of the annotation
                 }
                 else{  NSLog("ERROR: Unable to get the location points for the tour.")  }
@@ -239,7 +253,7 @@ class nplayingViewController: UIViewController, UIPickerViewDataSource, UIPicker
             self.present(alertController,animated: true, completion: nil)
         }
         print("\n\n\n")
-        nextPoint = locationPoints[0].position
+        nextPoint = locationPoints[counter].position
         
         //get the consent of the user for accessing current location
         
@@ -375,7 +389,9 @@ class nplayingViewController: UIViewController, UIPickerViewDataSource, UIPicker
             mapView.camera = camera
         }
         
-
+        for i in locationPoints {
+            i.map = mapView
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
         reloadInputViews()
@@ -441,10 +457,11 @@ extension nplayingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                     do {
 
                         self.locationPoints[self.counter].iconView?.tintColor = UIColor.black
+                        self.locationPoints[self.counter].title = "x"
                         self.locationPoints[self.counter].map = mapView
-                        self.audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: self.audioPath[self.counter-1]))
+                        self.audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: self.audioPath[self.counter]))
                         self.audioPlayer.play()
-                        
+                        self.counter = self.counter + 1
                         self.nextPoint = self.locationPoints[self.counter].position
                         
                         if let tour = tour {
@@ -464,7 +481,7 @@ extension nplayingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                         }
                         
                         
-                        self.counter = self.counter + 1
+                        
                         
 
                     } catch {
@@ -474,7 +491,7 @@ extension nplayingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                 else if !(self.audioPlayer.isPlaying) {
                     do {
                         //A Thank or something
-                        self.audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: self.audioPath[self.counter-1]))
+                        self.audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: self.audioPath[self.counter]))
                         self.audioPlayer.play()
                         self.counter = 0
                         self.nextPoint = self.locationPoints[self.counter].position
@@ -528,9 +545,6 @@ extension nplayingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             }
 
             
-        }
-        for i in locationPoints {
-            i.map = mapView
         }
     }
     

@@ -26,7 +26,7 @@ class TabBarViewController: UITabBarController {
         if let user = user {
             dataModel.user = user
             //dataModel.savePurchase(user: user, tour: 0)                             //THese needs removed
-            dataModel.getPurchasedFor(userId: user.id, tours: dataModel.tours)      //sharing not sharing email, has different ids
+            //dataModel.getPurchasedFor(userId: user.id, tours: dataModel.tours)      //sharing not sharing email, has different ids
         }
         else {
             //alert

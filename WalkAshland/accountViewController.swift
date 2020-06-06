@@ -68,6 +68,7 @@ class accountViewController: UITableViewController, CLLocationManagerDelegate{
 
 
         reloadInputViews()
+        loadView()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -146,7 +147,7 @@ class accountViewController: UITableViewController, CLLocationManagerDelegate{
             //Foot const
             let toFeet = 3.28084                                        //one meters in feet
             let toMile = 5280.0                                         //one mile in feets
-            if route.distance * toFeet < toMile {
+            if route.distance * toFeet > toMile {
                 self.distance = (route.distance * toFeet) / toMile           //distance in miles
                 cell.distLabelOut.text = "\( round((self.distance / 0.01 ) * 0.01)) miles away"
             }

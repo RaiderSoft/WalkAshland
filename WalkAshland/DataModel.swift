@@ -162,7 +162,7 @@ class DataModel {
         
             //Check if the user exists in the database
         
-        self.databaseRef.child("purchaseditems").child("\(id)").child("tours").observeSingleEvent(of: .value, with: { (data) in
+        self.databaseRef.child("purchaseditems").child("\(id)").child("tours").observe( .value, with: { (data) in
                 //add the user to the database if not exists
                 
                 if data.childrenCount != 0 {
@@ -184,8 +184,6 @@ class DataModel {
                                 for i in toursc {
                                     print("i is : \(i)")
                                     self.databaseRef.child("db").child("\(i)").observeSingleEvent(of: .value, with: { (data) in
-                                                      
-                                        print("enter 1 ")
                                         // Get user value
                                                       
                                         let tour = data.value as? NSDictionary
@@ -198,14 +196,14 @@ class DataModel {
                                         let duration = tour?["duration"] as! String
                                         let location = tour?["locations"] as! [[String: Double]]
                                         let audio = tour?["audios"] as! [String]
-                                        print("enter 2 ")
                                         let photos = tour?["photos"] as! [String]
 
                                         //Check if there is more photos than the default preview image al
                                         if true {
-                                            var x = 0
+                                            var x = 3   //The number after purchased
+                                            
                                             while x < photos.count {
-                                                print("enter 3 ")
+                    
                                                 let photo = photos[x]
                                                 //Get local storage reference
                                                 let documentsPhotoURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -320,7 +318,7 @@ class DataModel {
                     let audio = tour?["audios"] as! [String]
                     let photos = tour?["photos"] as! [String]
                     
-                    
+                    var p = 0
                     for photo in photos {
                         if !photolocked {
                             //Get local storage reference
@@ -345,10 +343,14 @@ class DataModel {
                                     NSLog("Error occured")
                                 }
                             }
-                            photolocked = true
+                            if p == 13
+                            {
+                               photolocked = true
+                            }
+                            
                         }
 
-
+                        p = p + 1
                     }
                     
                     

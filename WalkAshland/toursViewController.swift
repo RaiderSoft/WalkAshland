@@ -70,7 +70,13 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
                 }
 
                 let alertController = UIAlertController(title: "Greeting", message: "Hi \(firstName) \n Thanks for creating an account \n Enjoy.", preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
+                
+                alertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: {
+                    action
+                    in
+                    self.reloadInputViews()
+                    self.loadView()
+                }))
                 self.present(alertController,animated: true, completion: nil)
             }
             else {
@@ -133,7 +139,6 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tours.count
     }
-    
     
     
     //Settup the contents of a tour dynamically
