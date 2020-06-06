@@ -329,9 +329,9 @@ class DataModel {
                             let localPhotoURL = documentsPhotoURL.appendingPathComponent(photo)
                             //get firestore reference for the image
                             print("Photo is \(photo) \n")
-                            let tourid : String = String(iterator-1)
-                            let photoRef = storageRef.child("photos").child(tourid).child("ashland2.jpg")
-                            
+                            print("iterator is \(iterator)")
+                            let photoRef = storageRef.child("photos").child(String(iterator-1)).child(photo)
+                            print(photoRef)
                             let _ = photoRef.write(toFile: localPhotoURL) { (URL, error) -> Void in
                                 if (error == nil) {
                                     NSLog("Got the file")

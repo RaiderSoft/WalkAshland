@@ -40,7 +40,7 @@ class nplayingViewController: UIViewController, UIPickerViewDataSource, UIPicker
     var baseURL = "https://maps.googleapis.com/maps/api/directions/json?"
     var baseURLDirections: URL?
     let directionsAPIKey = "AIzaSyALhYJ57z7cqPzn8jLMMM1pxmhZIgmiG-8"
-    var waypoints: String = ""
+    var waypoints: String = "&waypoints=via:"
     var camera : GMSCameraPosition?
     let documentsDirectoryPath: String = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
    
@@ -177,17 +177,19 @@ class nplayingViewController: UIViewController, UIPickerViewDataSource, UIPicker
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
         
+        print("\n\n\n")
         var x = 0
         if let tour = tour {
             for point in tour.locationPoints {                                                     //loop through the locationpoints array
                 //Unwrap both longitude and latitude
                 if let long = point["Longitude"], let lat = point["Latitude"]
                 {
+                    print("x is \(x)")
                     let an =  GMSMarker(position: CLLocationCoordinate2D.init(latitude: lat, longitude: long))
                     
-                    an.title = tour.audioClips[x] as? String
+                    an.title = String(x)            //tour.audioClips[x] as? String
                     
-                    an.accessibilityHint = "!"
+                    
                     an.iconView?.tintColor = UIColor.red
                     
 //                    baseURL = baseURL + "origin=\(),\()&destination=\(destinationLat),\(destinationLong)&sensor=true&mode=walking&key=\(directionsAPIKey)")
@@ -198,20 +200,30 @@ class nplayingViewController: UIViewController, UIPickerViewDataSource, UIPicker
                     }
                     else {
                         locationPoints.append(an)
-                        if x < tour.locationPoints.count  {
-                            waypoints = waypoints + "&waypoints=\(an.position.latitude),\(an.position.longitude)"
+                        if x < tour.locationPoints.count - 1 {
+                            
+                            waypoints = waypoints + "\(an.position.latitude)%2C\(an.position.longitude)%7Cvia:"
                         }
+                        else {
+                            
+                            waypoints = waypoints + "\(an.position.latitude)%2C\(an.position.longitude)"
+                        }
+                        
                     }
                     //change the icon or color of the annotation
                 }
                 else{  NSLog("ERROR: Unable to get the location points for the tour.")  }
                 x = x + 1
             }
+            print("size of \(locationPoints)")
             baseURL = baseURL + "origin=\(locationPoints[0].position.latitude),\(locationPoints[0].position.longitude)&destination=\(locationPoints[locationPoints.count-1].position.latitude),\(locationPoints[locationPoints.count-1].position.longitude)"
 
+            print("baseURL :   \(baseURL)")
             baseURL = baseURL + waypoints + "&sensor=true&mode=walking&key=\(directionsAPIKey)"
-            baseURLDirections = URL(string: baseURL)
             
+            baseURLDirections = URL(string: baseURL)
+            print("\n\n")
+            print(baseURLDirections)
         }
         else {
             //Alert
@@ -226,6 +238,7 @@ class nplayingViewController: UIViewController, UIPickerViewDataSource, UIPicker
             }))
             self.present(alertController,animated: true, completion: nil)
         }
+        print("\n\n\n")
         nextPoint = locationPoints[0].position
         
         //get the consent of the user for accessing current location
@@ -276,7 +289,7 @@ class nplayingViewController: UIViewController, UIPickerViewDataSource, UIPicker
                 else {
                     do {
                         if let json : [String:Any] = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any]{
-                                
+
 //                            guard let routes = json["routes"] as? NSArray else {
 //                                    return
 //                            }
@@ -287,14 +300,14 @@ class nplayingViewController: UIViewController, UIPickerViewDataSource, UIPicker
                                 let aroute = routes?[0] as? [String:Any]
                                 let overview = aroute?["overview_polyline"] as? [String: Any]
                                 let polyline = overview?["points"] as? String
-                                
+
                                 DispatchQueue.main.async {
                                     let path = GMSPath(fromEncodedPath: polyline!)
-                                    
+
                                     let lines = GMSPolyline(path: path)
                                     lines.strokeWidth = 4.0
                                     lines.strokeColor = UIColor.blue
-                                    
+
                                     lines.map = self.mapView
 
                                 }
