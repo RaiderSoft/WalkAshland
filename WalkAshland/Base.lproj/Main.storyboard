@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ctB-7Z-VQi">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -362,7 +362,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jpq-gf-r7c">
                                                     <rect key="frame" x="0.0" y="160" width="162" height="37"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DuJ-pW-mji">
+                                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DuJ-pW-mji">
                                                             <rect key="frame" x="8" y="3" width="63" height="30"/>
                                                             <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
@@ -393,6 +393,9 @@
                                                                     </fragment>
                                                                 </attributedString>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="purchasePressed:" destination="g03-Vw-fTi" eventType="touchUpInside" id="38L-Y1-yzt"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -446,18 +449,18 @@
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                 </accessibility>
                                 <connections>
-                                    <outlet property="PDSButtonOut" destination="mPq-Jo-AP7" id="kGS-UT-Krw"/>
+                                    <outlet property="PDSButtonOut" destination="mPq-Jo-AP7" id="LdN-Da-MzL"/>
                                     <outlet property="aboutOut" destination="ImQ-BB-uoz" id="A9H-JD-LQA"/>
                                     <outlet property="distImgOut" destination="0Ar-FC-Ygv" id="gOH-b5-dax"/>
                                     <outlet property="distLabelOut" destination="O5t-LZ-FW9" id="oJW-Cw-kCS"/>
                                     <outlet property="durImgOut" destination="ega-b4-cC9" id="PZj-PA-CKQ"/>
                                     <outlet property="durNumOut" destination="fja-M9-KjV" id="RSE-Mu-Tds"/>
                                     <outlet property="imgOut" destination="KKn-rQ-MKh" id="Gr8-qm-OKM"/>
-                                    <outlet property="startOut" destination="DuJ-pW-mji" id="6nw-pL-934"/>
+                                    <outlet property="startOut" destination="DuJ-pW-mji" id="Idc-VF-ce2"/>
                                     <outlet property="titleOut" destination="VTW-Pf-itB" id="IyJ-VO-zsQ"/>
                                     <outlet property="typeImgOut" destination="c3h-qz-dlU" id="x3M-em-FX5"/>
                                     <outlet property="typeLabelOut" destination="JxE-uu-ilG" id="rne-6F-yA6"/>
-                                    <segue destination="2ee-gl-ZZ0" kind="showDetail" identifier="tourinfo" trigger="accessoryAction" id="cGf-VS-slT"/>
+                                    <segue destination="2ee-gl-ZZ0" kind="showDetail" identifier="toinfo" id="8KF-58-WpW"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

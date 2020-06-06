@@ -72,6 +72,15 @@ class nplayingViewController: UIViewController, UIPickerViewDataSource, UIPicker
         }
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
     }
+    var currentPin : Ano?
+    var nextPoint: CLLocationCoordinate2D?
+    var counter = 1;
+    var notVisited : Bool = true  //For tracking is a location is visited
+    var span : MKCoordinateSpan?
+    var direction: MKDirections?
+
+    
+    
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
     
     //Created by Dylan
@@ -241,6 +250,8 @@ class nplayingViewController: UIViewController, UIPickerViewDataSource, UIPicker
         print("\n\n\n")
         nextPoint = locationPoints[0].position
         
+        nextPoint = locationPoints[0].coordinate
+        directionRequest.transportType = .walking
         //get the consent of the user for accessing current location
         
         locationManager.requestWhenInUseAuthorization()
@@ -269,6 +280,7 @@ class nplayingViewController: UIViewController, UIPickerViewDataSource, UIPicker
         }
         mapView.isMyLocationEnabled = true
         mapView.isBuildingsEnabled = true
+        mapView.isZoomEnabled = true
         mapView.isMultipleTouchEnabled = true
         mapView.isUserInteractionEnabled = true
 
@@ -532,6 +544,59 @@ extension nplayingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         for i in locationPoints {
             i.map = mapView
         }
+            if distanceAway > 1.0 {
+                
+                directionRequest.destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: destinationLat , longitude: destinationLong)))
+                directionRequest.source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: sourceLat , longitude: sourceLong)))
+
+                //Set an Alert
+            }
+            else {
+                directionRequest.destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: nextPoint!.latitude , longitude: nextPoint!.longitude)))
+                
+                directionRequest.source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: currentLocation.latitude , longitude: currentLocation.longitude)))
+                    
+            }
+            directionRequest.requestsAlternateRoutes = false                //Set alternative paths to none
+            directionRequest.transportType = .walking                       //Default transport type is walking
+            
+            
+            direction = MKDirections(request: directionRequest)        //request a direction from the source to the direction
+            
+            direction?.calculate { (response, error) in                     //Get an process the respons to the the direction request
+                guard let directionResponse = response else {
+                    if let error = error {
+                        NSLog("ERROR: \t Failed on unwrapping response: \(error)")
+                    }
+                    return
+                }
+                let route = directionResponse.routes[0]                     //Get the first posible route
+                // NSLog("next point lat : \(self.nextPoint?.latitude) \n next point long : \(self.nextPoint?.longitude)")
+                //one meters in feet
+                //let distance = route.distance          //distance in miles
+                //NSLog("Calculated   distance \(distance)")
+                
+                self.mapView.addOverlay(route.polyline)
+                
+                //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
+            }
+
+            
+        }
+    }
+    
+    /*  This function updates the user's location      >>>>Faisal */
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    //  let locationPoints = gets from tour             //Get the location points create annotations
+        
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        currentLocation = locValue
+        
+        //Set the region where the mapview should focus on
+        //Get the longitude and latitude of the centeral point in the
+        //tour and set as the center of the camera
+        getRout()
+        reloadInputViews()
     }
     
     /*  This function updates the user's location      >>>>Faisal */
@@ -576,3 +641,6 @@ extension nplayingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
 //    }
 }//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
 
+extension playingViewController {
+    
+}
