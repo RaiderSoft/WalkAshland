@@ -54,7 +54,6 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
     }
     var user : User!
     var distance: Double!
-    var duration: Double!
     //Create a reference to the firebase storage for accessing files
     let storageRef = Storage.storage().reference()
     let locationManager = CLLocationManager()
@@ -66,64 +65,28 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let user = dataModel?.user {
-            self.user = user
-        }
         
-        var firstName = ""
-
-         if let result = dataModel?.saveuserinfo(user: user){
-            if result {
-                if user.firstName != "" {
-                    firstName = user.firstName
-                }
-                else {
-                    firstName = "UnknownUser"
-                }
-
-                let alertController = UIAlertController(title: "Greeting", message: "Hi \(firstName) \n Thanks for creating an account \n Enjoy.", preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
-                self.present(alertController,animated: true, completion: nil)
-            }
-            else {
-                let alertController = UIAlertController(title: "Greeting", message: "Hi \n Welcome Back \n Enjoy.", preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: {
-                    action in
-
-                    }))
-                self.present(alertController,animated: true, completion: nil)
-            }
-
-        }
-        self.locationManager.requestWhenInUseAuthorization()
-        if CLLocationManager.locationServicesEnabled() {
-            self.locationManager.delegate = self
-            self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            
-            self.locationManager.startUpdatingLocation()
-        }
-
         NSLog("Reached \(user)")
         
+        locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            
+            locationManager.startUpdatingLocation()
+        }
 
-        
-
-
-        
         reloadInputViews()
-        loadView()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "tourinfo", sender: nil)
+        performSegue(withIdentifier: "toinfo", sender: nil)
     }
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
     //This function is called before the view will be loaded
     //I used this function to reload the data on the table
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        reloadInputViews()
-        loadView()
         
         
     }
@@ -134,22 +97,29 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
         
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         currentLocation = locValue
-        locationManager.stopUpdatingLocation()
-
+        
+        
+        //more than 11 meters
+        /*
+         if( locationPoints[0]["lat"]! + CLLocationCoordinate2D.init(latitude: 0.00015, longitude: 0.0015).latitude > locValue.latitude
+            && locValue.latitude > locationPoints[0]["lat"]! - CLLocationCoordinate2D.init(latitude: 0.00015, longitude: 0.0015).latitude)
+        {
+            print(" \n\n\nlocations = \(locValue.latitude) \(locValue.longitude) \n\n")
+        }
+        */
+        
         //Set the region where the mapview should focus on
         //Get the longitude and latitude of the centeral point in the
         //tour and set as the center of the camera
         loadView()
         
     }
+    
     //This function sets the number of rows in table
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tours.count
     }
     
-    
-    
-    //Settup the contents of a tour dynamically
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
         let tour = tours[indexPath.row]             //For each row create a cell  with cell class
@@ -174,6 +144,9 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
                 directionRequest.source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: destinationLat , longitude: destinationLong)))
                 directionRequest.destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: sourceLat , longitude: sourceLong)))
             }
+               
+
+               
         directionRequest.requestsAlternateRoutes = false                //Set alternative paths to none
         directionRequest.transportType = .walking                       //Default transport type is walking
         let directions = MKDirections(request: directionRequest)        //request a direction from the source to the direction
@@ -192,7 +165,6 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
             self.distance = (route.distance * toFeet) / toMile           //distance in miles
             cell.distLabelOut.text = "\( round((self.distance / 0.01 ) * 0.01)) miles away"        //Set the distance label in the view
         }
-        //Trim the title to a fitting size
         let t : String = tour.title                                     //These steps are for truncating the title to a file size
         var title = ""
         if t.count > 15 {
@@ -205,12 +177,11 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
         }
         else {
             cell.titleOut.text = tour.title                             //Set the title of the tour
-        }
-        //Trim the description to a fitting size
-        let d : String = tour.description                               //These steps are to truncate the desription to fine size
+        }                                                               //These steps are to truncate the desription to fine size
+        let d : String = tour.description
         var description = ""
-        if d.count > 150 {
-            let index = d.index(d.startIndex, offsetBy: 150)
+        if d.count > 15 {
+            let index = d.index(d.startIndex, offsetBy: 100)
             let de = d[..<index]
             for i in de {
                 description = "\(description)\(i)"
@@ -219,20 +190,24 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
         else {
             cell.aboutOut.text = tour.description                       //Set description of the tour
         }
-        
-        cell.durNumOut.text = "\(tour.duration)"                   //Set the duration of the tour
-        
+        cell.durNumOut.text = "\(tour.duration) mins"                   //Set the duration of the tour
         cell.typeLabelOut.text = tour.tourType                          //Set the type of the tour
         
         /*
             Download the image and view is
             Create a reference to this image from the firebase storage
          */
-                
-        let documentsDirectoryPath: String = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
-        let prevImagePath =  URL(fileURLWithPath: documentsDirectoryPath).appendingPathComponent(tour.photos[0])
-        let image = UIImage(contentsOfFile: prevImagePath.path)
-        cell.imgOut.image = image
+        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
+        let nsUserDomainMask    = FileManager.SearchPathDomainMask.userDomainMask
+        let paths               = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+        if let dirPath          = paths.first
+        {
+            let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(tour.imgPath)
+            let image    = UIImage(contentsOfFile: imageURL.path)
+            cell.imgOut.image = image
+           // Do whatever you want with the image
+        }
+        
         cell.startOut.tag = indexPath.row                               //A way to p
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
     return cell
@@ -246,7 +221,7 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
                tourInfo.tour = tours[index]
             }
         }
-        if let playSc = segue.destination as? nplayingViewController {
+        if let playSc = segue.destination as? playingViewController {
             if let obj = sender as? UIButton {
                 playSc.tour = tours[obj.tag]
                 playSc.distanceAway = distance

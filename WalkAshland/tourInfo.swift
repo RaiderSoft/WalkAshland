@@ -38,7 +38,7 @@ class tourInfo: UIViewController {
         let paths               = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
         if let dirPath          = paths.first
         {
-            let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent((tour?.photos[0])!)
+            let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent("ashland3.jpg")
             let image    = UIImage(contentsOfFile: imageURL.path)
             self.TourImage.image = image
            // Do whatever you want with the image
