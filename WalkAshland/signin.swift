@@ -45,8 +45,11 @@ class SigninViewController: UIViewController{
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let NVC = segue.destination.children.first as? UINavigationController, let toursVC = NVC.children.first as? toursViewController , let user = sender as? User {
-            toursVC.user = user
+//        if let NVC = segue.destination.children.first as? UINavigationController, let toursVC = NVC.children.first as? toursViewController , let user = sender as? User {
+//            toursVC.user = user
+//        }
+        if let TVC = segue.destination as? TabBarViewController , let user = sender as? User {
+            TVC.user = user
         }
     }
 }
@@ -64,10 +67,7 @@ extension SigninViewController: ASAuthorizationControllerDelegate, ASAuthorizati
         switch authorization.credential {
         case let credentials as ASAuthorizationAppleIDCredential:
             let user = User(credentials: credentials)
-            
-            
-            
-            
+            NSLog("in tab view \(user)")
             performSegue(withIdentifier: "segue", sender: user)
             
         default: break 
