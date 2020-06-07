@@ -14,6 +14,12 @@ import SDWebImageWebPCoder
 import SwiftUI
 import MapKit
 import CoreLocation //For accesing the curent location
+import StoreKit
+
+
+
+
+
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
 
 extension toursViewController {
@@ -162,6 +168,10 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
                 directionRequest.source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: destinationLat , longitude: destinationLong)))
                 directionRequest.destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: sourceLat , longitude: sourceLong)))
             }
+        //SKPaymentQueue.default().add(cell)
+        cell.fetchAvailableProducts()
+        
+        
         directionRequest.requestsAlternateRoutes = false                //Set alternative paths to none
         directionRequest.transportType = .walking                       //Default transport type is walking
         let directions = MKDirections(request: directionRequest)        //request a direction from the source to the direction
@@ -246,9 +256,8 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
 
 /* Faisal:
    This class handles */
-class tourCell: UITableViewCell {
-    
-
+class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransactionObserver  {
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
     @IBOutlet weak var durImgOut: UIImageView!
     @IBOutlet weak var typeLabelOut: UILabel!
     @IBOutlet weak var typeImgOut: UIImageView!
@@ -264,9 +273,127 @@ class tourCell: UITableViewCell {
     
     @IBOutlet weak var aboutOut: UILabel!
     @IBOutlet weak var titleOut: UILabel!
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
     
     
+    //****************************************************************DYlan
+    weak var delegate : tourCellDelegate?
+    //let productID = "com.walkashland.walkashland.route2" //productID from appConnect
+    var productsRequest = SKProductsRequest()
+    var validProducts = [SKProduct]()
+    var productIndex = 0
+    
+    @IBAction func purchasedPressed(_ sender: UIButton) {
+        productIndex = 0
+        purchaseMyProduct(validProducts[productIndex])
+    }
+    func fetchAvailableProducts()  {
+        let productIdentifiers = NSSet(objects:
+            "com.walkashland.walkashland.route2"         // 0
+        )
+        productsRequest = SKProductsRequest(productIdentifiers: productIdentifiers as! Set<String>)
+        productsRequest.delegate = self
+        productsRequest.start()
+    }
+    func productsRequest (_ request:SKProductsRequest, didReceive response:SKProductsResponse) {
+        if (response.products.count > 0) {
+            validProducts = response.products
+                
+            let route1 = response.products[0] as SKProduct
+            print("1st rpoduct: " + route1.localizedDescription)
+        }
+    }
+    func paymentQueue(_ queue: SKPaymentQueue, shouldAddStorePayment payment: SKPayment, for product: SKProduct) -> Bool {
+        return true
+    }
+    func canMakePurchases() -> Bool {  return SKPaymentQueue.canMakePayments()  }
+    
+    func purchaseMyProduct(_ product: SKProduct) {
+        var msg = ""
+        var title = ""
+        if self.canMakePurchases() {
+            let payment = SKPayment(product: product)
+            SKPaymentQueue.default().add(self)
+            SKPaymentQueue.default().add(payment)
+        } else {
+            
+            msg = "Purchases are disabled in your device!"
+            title = "Transaction Error!"
+            
+            self.delegate?.tourCell(self, msg: msg, title: title)
+        }
+    }
+    
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        
+        var msg = ""
+        var title = ""
+        
+            for transaction:AnyObject in transactions {
+                if let trans:SKPaymentTransaction = transaction as? SKPaymentTransaction {
+                    switch trans.transactionState {
+                        
+                    case .purchased:
+                        SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
+                        if productIndex == 0 {
+                            print("You've bought route 1")
+                            
+                            PDSButtonOut.isEnabled = false
+                            PDSButtonOut.isOpaque = true
+                            startOut.isEnabled = true
+                            startOut.isOpaque = false
+                        } else {
+                           //other purchase
+                        }
+                        break
+                        
+                    case .failed:
+                        SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
+                        
+                        msg = "Payment has failed."
+                        title = "Transaction Error!"
+                        
+                        self.delegate?.tourCell(self, msg: msg, title: title)
+                        
+                        break
+                    case .restored:
+                        SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
+                        print("Purchase has been successfully restored!")
+                        break
+                        
+                    default: break
+            }}}
+    }
+    
+    func restorePurchase() {
+            SKPaymentQueue.default().add(self as SKPaymentTransactionObserver)
+            SKPaymentQueue.default().restoreCompletedTransactions()
+    }
+        
+    func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
+            
+        let msg = "Purchase Completed."
+        let title = "Transaction Success!"
+        
+        self.delegate?.tourCell(self, msg: msg, title: title)
+    }
+    //################################################################PITTS
 }
- 
 
+ 
+//****************************************************************DYlan
+extension toursViewController : tourCellDelegate {
+        
+    func tourCell(_ tourCell: tourCell, msg: String, title: String) {
+        
+        let alertController = UIAlertController(title: "\(title)", message: "\(msg)", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
+
+        self.present(alertController,animated: true, completion: nil)
+    }
+}
+protocol tourCellDelegate: AnyObject {
+    func tourCell(_ tourCell: tourCell, msg: String, title: String)
+}
+//################################################################PITTS
 

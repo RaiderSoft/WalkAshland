@@ -338,6 +338,10 @@ class DataModel {
                                         print(url)
                                         print("THis worked")
                                     }
+                                    else
+                                    {
+                                        print("I DONT KNOW ")
+                                    }
                                 }
                                 else {
                                     NSLog("Error occured")
@@ -349,7 +353,7 @@ class DataModel {
                             }
                             
                         }
-
+                        photolocked = false
                         p = p + 1
                     }
                     
@@ -407,7 +411,7 @@ class DataModel {
                   { (error) in
                         NSLog("ERROR: Unable to open Firebase database")
                     }
-                iterator += 1
+                iterator = iterator + 1
                     
             }
         })

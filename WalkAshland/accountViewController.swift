@@ -38,9 +38,7 @@ class accountViewController: UITableViewController, CLLocationManagerDelegate{
     //Creating variable to be set from the scene delegate for the data
     var dataModel: DataModel?
     //To store dowloaded tours from the model
-    var tours: [Tour] {
-        return dataModel?.purchasedTours ?? []
-    }
+    var tours: [Tour]!
     var user : User!
     var distance: Double!
     var duration: Double!
@@ -55,6 +53,12 @@ class accountViewController: UITableViewController, CLLocationManagerDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if dataModel?.purchasedTours != nil {
+            tours = dataModel?.purchasedTours
+        }
+        else {
+            tours = []
+        }
         
         NSLog("Reached \(user)")
         
@@ -70,6 +74,7 @@ class accountViewController: UITableViewController, CLLocationManagerDelegate{
         reloadInputViews()
         loadView()
     }
+
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "tourinfo", sender: nil)
@@ -109,6 +114,9 @@ class accountViewController: UITableViewController, CLLocationManagerDelegate{
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             print("SELEcted ")
+            tours.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+
         }
         
     }

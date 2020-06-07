@@ -9,28 +9,45 @@
 import Foundation
 import UIKit
 
-class photosViewController: UIViewController {
-    @IBOutlet weak var photosStack: UIStackView!
+class photoItem: UICollectionViewCell {
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
+    
+    
+}
+
+class photosViewController: UICollectionViewController {
+
 
     var images : [UIImage]?
     
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return images?.count ?? 0
+    }
+    
+
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+ 
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoItem", for: indexPath) as! photoItem
+        
+        let imageView = UIImageView.init(image: images![indexPath.row])
+        
+        cell.name.text = "SOME NAME"
+
+        cell.imageView.image = images![indexPath.row]
+        
+        return cell
+    }
+    
     override func viewDidLoad() {
+        
         print("\n\n\nnumber of images \(images?.count) \n\n\n")
         //unwrap the image
 
-        if let images = images {
-            var stviews : [UIImageView] = []
-            for image in images {
-                stviews.append(UIImageView.init(image: image))
-            }
-            for u in stviews {
-                photosStack.addArrangedSubview(u)
-            }
-            print("\(photosStack.arrangedSubviews.count)")
-            self.photosStack.translatesAutoresizingMaskIntoConstraints = false
-            self.view.addSubview(photosStack)
-            
-        }
+        
         
     }
+    
 }

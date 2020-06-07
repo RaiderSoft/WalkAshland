@@ -35,6 +35,7 @@ class TabBarViewController: UITabBarController {
             nvc.dataModel = dataModel
         }
         if let avc = children.last?.children.first as? accountViewController {
+            
             avc.dataModel = dataModel
 
         }
