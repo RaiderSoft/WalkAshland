@@ -144,6 +144,7 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
         let tour = tours[indexPath.row]             //For each row create a cell  with cell class
+        NSLog("The product Id will be \(indexPath.row)")
         let cell = tableView.dequeueReusableCell(withIdentifier: "tourCell", for: indexPath) as! tourCell
         //Setup all static images for a cell
         cell.typeImgOut.image = UIImage.init(named: "walking")
@@ -283,13 +284,16 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
     var productIndex = 0
     
     @IBAction func purchasedPressed(_ sender: UIButton) {
-        NSLog("pressed")
-        productIndex = 0
-        purchaseMyProduct(validProducts[productIndex])
+        if (PDSButtonOut.titleLabel?.text == "Purchase")
+        {
+            productIndex = 0
+            purchaseMyProduct(validProducts[productIndex])
+        }
+
     }
     func fetchAvailableProducts()  {
         let productIdentifiers = NSSet(objects:
-            "com.walkashland.walkashland.route1"         // 0
+            "com.walkashland.walkashland.route3"         // 0
         )
         productsRequest = SKProductsRequest(productIdentifiers: productIdentifiers as! Set<String>)
         productsRequest.delegate = self
@@ -337,6 +341,12 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
                         SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
                         if productIndex == 0 {
                             print("You've bought route 1")
+                            //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
+                            if let user = dataModel?.user {
+                                dataModel?.savePurchase(user: user, tour: tourId! )
+                                dataModel?.getPurchasedFor(userId: user.id, tours: dataModel!.tours)
+                            }
+                            //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
                             
                         PDSButtonOut.isEnabled = false
                         PDSButtonOut.isHidden = true
@@ -376,12 +386,7 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
             
         let msg = "Purchase Completed."
         let title = "Transaction Success!"
-        //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal   
-        if let user = dataModel?.user {
-            dataModel?.savePurchase(user: user, tour: tourId! )
-            dataModel?.getPurchasedFor(userId: user.id, tours: dataModel!.tours)
-        }
-        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
+
         
         self.delegate?.tourCell(self, msg: msg, title: title)
     }
