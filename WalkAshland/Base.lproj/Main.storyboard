@@ -190,7 +190,7 @@
                                                 <constraint firstAttribute="width" secondItem="tlQ-1w-JqU" secondAttribute="height" multiplier="414:233" id="i6V-K3-O18"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VSI-9d-owH">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VSI-9d-owH">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="42"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="VSI-9d-owH" secondAttribute="height" multiplier="69:7" id="2c8-SJ-Mwn"/>
@@ -457,7 +457,6 @@
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="197" id="1BV-AJ-gFm"/>
                                                 <constraint firstItem="jpq-gf-r7c" firstAttribute="top" secondItem="ImQ-BB-uoz" secondAttribute="bottom" constant="3" id="49n-yO-O7Z"/>
                                                 <constraint firstAttribute="bottom" secondItem="jpq-gf-r7c" secondAttribute="bottom" id="4bQ-wO-MoD"/>
                                                 <constraint firstItem="jpq-gf-r7c" firstAttribute="leading" secondItem="ypf-9o-ipF" secondAttribute="leading" id="CM8-j5-Ufq"/>
@@ -1144,7 +1143,6 @@
                                                 <constraint firstItem="Bck-jc-piX" firstAttribute="top" secondItem="Qwd-zY-e7Y" secondAttribute="bottom" constant="3" id="jCC-Wj-dcy"/>
                                                 <constraint firstItem="Qwd-zY-e7Y" firstAttribute="top" secondItem="kxw-t7-eN9" secondAttribute="top" constant="7" id="jde-cf-vbK"/>
                                                 <constraint firstAttribute="bottom" secondItem="IZB-nn-1yc" secondAttribute="bottom" id="mJZ-D0-bnM"/>
-                                                <constraint firstAttribute="height" constant="197" id="wqd-LF-TcP"/>
                                                 <constraint firstItem="IZB-nn-1yc" firstAttribute="top" secondItem="Bck-jc-piX" secondAttribute="bottom" constant="3" id="zv9-gA-35s"/>
                                             </constraints>
                                         </view>
@@ -1198,8 +1196,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="cGf-VS-slT"/>
-        <segue reference="cbN-Xm-DZa"/>
+        <segue reference="slu-ro-BCk"/>
+        <segue reference="cNd-SW-68H"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="icloud.and.arrow.up.fill" catalog="system" width="128" height="106"/>

@@ -53,28 +53,19 @@ class accountViewController: UITableViewController, CLLocationManagerDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if dataModel?.purchasedTours != nil {
-            tours = dataModel?.purchasedTours
-        }
-        else {
-            tours = []
-        }
-        
-        NSLog("Reached \(user)")
+        //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
+
         
         locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            
             locationManager.startUpdatingLocation()
         }
-
-
         reloadInputViews()
         loadView()
+        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
     }
-
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "tourinfo", sender: nil)
@@ -84,15 +75,25 @@ class accountViewController: UITableViewController, CLLocationManagerDelegate{
     //I used this function to reload the data on the table
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if let user = dataModel?.user {
+            self.user = user
+        }
+        dataModel!.getPurchasedFor(userId: user.id, tours: dataModel!.tours)      //sharing not sharing email, has different ids
+        if dataModel?.purchasedTours != nil {
+            tours = dataModel?.purchasedTours
+        }
+        else {
+            tours = []
+        }
         reloadInputViews()
         loadView()
-        
+        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
     }
 
     /*  This function updates the user's location      >>>>Faisal */
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    //  let locationPoints = gets from tour             //Get the location points create annotations
-        
+        //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
+        //  let locationPoints = gets from tour             //Get the location points create annotations
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         currentLocation = locValue
         locationManager.stopUpdatingLocation()
@@ -100,7 +101,9 @@ class accountViewController: UITableViewController, CLLocationManagerDelegate{
         //Set the region where the mapview should focus on
         //Get the longitude and latitude of the centeral point in the
         //tour and set as the center of the camera
+        reloadInputViews()
         loadView()
+        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
         
     }
     //This function sets the number of rows in table
@@ -112,13 +115,12 @@ class accountViewController: UITableViewController, CLLocationManagerDelegate{
         return true
     }
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
         if editingStyle == .delete {
-            print("SELEcted ")
             tours.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-
         }
-        
+        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -131,7 +133,6 @@ class accountViewController: UITableViewController, CLLocationManagerDelegate{
         cell.distImgOut.image = UIImage.init(named: "locationicon")
         
         //Take care of location and distance
-        
         //For now [0] later location and photos
         if  let destinationLat = tour.locationPoints[0]["Latitude"],        //latitude of starting point of the location
             let destinationLong = tour.locationPoints[0]["Longitude"],      //longitude 0f /////
@@ -163,10 +164,7 @@ class accountViewController: UITableViewController, CLLocationManagerDelegate{
                 self.distance = route.distance * toFeet
                 cell.distLabelOut.text = "\( round((self.distance / 0.01 ) * 0.01)) fts away"
             }
-            
-            
-            
-                //Set the distance label in the view
+            //Set the distance label in the view
         }
         //Trim the title to a fitting size
         let t : String = tour.title                                     //These steps are for truncating the title to a file size
@@ -195,9 +193,7 @@ class accountViewController: UITableViewController, CLLocationManagerDelegate{
         else {
             cell.aboutOut.text = tour.description                       //Set description of the tour
         }
-        
         cell.durNumOut.text = "\(tour.duration)"                   //Set the duration of the tour
-        
         cell.typeLabelOut.text = tour.tourType                          //Set the type of the tour
         
         /*
@@ -208,12 +204,16 @@ class accountViewController: UITableViewController, CLLocationManagerDelegate{
         let prevImagePath =  URL(fileURLWithPath: documentsDirectoryPath).appendingPathComponent(tour.photos[0])
         let image = UIImage(contentsOfFile: prevImagePath.path)
         cell.imgOut.image = image
+        cell.PDSButtonOut.isHidden = true
+        cell.PDSButtonOut.isEnabled = false 
         
         cell.startOut.tag = indexPath.row                               //A way to p
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
     return cell
     }
-    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.reloadInputViews()
+    }
      //SEND this tour data on clicking
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal

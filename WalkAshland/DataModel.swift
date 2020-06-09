@@ -34,6 +34,7 @@ struct Tour {
         self.photos = photos
         
     }
+
     var title: String                           //The Tour title
     var description: String                     //A description about the tour viewed as about
     var price: String = "3.00"                  //The price of a toure currently 3.00 dollars
@@ -162,9 +163,10 @@ class DataModel {
         
             //Check if the user exists in the database
         
-        self.databaseRef.child("purchaseditems").child("\(id)").child("tours").observe( .value, with: { (data) in
+        self.databaseRef.child("purchaseditems").child("\(id)").child("tours").observeSingleEvent(of: .value, with: { (data) in
                 //add the user to the database if not exists
                 
+            var notExists = true
                 if data.childrenCount != 0 {
                     //Set the very first purchased item of the user
                     
@@ -177,117 +179,131 @@ class DataModel {
                             
                             if let toursc = tourids["tours"] as? [Int] {
                                 //CHeck if the purchased tour is already added
-                                NSLog("count of toursc is \(toursc.count)" )
-                                print(tourids)
-                                NSLog("RE HERE \n id is \(id) \n ")
+                                //NSLog("count of toursc is \(toursc.count)" )
+                                //print(tourids)
+                                //NSLog("RE HERE \n id is \(id) \n ")
                                 
                                 for i in toursc {
                                     print("i is : \(i)")
-                                    self.databaseRef.child("db").child("\(i)").observeSingleEvent(of: .value, with: { (data) in
-                                        // Get user value
-                                                      
-                                        let tour = data.value as? NSDictionary
-                                        //Get individual values of a tour from the database
-                                        let title = tour?["title"] as! String
-                                        let description = tour?["about"] as! String
-                                        let price = tour?["price"] as! String
-                                        let type = tour?["type"] as! String
-                                        let image = tour?["image"] as! String
-                                        let duration = tour?["duration"] as! String
-                                        let location = tour?["locations"] as! [[String: Double]]
-                                        let audio = tour?["audios"] as! [String]
-                                        let photos = tour?["photos"] as! [String]
-
-                                        //Check if there is more photos than the default preview image al
-                                        if true {
-                                            var x = 3   //The number after purchased
+                                    //Get a/the tour from the tours
+                                    let tour = t[i]
+                                    //check if the tour is already in the purchased tours otherwise add it
+                                    if self.purchasedTours.count > 0 {
+                                        //flag to track matches
+                                        for t in self.purchasedTours {
+                                            if t.title == tour.title {
+                                                notExists = false
+                                            }
+                                        }
+                                        if notExists {
                                             
-                                            while x < photos.count {
-                    
-                                                let photo = photos[x]
+                                            self.purchasedTours.append(tour)
+                                            let photos = tour.photos
+                                            print(photos)
+                                            
+                                            //Check if there is more photos than the default preview image al
+                                            var numPicUnlocked = 3   //The number after purchased
+                                            
+                                            while numPicUnlocked < photos.count {
+                                                
+                                                let photo = photos[numPicUnlocked]
                                                 //Get local storage reference
                                                 let documentsPhotoURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
                                                 //create a reference to the file
                                                 let localPhotoURL = documentsPhotoURL.appendingPathComponent(photo)
                                                 //get firestore reference for the image
-                                                let photoRef = storageRef.child(photo)
                                                 
+                                                let photoRef = storageRef.child("photos").child(String(i)).child(photo)
+                                                print(photoRef)
                                                 let _ = photoRef.write(toFile: localPhotoURL) { (URL, error) -> Void in
                                                     if (error == nil) {
-                                                        NSLog("Got the file in Getpurchased")
+                                                        //NSLog("Got the file in Getpurchased")
                                                         if let url = URL {
                                                             //Added this path to the array of paths to local photos
-                                                            print(url)
+                                                            //print(url)
                                                         }
                                                     }
                                                     else {
-                                                        NSLog("Error occured")
+                                                        //NSLog("Error occured")
                                                     }
                                                 }
-                                                x += 1
+                                                numPicUnlocked += 1
                                             }
-                                            
                                         }
-                                         //Create a tour
-                                         let x = Tour.init(ti: title, des: description, pr: price, img: image, dur: duration, type: type , locs: location, auds: audio,photos: photos, flag: "ND")
-
-                                        //add the tour to the tours list
-                                        self.purchasedTours.append(x)
-                                                      
-                                       // ?????? NEEd TO LIMIT TO DOWNLOAD A CERTIAN NUMBEER OF AUDIOS
+                                    }
+                                    else {
+                                        self.purchasedTours.append(tour)
+                                        let photos = tour.photos
+                                        print(photos)
                                         
-                                        //**********************************************************************DYlan
-                                        for aud in audio {
-                                                          
-                                            let audDocumentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-                                            let audLocalURL = audDocumentsURL.appendingPathComponent(aud)
-                                                
-                                                // Create a reference to the file you want to download
-                                            let audRef = storageRef.child(aud)
+                                        //Check if there is more photos than the default preview image al
+                                        var numPicUnlocked = 3   //The number after purchased
+                                        
+                                        while numPicUnlocked < photos.count {
                                             
-                                            // Download to the local filesystem
-                                            _ = audRef.write(toFile: audLocalURL)
-                                            { (URL, error) -> Void in
-                                                if (error != nil) {
-                                                    // Uh-oh, an error occurred!
-                                                    print("Error: File Not Saved")
-                                                } else {
-                                                    // Local file URL for "images/island.jpg" is returned
-//                                                    print("File Saved")
-//                                                    print(audLocalURL)
+                                            let photo = photos[numPicUnlocked]
+                                            //Get local storage reference
+                                            let documentsPhotoURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                                            //create a reference to the file
+                                            let localPhotoURL = documentsPhotoURL.appendingPathComponent(photo)
+                                            //get firestore reference for the image
+                                            
+                                            let photoRef = storageRef.child("photos").child(String(i)).child(photo)
+                                            print(photoRef)
+                                            let _ = photoRef.write(toFile: localPhotoURL) { (URL, error) -> Void in
+                                                if (error == nil) {
+                                                    //NSLog("Got the file in Getpurchased")
+                                                    if let url = URL {
+                                                        //Added this path to the array of paths to local photos
+                                                        print(url)
+                                                    }
+                                                }
+                                                else {
+                                                    //NSLog("Error occured")
                                                 }
                                             }
+                                            numPicUnlocked += 1
                                         }
-//                                        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-//                                        let localURL = documentsURL.appendingPathComponent(image)
+                                    }
+                                    
+                                    //Get individual values of a tour from the database
+
+                                    let audio = tour.audioClips
+                                    
+                                        //**********************************************************************DYlan
+//                                        for aud in audio {
 //
-//                                        // Create a reference to the file you want to download
-//                                        let islandRef = storageRef.child(image)
-//                                        // Download to the local filesystem
-//                                        _ = islandRef.write(toFile: localURL) { (URL, error) -> Void in
-//                                        if (error != nil) {
-//                                                          // Uh-oh, an error occurred!
-//                                            print("Error: File Not Saved")
-//                                        } else {
-//                                        // Local file URL for "images/island.jpg" is returned
-//                                            print("File Saved")
-//                                            print(localURL)
-//                                        }
+//                                            let audDocumentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+//                                            let audLocalURL = audDocumentsURL.appendingPathComponent(aud)
+//
+//                                                // Create a reference to the file you want to download
+//                                            let audRef = storageRef.child(aud)
+//
+//                                            // Download to the local filesystem
+//                                            _ = audRef.write(toFile: audLocalURL)
+//                                            { (URL, error) -> Void in
+//                                                if (error != nil) {
+//                                                    // Uh-oh, an error occurred!
+//                                                    print("Error: File Not Saved")
+//                                                } else {
+//                                                    // Local file URL for "images/island.jpg" is returned
+////                                                    print("File Saved")
+////                                                    print(audLocalURL)
+//                                                }
+//                                            }
 //                                        }
                                         //########################################################################Pitts
-                                    })
-                                    { (error) in
-                                        NSLog("ERROR: Unable to open Firebase database")
-                                    }
                                 }
                             }
                         }
                     })
                 }
         })
+        
     }
     func retrieve_data(){
-        NSLog("Datamodel is called")
+        let numPicUnlocked = 3
+        //NSLog("Datamodel is called")
         //Get a reference to the storage
         //let storage = Storage.storage()
         var photolocked: Bool = false
@@ -326,37 +342,35 @@ class DataModel {
                             //create a reference to the file
                             let localPhotoURL = documentsPhotoURL.appendingPathComponent(photo)
                             //get firestore reference for the image
-                            print("Photo is \(photo) \n")
-                            print("iterator is \(iterator)")
                             let photoRef = storageRef.child("photos").child(String(iterator-1)).child(photo)
                             print(photoRef)
                             let _ = photoRef.write(toFile: localPhotoURL) { (URL, error) -> Void in
                                 if (error == nil) {
-                                    NSLog("Got the file")
+                                    //NSLog("Got the file")
                                     if let url = URL {
                                         //Added this path to the array of paths to local photos
                                         print(url)
-                                        print("THis worked")
+                                        //print("THis worked")
                                     }
                                     else
                                     {
-                                        print("I DONT KNOW ")
+                                        //print("I DONT KNOW ")
                                     }
                                 }
                                 else {
-                                    NSLog("Error occured")
+                                    //NSLog("Error occured")
                                 }
                             }
-                            if p == 13
+                            if p == numPicUnlocked
                             {
                                photolocked = true
                             }
                             
                         }
-                        photolocked = false
+                        
                         p = p + 1
                     }
-                    
+                    photolocked = false
                     
                     //Create a tour
                     let t = Tour.init(ti: title, des: description, pr: price, img: image, dur: duration, type: type , locs: location, auds: audio,photos: photos, flag: "ND")
@@ -388,25 +402,6 @@ class DataModel {
                         
                     }
                     
-                    
-//                    let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-//                    let localURL = documentsURL.appendingPathComponent(image)
-//
-//                    // Create a reference to the file you want to download
-//                    let islandRef = storageRef.child(image)
-//
-//                    // Download to the local filesystem
-//                    _ = islandRef.write(toFile: localURL) { (URL, error) -> Void in
-//                      if (error != nil) {
-//                        // Uh-oh, an error occurred!
-//                        print("Error: File Not Saved")
-//                      } else {
-//                        // Local file URL for "images/island.jpg" is returned
-//                        print("File Saved")
-//                        print(localURL)
-//                      }
-//                    }
-                     //########################################################################Pitts
                   })
                   { (error) in
                         NSLog("ERROR: Unable to open Firebase database")

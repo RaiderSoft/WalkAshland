@@ -17,7 +17,7 @@ class tourInfo: UIViewController {
     var distance: Double?
     //This will recieve data from the tour list
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ALik
-    
+    //*****************************************************************DYLAN
     @IBOutlet weak var TourTitle: UILabel!
     
     @IBOutlet weak var TourImage: UIImageView!
@@ -50,5 +50,5 @@ class tourInfo: UIViewController {
         TourDistance.text = "\(distance)" + "minutes" ?? "0.0 minutes"
         TourDescription.text = tour?.description ?? "Loading"
     }
-    
+    //#################################################################PITTS
 }

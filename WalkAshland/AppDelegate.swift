@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-Faisal
         //Connecting to Firebase database
         FirebaseApp.configure()
-        //Database.database().isPersistenceEnabled = true
+        Database.database().isPersistenceEnabled = true
         //Later Restrict the API key                                        //>>>><<<K<<<<<<#<#<#<#<#<$<$<<#<#<#
         //providing the google maps Api key
         GMSServices.provideAPIKey("AIzaSyDjNpvuv_eW0ogWbHevj3MWwll2El58mW0")

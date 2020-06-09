@@ -10,15 +10,17 @@ import Foundation
 import AuthenticationServices
 //This is a user object
 struct User {
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
     let id: String
     let firstName: String
     let lastName: String
     let email: String
     
+    var saveToLocalDb: String {
+        return id + ":" + firstName + ":" + lastName + ":" + email
+    }
     //Initialize the user with the given credentials or empty strings
     init(credentials: ASAuthorizationAppleIDCredential) {
-        
-        
         //Fire base does not allow chillds to have . , [ , ], #
         var uId : String = ""
         for var i in credentials.user {
@@ -43,9 +45,11 @@ struct User {
 
         ]
     }
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
 }
 //For debuging purposes
 extension User: CustomDebugStringConvertible {
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
     var debugDescription: String {
         return """
         ID: \(id)
@@ -54,4 +58,5 @@ extension User: CustomDebugStringConvertible {
         Email: \(email)
         """
     }
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
 }

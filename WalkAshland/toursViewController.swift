@@ -14,15 +14,12 @@ import SDWebImageWebPCoder
 import SwiftUI
 import MapKit
 import CoreLocation //For accesing the curent location
-import StoreKit
-
-
-
-
-
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
 
+import StoreKit //For purchasing DYLAN
+
 extension toursViewController {
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
     /*      In this function we check for user authorization of using the location  >>>>Faisal    */
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus){
         if status != .authorizedWhenInUse {             //check if the user has given authorization
@@ -36,6 +33,7 @@ extension toursViewController {
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         NSLog("ERROR:: \(error) ")
     }
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
 }
 /*  This class is the class for the tours view controller that list the tours   */
 class toursViewController: UITableViewController, CLLocationManagerDelegate{
@@ -60,10 +58,10 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
         if let user = dataModel?.user {
             self.user = user
         }
-        
         var firstName = ""
 
          if let result = dataModel?.saveuserinfo(user: user){
@@ -74,9 +72,7 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
                 else {
                     firstName = "UnknownUser"
                 }
-
                 let alertController = UIAlertController(title: "Greeting", message: "Hi \(firstName) \n Thanks for creating an account \n Enjoy.", preferredStyle: .alert)
-                
                 alertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: {
                     action
                     in
@@ -93,7 +89,6 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
                     }))
                 self.present(alertController,animated: true, completion: nil)
             }
-
         }
         self.locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
@@ -102,48 +97,44 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
             
             self.locationManager.startUpdatingLocation()
         }
-
-        NSLog("Reached \(user)")
-        
-
-        
-
-
-        
-        reloadInputViews()
-        loadView()
+        self.reloadInputViews()
+        self.loadView()
+        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "tourinfo", sender: nil)
+        //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
+        performSegue(withIdentifier: "tourinfo", sender: nil) //Got to the tourinfo view controller
+        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
     }
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
     //This function is called before the view will be loaded
     //I used this function to reload the data on the table
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        reloadInputViews()
-        loadView()
+        //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
+        self.reloadInputViews()
+        self.loadView()      //Reload the view
+        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
         
     }
 
     /*  This function updates the user's location      >>>>Faisal */
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    //  let locationPoints = gets from tour             //Get the location points create annotations
-        
+        //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         currentLocation = locValue
         locationManager.stopUpdatingLocation()
-
-        //Set the region where the mapview should focus on
-        //Get the longitude and latitude of the centeral point in the
-        //tour and set as the center of the camera
-        loadView()
+        self.reloadInputViews()
+        self.loadView()
+        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
         
     }
     //This function sets the number of rows in table
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tours.count
+        //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
+        return tours.count  //Set the number of rows visible
+        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
     }
     
     
@@ -156,9 +147,8 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
         cell.typeImgOut.image = UIImage.init(named: "walking")
         cell.durImgOut.image = UIImage.init(named: "timeicon")
         cell.distImgOut.image = UIImage.init(named: "locationicon")
-        
+        cell.distImgOut.image = UIImage.init(named: "tolisten")
         //Take care of location and distance
-        
         //For now [0] later location and photos
         if  let destinationLat = tour.locationPoints[0]["Latitude"],        //latitude of starting point of the location
             let destinationLong = tour.locationPoints[0]["Longitude"],      //longitude 0f /////
@@ -168,9 +158,10 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
                 directionRequest.source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: destinationLat , longitude: destinationLong)))
                 directionRequest.destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: sourceLat , longitude: sourceLong)))
             }
+        //################################################################PITTS
         //SKPaymentQueue.default().add(cell)
         cell.fetchAvailableProducts()
-        
+        //****************************************************************DYlan
         
         directionRequest.requestsAlternateRoutes = false                //Set alternative paths to none
         directionRequest.transportType = .walking                       //Default transport type is walking
@@ -189,6 +180,7 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
             self.distance = (route.distance * toFeet) / toMile           //distance in miles
             cell.distLabelOut.text = "\( round((self.distance / 0.01 ) * 0.01)) miles away"        //Set the distance label in the view
         }
+        
         //Trim the title to a fitting size
         let t : String = tour.title                                     //These steps are for truncating the title to a file size
         var title = ""
@@ -220,12 +212,10 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
         cell.durNumOut.text = "\(tour.duration)"                   //Set the duration of the tour
         
         cell.typeLabelOut.text = tour.tourType                          //Set the type of the tour
-        
         /*
             Download the image and view is
             Create a reference to this image from the firebase storage
          */
-                
         let documentsDirectoryPath: String = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
         let prevImagePath =  URL(fileURLWithPath: documentsDirectoryPath).appendingPathComponent(tour.photos[0])
         let image = UIImage(contentsOfFile: prevImagePath.path)
@@ -241,14 +231,12 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
         if let index = tableView.indexPathForSelectedRow?.row {
             if let tourInfo = segue.destination as? tourInfo {
                tourInfo.tour = tours[index]
-            }
-        }
+            }}
         if let playSc = segue.destination as? nplayingViewController {
             if let obj = sender as? UIButton {
                 playSc.tour = tours[obj.tag]
                 playSc.distanceAway = distance
-            }
-        }
+            }}
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
     }
 }
@@ -338,10 +326,13 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
                         if productIndex == 0 {
                             print("You've bought route 1")
                             
-                            PDSButtonOut.isEnabled = false
-                            PDSButtonOut.isOpaque = true
-                            startOut.isEnabled = true
-                            startOut.isOpaque = false
+                        PDSButtonOut.isEnabled = false
+                        PDSButtonOut.isHidden = true
+                        startOut.isEnabled = true
+                        startOut.isOpaque = false
+                            
+                            //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
+                            
                         } else {
                            //other purchase
                         }
