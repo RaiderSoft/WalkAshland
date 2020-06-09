@@ -45,6 +45,7 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
         return dataModel?.tours ?? []
     }
     var user : User!
+    
     var distance: Double!
     var duration: Double!
     //Create a reference to the firebase storage for accessing files
@@ -61,6 +62,7 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
         if let user = dataModel?.user {
             self.user = user
+            NSLog("\(user.id)")
         }
         var firstName = ""
 
@@ -208,7 +210,8 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
         else {
             cell.aboutOut.text = tour.description                       //Set description of the tour
         }
-        
+        cell.dataModel = dataModel
+        cell.tourId = indexPath.row
         cell.durNumOut.text = "\(tour.duration)"                   //Set the duration of the tour
         
         cell.typeLabelOut.text = tour.tourType                          //Set the type of the tour
@@ -261,6 +264,14 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
     
     @IBOutlet weak var aboutOut: UILabel!
     @IBOutlet weak var titleOut: UILabel!
+    
+    var dataModel: DataModel?
+    //To store dowloaded tours from the model
+    var tours: [Tour] {
+        return dataModel?.tours ?? []
+    }
+    var tourId: Int?
+    
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
     
     
@@ -272,12 +283,13 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
     var productIndex = 0
     
     @IBAction func purchasedPressed(_ sender: UIButton) {
+        NSLog("pressed")
         productIndex = 0
         purchaseMyProduct(validProducts[productIndex])
     }
     func fetchAvailableProducts()  {
         let productIdentifiers = NSSet(objects:
-            "com.walkashland.walkashland.route2"         // 0
+            "com.walkashland.walkashland.route1"         // 0
         )
         productsRequest = SKProductsRequest(productIdentifiers: productIdentifiers as! Set<String>)
         productsRequest.delegate = self
@@ -331,8 +343,7 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
                         startOut.isEnabled = true
                         startOut.isOpaque = false
                             
-                            //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
-                            
+
                         } else {
                            //other purchase
                         }
@@ -365,6 +376,12 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
             
         let msg = "Purchase Completed."
         let title = "Transaction Success!"
+        //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal   
+        if let user = dataModel?.user {
+            dataModel?.savePurchase(user: user, tour: tourId! )
+            dataModel?.getPurchasedFor(userId: user.id, tours: dataModel!.tours)
+        }
+        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
         
         self.delegate?.tourCell(self, msg: msg, title: title)
     }

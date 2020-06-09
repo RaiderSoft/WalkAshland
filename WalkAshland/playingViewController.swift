@@ -122,7 +122,7 @@ class nplayingViewController: UIViewController, UIPickerViewDataSource, UIPicker
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: audioPath[row]))
-            nextPoint = locationPoints[row].position
+            //nextPoint = locationPoints[row].position
         } catch {
             print(error)
         }
