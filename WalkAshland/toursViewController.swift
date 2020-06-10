@@ -144,6 +144,7 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
         let tour = tours[indexPath.row]             //For each row create a cell  with cell class
+        NSLog("The product Id will be \(indexPath.row)")
         let cell = tableView.dequeueReusableCell(withIdentifier: "tourCell", for: indexPath) as! tourCell
         //Setup all static images for a cell
         cell.typeImgOut.image = UIImage.init(named: "walking")
@@ -283,6 +284,7 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
     var productIndex = 0                            //product index
     
     @IBAction func purchasedPressed(_ sender: UIButton) {
+
         NSLog("pressed")
         if self.PDSButtonOut.titleLabel?.text != "Download" {
             productIndex = 0
@@ -373,6 +375,12 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
                         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
                         if productIndex == 0 {
                             print("You've bought route 1")
+                            //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
+                            if let user = dataModel?.user {
+                                dataModel?.savePurchase(user: user, tour: tourId! )
+                                dataModel?.getPurchasedFor(userId: user.id, tours: dataModel!.tours)
+                            }
+                            //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
                             
                         } else {
                            //other purchase
