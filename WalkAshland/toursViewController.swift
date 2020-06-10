@@ -271,7 +271,7 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
         return dataModel?.tours ?? []
     }
     var tourId: Int?
-    
+
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Alik
     
     
@@ -289,7 +289,7 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
     }
     func fetchAvailableProducts()  {
         let productIdentifiers = NSSet(objects:
-            "com.walkashland.walkashland.route1"         // 0
+            "com.walkashland.walkashland.route3"         // 0
         )
         productsRequest = SKProductsRequest(productIdentifiers: productIdentifiers as! Set<String>)
         productsRequest.delegate = self
@@ -338,12 +338,6 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
                         if productIndex == 0 {
                             print("You've bought route 1")
                             
-                        PDSButtonOut.isEnabled = false
-                        PDSButtonOut.isHidden = true
-                        startOut.isEnabled = true
-                        startOut.isOpaque = false
-                            
-
                         } else {
                            //other purchase
                         }
@@ -361,6 +355,20 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
                     case .restored:
                         SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
                         print("Purchase has been successfully restored!")
+                        break
+                        
+                    case .purchasing:
+                        
+                        print("purchasing")
+                        
+                        msg = "Payment is Processing please wait a moment!."
+                        title = "Transaction!"
+                        
+                        self.delegate?.tourCell(self, msg: msg, title: title)
+                        break
+                        
+                    case .deferred:
+                        print("deferred")
                         break
                         
                     default: break

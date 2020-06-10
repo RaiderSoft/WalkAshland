@@ -379,29 +379,37 @@ class DataModel {
                     
                     
                     // ?????? NEEd TO LIMIT TO DOWNLOAD A CERTIAN NUMBEER OF AUDIOS
-                     
+                    let numAudsLocked = 3
+                    var audiolocked: Bool = false
+                    p = 0
                      //**********************************************************************DYlan
                     for aud in audio {
-                        let audDocumentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-                        let audLocalURL = audDocumentsURL.appendingPathComponent(aud)
-                        
-                        // Create a reference to the file you want to download
-                        let audRef = storageRef.child(aud)
+                        if !audiolocked {
+                            let audDocumentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                            let audLocalURL = audDocumentsURL.appendingPathComponent(aud)
+                            
+                            // Create a reference to the file you want to download
+                            let audRef = storageRef.child(aud)
 
-                        // Download to the local filesystem
-                        _ = audRef.write(toFile: audLocalURL) { (URL, error) -> Void in
-                          if (error != nil) {
-                            // Uh-oh, an error occurred!
-                            print("Error: File Not Saved")
-                          } else {
-                            // Local file URL for "images/island.jpg" is returned
-//                            print("File Saved")
-//                            print(audLocalURL)
-                          }
+                            // Download to the local filesystem
+                            _ = audRef.write(toFile: audLocalURL) { (URL, error) -> Void in
+                              if (error != nil) {
+                                // Uh-oh, an error occurred!
+                                print("Error: File Not Saved")
+                              } else {
+                                // Local file URL for "images/island.jpg" is returned
+    //                            print("File Saved")
+    //                            print(audLocalURL)
+                              }
+                            }
+                            if p == numAudsLocked
+                            {
+                                audiolocked = true
+                            }
                         }
-                        
+                        p = p + 1
                     }
-                    
+                    audiolocked = false
                   })
                   { (error) in
                         NSLog("ERROR: Unable to open Firebase database")
