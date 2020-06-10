@@ -421,15 +421,7 @@
                                                                 <constraint firstAttribute="height" constant="29" id="nGy-6R-jZT"/>
                                                             </constraints>
                                                             <state key="normal">
-                                                                <attributedString key="attributedTitle">
-                                                                    <fragment content="Purchase">
-                                                                        <attributes>
-                                                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                            <font key="NSFont" metaFont="system" size="15"/>
-                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                        </attributes>
-                                                                    </fragment>
-                                                                </attributedString>
+                                                                <attributedString key="attributedTitle"/>
                                                             </state>
                                                             <connections>
                                                                 <action selector="purchasedPressed:" destination="g03-Vw-fTi" eventType="touchUpInside" id="Hvl-49-F2b"/>

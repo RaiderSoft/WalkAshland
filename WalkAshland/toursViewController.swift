@@ -256,7 +256,7 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
     @IBOutlet weak var distImgOut: UIImageView!
     
     //This is for the button to be labeled download, start, or purchase (price)
-    @IBOutlet weak var PDSButtonOut: UIButton!
+    @IBOutlet weak var PDSButtonOut: UIButton!      
     @IBOutlet weak var startOut: UIButton!
     
     @IBOutlet weak var durNumOut: UILabel!
@@ -276,18 +276,26 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
     
     
     //****************************************************************DYlan
-    weak var delegate : tourCellDelegate?
+    weak var delegate : tourCellDelegate?       //alerts
     //let productID = "com.walkashland.walkashland.route2" //productID from appConnect
-    var productsRequest = SKProductsRequest()
-    var validProducts = [SKProduct]()
-    var productIndex = 0
+    var productsRequest = SKProductsRequest()       //retrieve info from app store about list of products
+    var validProducts = [SKProduct]()               //get list of products from app store
+    var productIndex = 0                            //product index
     
     @IBAction func purchasedPressed(_ sender: UIButton) {
         NSLog("pressed")
-        productIndex = 0
-        purchaseMyProduct(validProducts[productIndex])
+        if self.PDSButtonOut.titleLabel?.text != "Download" {
+            productIndex = 0
+            purchaseMyProduct(validProducts[productIndex])
+        } else {
+            // MARK: TODO if button is labled download
+            // button will now be used to download tour
+        }
     }
+    //fetch list of available products using product idententifer
+    // MARK: TODO make this dynamic
     func fetchAvailableProducts()  {
+        
         let productIdentifiers = NSSet(objects:
             "com.walkashland.walkashland.route3"         // 0
         )
@@ -295,26 +303,45 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
         productsRequest.delegate = self
         productsRequest.start()
     }
+    
+    //responds with list of valid products
+    // MARK: TODO print all valid products with a loop
     func productsRequest (_ request:SKProductsRequest, didReceive response:SKProductsResponse) {
         if (response.products.count > 0) {
             validProducts = response.products
-                
+            
+            //must be on the main thread
+            //set title of button to price of route
+            DispatchQueue.main.async {
+                self.PDSButtonOut.setTitle("\(self.validProducts[self.productIndex].localizedPrice)", for: .normal)
+                self.PDSButtonOut.setTitleColor(.white, for: .normal)
+            }
+            
+            print("\(validProducts[productIndex].localizedPrice)")
             let route1 = response.products[0] as SKProduct
             print("1st rpoduct: " + route1.localizedDescription)
         }
     }
+    //queue transaction request
     func paymentQueue(_ queue: SKPaymentQueue, shouldAddStorePayment payment: SKPayment, for product: SKProduct) -> Bool {
         return true
     }
+    //checks if user elligible to make payments if true return true
     func canMakePurchases() -> Bool {  return SKPaymentQueue.canMakePayments()  }
     
+    //attempt to make payment
     func purchaseMyProduct(_ product: SKProduct) {
+        
         var msg = ""
         var title = ""
+        
+        //can make payments
         if self.canMakePurchases() {
             let payment = SKPayment(product: product)
             SKPaymentQueue.default().add(self)
             SKPaymentQueue.default().add(payment)
+            
+        //can not make payments
         } else {
             
             msg = "Purchases are disabled in your device!"
@@ -323,18 +350,27 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
             self.delegate?.tourCell(self, msg: msg, title: title)
         }
     }
-    
+    //check state if transaction
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         
         var msg = ""
         var title = ""
         
+            //for all transactions in the queue
             for transaction:AnyObject in transactions {
                 if let trans:SKPaymentTransaction = transaction as? SKPaymentTransaction {
+                    //check transaction state
                     switch trans.transactionState {
-                        
+                    //transaction completed
                     case .purchased:
                         SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
+                        //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
+                        if let user = dataModel?.user {
+                            dataModel?.savePurchase(user: user, tour: tourId! )
+                            dataModel?.getPurchasedFor(userId: user.id, tours: dataModel!.tours)
+                        }
+                        self.PDSButtonOut.titleLabel?.text = "Download"
+                        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
                         if productIndex == 0 {
                             print("You've bought route 1")
                             
@@ -343,6 +379,7 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
                         }
                         break
                         
+                    //transaction failed
                     case .failed:
                         SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
                         
@@ -352,11 +389,14 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
                         self.delegate?.tourCell(self, msg: msg, title: title)
                         
                         break
+                        
+                    //restoring transaction
                     case .restored:
                         SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
                         print("Purchase has been successfully restored!")
                         break
                         
+                    //transaction stuck on purchasing
                     case .purchasing:
                         
                         print("purchasing")
@@ -367,6 +407,7 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
                         self.delegate?.tourCell(self, msg: msg, title: title)
                         break
                         
+                    //transaction deffered
                     case .deferred:
                         print("deferred")
                         break
@@ -375,21 +416,19 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
             }}}
     }
     
+    //restore purchase (no corresponding button at the moment)
+    // MARK: TODO implement a restore button
     func restorePurchase() {
             SKPaymentQueue.default().add(self as SKPaymentTransactionObserver)
             SKPaymentQueue.default().restoreCompletedTransactions()
     }
-        
+    
+    //transaction completed successfully
     func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
             
         let msg = "Purchase Completed."
         let title = "Transaction Success!"
-        //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal   
-        if let user = dataModel?.user {
-            dataModel?.savePurchase(user: user, tour: tourId! )
-            dataModel?.getPurchasedFor(userId: user.id, tours: dataModel!.tours)
-        }
-        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
+
         
         self.delegate?.tourCell(self, msg: msg, title: title)
     }
@@ -398,6 +437,7 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
 
  
 //****************************************************************DYlan
+//alert
 extension toursViewController : tourCellDelegate {
         
     func tourCell(_ tourCell: tourCell, msg: String, title: String) {
@@ -411,5 +451,14 @@ extension toursViewController : tourCellDelegate {
 protocol tourCellDelegate: AnyObject {
     func tourCell(_ tourCell: tourCell, msg: String, title: String)
 }
-//################################################################PITTS
 
+//get price of a route
+extension SKProduct {
+    var localizedPrice: String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = priceLocale
+        return formatter.string(from: price)!
+    }
+}
+//################################################################PITTS

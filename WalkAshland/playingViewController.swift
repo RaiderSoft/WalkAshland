@@ -316,6 +316,7 @@ class nplayingViewController: UIViewController, UIPickerViewDataSource, UIPicker
         //###############################################################-Dylan
         //Created by Dylan
         //let fileManager = FileManager.default
+        // MARK: TODO: For loop should stop after it has reached locked audios
         var i = 0
         if let tours = tour?.audioClips {
             for aud in tours {
@@ -325,6 +326,8 @@ class nplayingViewController: UIViewController, UIPickerViewDataSource, UIPicker
                 let path = documentsDirectoryPath + "/" + aud
                 print("\n \n \(aud) \n \n")
                 audioPath.append(path)
+            
+                // MARK: if i == locked break loop
             }
         }
        //bring mediabar forward
