@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "tolisten.png",
+      "filename" : "Asset 359.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "tolisten@2x.png",
+      "filename" : "Asset 359@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "tolisten@3x.png",
+      "filename" : "Asset 359@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -196,30 +196,35 @@ class nplayingViewController: UIViewController, UIPickerViewDataSource, UIPicker
                 {
                     //Create a marker
                     let an =  GMSMarker(position: CLLocationCoordinate2D.init(latitude: lat, longitude: long))
-                    an.iconView?.tintColor = UIColor.red    //The color of the marker
+                    let image = UIImage(named: "m\(x+1)")
+                    an.icon = image
+                    an.title = String(x+1)            //The tile of the marker is the number associated with p
+                    
                     if locationPoints == nil {  //if the locationPoints is emtpy just add the first locationp
-                        an.title = String(x)            //The tile of the marker is the number associated with p
+                        
                         locationPoints = [an]
 //                        baseURL = baseURL + "origin=\(an.position.latitude),\(an.position.longitude)"
                     }
                     else {
-                        var exists = false
-                        for a in locationPoints {
-                            if (a.position.latitude == an.position.latitude) && (a.position.longitude == an.position.longitude) {
-                                exists = true
-                                a.title = a.title! + String(x)
-                            }
-                        }
-                        if !exists {
-                            locationPoints.append(an)
-                            an.title = String(x)            //tour.audioClips[x] as? String
-                        }
+                        locationPoints.append(an)
+
+//                        var exists = false
+//                        for a in locationPoints {
+//                            if (a.position.latitude == an.position.latitude) && (a.position.longitude == an.position.longitude) {
+//                                exists = true
+//                                a.title = a.title! + String(x)
+//                            }
+//                        }
+//                        if !exists {
+//                            an.title = String(x)            //tour.audioClips[x] as? String
+//                        }
                         if x < tour.locationPoints.count - 1 {
                             waypoints = waypoints + "\(an.position.latitude)%2C\(an.position.longitude)%7Cvia:"
                         }
                         else {
                             waypoints = waypoints + "\(an.position.latitude)%2C\(an.position.longitude)"
                         }
+                        
                     }
                     //change the icon or color of the annotation
                 }
@@ -370,8 +375,6 @@ class nplayingViewController: UIViewController, UIPickerViewDataSource, UIPicker
     override func viewWillAppear(_ animated: Bool) {
         reloadInputViews()
     }
-    
-
 }
 
 /*
@@ -423,14 +426,24 @@ extension nplayingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                 if self.counter < self.locationPoints.count && !(self.audioPlayer.isPlaying){
                     do {
 
-                        self.locationPoints[self.counter].iconView?.tintColor = UIColor.black
-                        self.locationPoints[self.counter].title = "x"
+                        self.locationPoints[self.counter].icon = UIImage.init(named: "listening")
+                        self.locationPoints[self.counter].title = "Playing"
                         self.locationPoints[self.counter].map = mapView
                         self.audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: self.audioPath[self.counter]))
                         self.audioPlayer.play()
-                        self.counter = self.counter + 1
-                        self.nextPoint = self.locationPoints[self.counter].position
                         
+                        //check if th counter is greater than zero and smaller max
+                        if self.counter < self.locationPoints.count && self.counter > 0  {
+                            self.locationPoints[self.counter-1].icon = UIImage.init(named: "m\(self.counter)")
+                            self.locationPoints[self.counter-1].title = "\(self.counter-1)"
+                        }
+                        
+                        self.counter = self.counter + 1
+                        
+                        if self.counter < self.locationPoints.count {
+                            
+                            self.nextPoint = self.locationPoints[self.counter].position
+                        }
                         if let tour = tour {
                             
                             if ( photosOut.tag <= tour.photos.count){
