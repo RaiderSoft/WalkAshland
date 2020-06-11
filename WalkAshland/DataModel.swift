@@ -79,13 +79,6 @@ class DataModel {
     func savePurchase(user uid: User, tour tid: Int){
             self.databaseRef = Database.database().reference()
                     
-                    //Update the user info can user this code
-            
-    //
-    //                self.databaseRef.updateChildValues(
-    //                    [
-    //                        "/users/": user.saveUserDetail]
-    //                )
 
             //Check if the user exists in the database
         self.databaseRef.child("purchaseditems").child("\(uid.id)").child("tours").observeSingleEvent(of: .value, with: { (data) in

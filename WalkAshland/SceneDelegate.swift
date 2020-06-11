@@ -18,27 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func download () {
         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-Faisal
         //This section is needed to create a shared instance of the dataModel between view controller
-        /*
-        guard let tabBarController = window?.rootViewController as? UITabBarController,
-            let viewControllers = tabBarController.viewControllers
-            else {
-                return
-        }
-        
-        for (index, viewController) in viewControllers.enumerated(){
-            if let navigationController = viewController as? UINavigationController,
-                let tourViewController = navigationController.viewControllers.first as? toursViewController
-            {
-                
-                tourViewController.dataModel = dataModel
-                dataModel.retrieve_data()
-                NSLog("WENT through this")
-                
-              //  NSLog("From scene delegate tourscoun in tourvc \(tourViewController.dataModel?.tours.count)")
-                //NSLog("the number of tour in Datamodel \(dataModel.tours.count)")
-            }
-        }
- */ //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
+
+  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
     }
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
