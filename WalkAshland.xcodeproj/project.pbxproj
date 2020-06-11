@@ -1,0 +1,833 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		02F45408AE6D73925D9317D3 /* Pods_WalkAshlandTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42CE7BA39036BDD1CF39859B /* Pods_WalkAshlandTests.framework */; };
+		60B4BFC87E2E1B4E75356EAB /* Pods_WalkAshland.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A5AD611FCA8A39D578510AA /* Pods_WalkAshland.framework */; };
+		6A153D5424453B1900EC6927 /* addLocationsViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A153D5324453B1900EC6927 /* addLocationsViewControllers.swift */; };
+		6A1CEB4D243FDC310013A3F5 /* createTour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1CEB4C243FDC310013A3F5 /* createTour.swift */; };
+		6A6E1A1624405E58004B75CE /* playingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6E1A1524405E58004B75CE /* playingViewController.swift */; };
+		6A85BE10247B88E600A2ABA6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A85BE0F247B88E600A2ABA6 /* User.swift */; };
+		6A85BE12247B8A0800A2ABA6 /* signin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A85BE11247B8A0800A2ABA6 /* signin.swift */; };
+		6A85BE18247BA4EF00A2ABA6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A85BE17247BA4EF00A2ABA6 /* GoogleService-Info.plist */; };
+		6A85BE1A247BA80B00A2ABA6 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A85BE19247BA80B00A2ABA6 /* TabBarViewController.swift */; };
+		6A959628242B41B0002F19CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A959627242B41B0002F19CF /* AppDelegate.swift */; };
+		6A95962A242B41B0002F19CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A959629242B41B0002F19CF /* SceneDelegate.swift */; };
+		6A95962C242B41B0002F19CF /* toursViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A95962B242B41B0002F19CF /* toursViewController.swift */; };
+		6A95962E242B41B0002F19CF /* accountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A95962D242B41B0002F19CF /* accountViewController.swift */; };
+		6A959631242B41B0002F19CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A95962F242B41B0002F19CF /* Main.storyboard */; };
+		6A959633242B41B1002F19CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A959632242B41B1002F19CF /* Assets.xcassets */; };
+		6A959641242B41B1002F19CF /* WalkAshlandTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A959640242B41B1002F19CF /* WalkAshlandTests.swift */; };
+		6A95964C242B41B1002F19CF /* WalkAshlandUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A95964B242B41B1002F19CF /* WalkAshlandUITests.swift */; };
+		6A95965C242B4323002F19CF /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A95965B242B4323002F19CF /* DataModel.swift */; };
+		6A95965E242F3CA2002F19CF /* tourInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A95965D242F3CA2002F19CF /* tourInfo.swift */; };
+		6AAF2F432488FB5D00F6C868 /* photosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAF2F422488FB5D00F6C868 /* photosViewController.swift */; };
+		6ABBFE4B247F9BC300A16532 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBFE4A247F9BC300A16532 /* StoreKit.framework */; };
+		D1C3706A162B94BD94737816 /* Pods_WalkAshland_WalkAshlandUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C734EC90AD374A411D6901A /* Pods_WalkAshland_WalkAshlandUITests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6A95963D242B41B1002F19CF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A95961C242B41B0002F19CF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6A959623242B41B0002F19CF;
+			remoteInfo = WalkAshland;
+		};
+		6A959648242B41B1002F19CF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A95961C242B41B0002F19CF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6A959623242B41B0002F19CF;
+			remoteInfo = WalkAshland;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		42CE7BA39036BDD1CF39859B /* Pods_WalkAshlandTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalkAshlandTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6916F5E884C5702772D198E5 /* Pods-WalkAshlandTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkAshlandTests.release.xcconfig"; path = "Target Support Files/Pods-WalkAshlandTests/Pods-WalkAshlandTests.release.xcconfig"; sourceTree = "<group>"; };
+		6A153D5324453B1900EC6927 /* addLocationsViewControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addLocationsViewControllers.swift; sourceTree = "<group>"; };
+		6A1CEB4C243FDC310013A3F5 /* createTour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createTour.swift; sourceTree = "<group>"; };
+		6A6E1A1524405E58004B75CE /* playingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = playingViewController.swift; sourceTree = "<group>"; };
+		6A85BE0F247B88E600A2ABA6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		6A85BE11247B8A0800A2ABA6 /* signin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signin.swift; sourceTree = "<group>"; };
+		6A85BE17247BA4EF00A2ABA6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6A85BE19247BA80B00A2ABA6 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		6A959624242B41B0002F19CF /* WalkAshland.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkAshland.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A959627242B41B0002F19CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6A959629242B41B0002F19CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		6A95962B242B41B0002F19CF /* toursViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = toursViewController.swift; sourceTree = "<group>"; };
+		6A95962D242B41B0002F19CF /* accountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = accountViewController.swift; sourceTree = "<group>"; };
+		6A959630242B41B0002F19CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6A959632242B41B1002F19CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6A959637242B41B1002F19CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6A95963C242B41B1002F19CF /* WalkAshlandTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WalkAshlandTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A959640242B41B1002F19CF /* WalkAshlandTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkAshlandTests.swift; sourceTree = "<group>"; };
+		6A959642242B41B1002F19CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6A959647242B41B1002F19CF /* WalkAshlandUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WalkAshlandUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A95964B242B41B1002F19CF /* WalkAshlandUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkAshlandUITests.swift; sourceTree = "<group>"; };
+		6A95964D242B41B1002F19CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6A95965B242B4323002F19CF /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		6A95965D242F3CA2002F19CF /* tourInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tourInfo.swift; sourceTree = "<group>"; };
+		6AAF2F422488FB5D00F6C868 /* photosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photosViewController.swift; sourceTree = "<group>"; };
+		6ABBFE49247F8A1600A16532 /* WalkAshland.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WalkAshland.entitlements; sourceTree = "<group>"; };
+		6ABBFE4A247F9BC300A16532 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		6C734EC90AD374A411D6901A /* Pods_WalkAshland_WalkAshlandUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalkAshland_WalkAshlandUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F7C389BCFF5BB6307BCC1C0 /* Pods-WalkAshland.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkAshland.debug.xcconfig"; path = "Target Support Files/Pods-WalkAshland/Pods-WalkAshland.debug.xcconfig"; sourceTree = "<group>"; };
+		8A5AD611FCA8A39D578510AA /* Pods_WalkAshland.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalkAshland.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		91AA5DA5AA92FAECBA3726E6 /* Pods-WalkAshland-WalkAshlandUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkAshland-WalkAshlandUITests.release.xcconfig"; path = "Target Support Files/Pods-WalkAshland-WalkAshlandUITests/Pods-WalkAshland-WalkAshlandUITests.release.xcconfig"; sourceTree = "<group>"; };
+		963245A9FB1247C801EB67E7 /* Pods-WalkAshland-WalkAshlandUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkAshland-WalkAshlandUITests.debug.xcconfig"; path = "Target Support Files/Pods-WalkAshland-WalkAshlandUITests/Pods-WalkAshland-WalkAshlandUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E17CC3F90DDBD3A86646061A /* Pods-WalkAshland.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkAshland.release.xcconfig"; path = "Target Support Files/Pods-WalkAshland/Pods-WalkAshland.release.xcconfig"; sourceTree = "<group>"; };
+		F9DA9DACF46712E8055A05C3 /* Pods-WalkAshlandTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkAshlandTests.debug.xcconfig"; path = "Target Support Files/Pods-WalkAshlandTests/Pods-WalkAshlandTests.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6A959621242B41B0002F19CF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60B4BFC87E2E1B4E75356EAB /* Pods_WalkAshland.framework in Frameworks */,
+				6ABBFE4B247F9BC300A16532 /* StoreKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A959639242B41B1002F19CF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02F45408AE6D73925D9317D3 /* Pods_WalkAshlandTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A959644242B41B1002F19CF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1C3706A162B94BD94737816 /* Pods_WalkAshland_WalkAshlandUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		11F5DC14E109379803976D91 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6F7C389BCFF5BB6307BCC1C0 /* Pods-WalkAshland.debug.xcconfig */,
+				E17CC3F90DDBD3A86646061A /* Pods-WalkAshland.release.xcconfig */,
+				963245A9FB1247C801EB67E7 /* Pods-WalkAshland-WalkAshlandUITests.debug.xcconfig */,
+				91AA5DA5AA92FAECBA3726E6 /* Pods-WalkAshland-WalkAshlandUITests.release.xcconfig */,
+				F9DA9DACF46712E8055A05C3 /* Pods-WalkAshlandTests.debug.xcconfig */,
+				6916F5E884C5702772D198E5 /* Pods-WalkAshlandTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		4602C0EE7ED871C7BD8A32E3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6ABBFE4A247F9BC300A16532 /* StoreKit.framework */,
+				8A5AD611FCA8A39D578510AA /* Pods_WalkAshland.framework */,
+				6C734EC90AD374A411D6901A /* Pods_WalkAshland_WalkAshlandUITests.framework */,
+				42CE7BA39036BDD1CF39859B /* Pods_WalkAshlandTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6A95961B242B41B0002F19CF = {
+			isa = PBXGroup;
+			children = (
+				6A959626242B41B0002F19CF /* WalkAshland */,
+				6A95963F242B41B1002F19CF /* WalkAshlandTests */,
+				6A95964A242B41B1002F19CF /* WalkAshlandUITests */,
+				6A959625242B41B0002F19CF /* Products */,
+				11F5DC14E109379803976D91 /* Pods */,
+				4602C0EE7ED871C7BD8A32E3 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		6A959625242B41B0002F19CF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6A959624242B41B0002F19CF /* WalkAshland.app */,
+				6A95963C242B41B1002F19CF /* WalkAshlandTests.xctest */,
+				6A959647242B41B1002F19CF /* WalkAshlandUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6A959626242B41B0002F19CF /* WalkAshland */ = {
+			isa = PBXGroup;
+			children = (
+				6A959627242B41B0002F19CF /* AppDelegate.swift */,
+				6A959629242B41B0002F19CF /* SceneDelegate.swift */,
+				6A95962B242B41B0002F19CF /* toursViewController.swift */,
+				6ABBFE49247F8A1600A16532 /* WalkAshland.entitlements */,
+				6A95965B242B4323002F19CF /* DataModel.swift */,
+				6A95962D242B41B0002F19CF /* accountViewController.swift */,
+				6A85BE11247B8A0800A2ABA6 /* signin.swift */,
+				6A85BE17247BA4EF00A2ABA6 /* GoogleService-Info.plist */,
+				6A85BE0F247B88E600A2ABA6 /* User.swift */,
+				6A6E1A1524405E58004B75CE /* playingViewController.swift */,
+				6AAF2F422488FB5D00F6C868 /* photosViewController.swift */,
+				6A95965D242F3CA2002F19CF /* tourInfo.swift */,
+				6A95962F242B41B0002F19CF /* Main.storyboard */,
+				6A85BE19247BA80B00A2ABA6 /* TabBarViewController.swift */,
+				6A1CEB4C243FDC310013A3F5 /* createTour.swift */,
+				6A153D5324453B1900EC6927 /* addLocationsViewControllers.swift */,
+				6A959632242B41B1002F19CF /* Assets.xcassets */,
+				6A959637242B41B1002F19CF /* Info.plist */,
+			);
+			path = WalkAshland;
+			sourceTree = "<group>";
+		};
+		6A95963F242B41B1002F19CF /* WalkAshlandTests */ = {
+			isa = PBXGroup;
+			children = (
+				6A959640242B41B1002F19CF /* WalkAshlandTests.swift */,
+				6A959642242B41B1002F19CF /* Info.plist */,
+			);
+			path = WalkAshlandTests;
+			sourceTree = "<group>";
+		};
+		6A95964A242B41B1002F19CF /* WalkAshlandUITests */ = {
+			isa = PBXGroup;
+			children = (
+				6A95964B242B41B1002F19CF /* WalkAshlandUITests.swift */,
+				6A95964D242B41B1002F19CF /* Info.plist */,
+			);
+			path = WalkAshlandUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6A959623242B41B0002F19CF /* WalkAshland */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6A959650242B41B1002F19CF /* Build configuration list for PBXNativeTarget "WalkAshland" */;
+			buildPhases = (
+				B30327F2AEF0753459C51A58 /* [CP] Check Pods Manifest.lock */,
+				6A959620242B41B0002F19CF /* Sources */,
+				6A959621242B41B0002F19CF /* Frameworks */,
+				6A959622242B41B0002F19CF /* Resources */,
+				A7A46656F8FBCD8708DA630C /* [CP] Embed Pods Frameworks */,
+				74BC9615E7F1A2F5FECA9ED8 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WalkAshland;
+			productName = WalkAshland;
+			productReference = 6A959624242B41B0002F19CF /* WalkAshland.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6A95963B242B41B1002F19CF /* WalkAshlandTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6A959653242B41B1002F19CF /* Build configuration list for PBXNativeTarget "WalkAshlandTests" */;
+			buildPhases = (
+				70B1ED04C83364DF940F727A /* [CP] Check Pods Manifest.lock */,
+				6A959638242B41B1002F19CF /* Sources */,
+				6A959639242B41B1002F19CF /* Frameworks */,
+				6A95963A242B41B1002F19CF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6A95963E242B41B1002F19CF /* PBXTargetDependency */,
+			);
+			name = WalkAshlandTests;
+			productName = WalkAshlandTests;
+			productReference = 6A95963C242B41B1002F19CF /* WalkAshlandTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		6A959646242B41B1002F19CF /* WalkAshlandUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6A959656242B41B1002F19CF /* Build configuration list for PBXNativeTarget "WalkAshlandUITests" */;
+			buildPhases = (
+				981DFE194A8EEA77346A68A0 /* [CP] Check Pods Manifest.lock */,
+				6A959643242B41B1002F19CF /* Sources */,
+				6A959644242B41B1002F19CF /* Frameworks */,
+				6A959645242B41B1002F19CF /* Resources */,
+				A28E7CD35CA938CA3CB53407 /* [CP] Embed Pods Frameworks */,
+				C7EF51353EEF9442E7C1186E /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6A959649242B41B1002F19CF /* PBXTargetDependency */,
+			);
+			name = WalkAshlandUITests;
+			productName = WalkAshlandUITests;
+			productReference = 6A959647242B41B1002F19CF /* WalkAshlandUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6A95961C242B41B0002F19CF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = RaiderSoft;
+				TargetAttributes = {
+					6A959623242B41B0002F19CF = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+					6A95963B242B41B1002F19CF = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 6A959623242B41B0002F19CF;
+					};
+					6A959646242B41B1002F19CF = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 6A959623242B41B0002F19CF;
+					};
+				};
+			};
+			buildConfigurationList = 6A95961F242B41B0002F19CF /* Build configuration list for PBXProject "WalkAshland" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6A95961B242B41B0002F19CF;
+			productRefGroup = 6A959625242B41B0002F19CF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6A959623242B41B0002F19CF /* WalkAshland */,
+				6A95963B242B41B1002F19CF /* WalkAshlandTests */,
+				6A959646242B41B1002F19CF /* WalkAshlandUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6A959622242B41B0002F19CF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A85BE18247BA4EF00A2ABA6 /* GoogleService-Info.plist in Resources */,
+				6A959633242B41B1002F19CF /* Assets.xcassets in Resources */,
+				6A959631242B41B0002F19CF /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A95963A242B41B1002F19CF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A959645242B41B1002F19CF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		70B1ED04C83364DF940F727A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WalkAshlandTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		74BC9615E7F1A2F5FECA9ED8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WalkAshland/Pods-WalkAshland-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WalkAshland/Pods-WalkAshland-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WalkAshland/Pods-WalkAshland-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		981DFE194A8EEA77346A68A0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WalkAshland-WalkAshlandUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A28E7CD35CA938CA3CB53407 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WalkAshland-WalkAshlandUITests/Pods-WalkAshland-WalkAshlandUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WalkAshland-WalkAshlandUITests/Pods-WalkAshland-WalkAshlandUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WalkAshland-WalkAshlandUITests/Pods-WalkAshland-WalkAshlandUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A7A46656F8FBCD8708DA630C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WalkAshland/Pods-WalkAshland-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WalkAshland/Pods-WalkAshland-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WalkAshland/Pods-WalkAshland-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B30327F2AEF0753459C51A58 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WalkAshland-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C7EF51353EEF9442E7C1186E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WalkAshland-WalkAshlandUITests/Pods-WalkAshland-WalkAshlandUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WalkAshland-WalkAshlandUITests/Pods-WalkAshland-WalkAshlandUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WalkAshland-WalkAshlandUITests/Pods-WalkAshland-WalkAshlandUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6A959620242B41B0002F19CF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A95965C242B4323002F19CF /* DataModel.swift in Sources */,
+				6A6E1A1624405E58004B75CE /* playingViewController.swift in Sources */,
+				6A95965E242F3CA2002F19CF /* tourInfo.swift in Sources */,
+				6A1CEB4D243FDC310013A3F5 /* createTour.swift in Sources */,
+				6A85BE1A247BA80B00A2ABA6 /* TabBarViewController.swift in Sources */,
+				6A95962E242B41B0002F19CF /* accountViewController.swift in Sources */,
+				6A95962C242B41B0002F19CF /* toursViewController.swift in Sources */,
+				6A959628242B41B0002F19CF /* AppDelegate.swift in Sources */,
+				6AAF2F432488FB5D00F6C868 /* photosViewController.swift in Sources */,
+				6A85BE12247B8A0800A2ABA6 /* signin.swift in Sources */,
+				6A95962A242B41B0002F19CF /* SceneDelegate.swift in Sources */,
+				6A85BE10247B88E600A2ABA6 /* User.swift in Sources */,
+				6A153D5424453B1900EC6927 /* addLocationsViewControllers.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A959638242B41B1002F19CF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A959641242B41B1002F19CF /* WalkAshlandTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A959643242B41B1002F19CF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A95964C242B41B1002F19CF /* WalkAshlandUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6A95963E242B41B1002F19CF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6A959623242B41B0002F19CF /* WalkAshland */;
+			targetProxy = 6A95963D242B41B1002F19CF /* PBXContainerItemProxy */;
+		};
+		6A959649242B41B1002F19CF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6A959623242B41B0002F19CF /* WalkAshland */;
+			targetProxy = 6A959648242B41B1002F19CF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6A95962F242B41B0002F19CF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6A959630242B41B0002F19CF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6A95964E242B41B1002F19CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6A95964F242B41B1002F19CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6A959651242B41B1002F19CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F7C389BCFF5BB6307BCC1C0 /* Pods-WalkAshland.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WalkAshland/WalkAshland.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5TH9JFS4L6;
+				INFOPLIST_FILE = WalkAshland/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.walkashland.walkashland;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		6A959652242B41B1002F19CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E17CC3F90DDBD3A86646061A /* Pods-WalkAshland.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WalkAshland/WalkAshland.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5TH9JFS4L6;
+				INFOPLIST_FILE = WalkAshland/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.walkashland.walkashland;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		6A959654242B41B1002F19CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F9DA9DACF46712E8055A05C3 /* Pods-WalkAshlandTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9L45KS8D7L;
+				INFOPLIST_FILE = WalkAshlandTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.walkashland.WalkAshlandTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WalkAshland.app/WalkAshland";
+			};
+			name = Debug;
+		};
+		6A959655242B41B1002F19CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6916F5E884C5702772D198E5 /* Pods-WalkAshlandTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9L45KS8D7L;
+				INFOPLIST_FILE = WalkAshlandTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.walkashland.WalkAshlandTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WalkAshland.app/WalkAshland";
+			};
+			name = Release;
+		};
+		6A959657242B41B1002F19CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 963245A9FB1247C801EB67E7 /* Pods-WalkAshland-WalkAshlandUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9L45KS8D7L;
+				INFOPLIST_FILE = WalkAshlandUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.walkashland.WalkAshlandUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = WalkAshland;
+			};
+			name = Debug;
+		};
+		6A959658242B41B1002F19CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 91AA5DA5AA92FAECBA3726E6 /* Pods-WalkAshland-WalkAshlandUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9L45KS8D7L;
+				INFOPLIST_FILE = WalkAshlandUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.walkashland.WalkAshlandUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = WalkAshland;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6A95961F242B41B0002F19CF /* Build configuration list for PBXProject "WalkAshland" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A95964E242B41B1002F19CF /* Debug */,
+				6A95964F242B41B1002F19CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6A959650242B41B1002F19CF /* Build configuration list for PBXNativeTarget "WalkAshland" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A959651242B41B1002F19CF /* Debug */,
+				6A959652242B41B1002F19CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6A959653242B41B1002F19CF /* Build configuration list for PBXNativeTarget "WalkAshlandTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A959654242B41B1002F19CF /* Debug */,
+				6A959655242B41B1002F19CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6A959656242B41B1002F19CF /* Build configuration list for PBXNativeTarget "WalkAshlandUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A959657242B41B1002F19CF /* Debug */,
+				6A959658242B41B1002F19CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6A95961C242B41B0002F19CF /* Project object */;
+}
