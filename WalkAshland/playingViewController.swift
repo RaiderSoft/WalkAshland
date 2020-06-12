@@ -325,14 +325,19 @@ class nplayingViewController: UIViewController, UIPickerViewDataSource, UIPicker
         var i = 0
         if let tours = tour?.audioClips {
             for aud in tours {
+
+                let fileManager = FileManager.default
+
                 i += 1
                 //text for Drop down menu(PickerTextView)
-                audioList.append("Chapter " + String(i))
                 let path = documentsDirectoryPath + "/" + aud
-                print("\n \n \(aud) \n \n")
-                audioPath.append(path)
-            
-                // MARK: if i == locked break loop
+                // Check if file exists, given its path
+                if fileManager.fileExists(atPath: path) {
+                    audioList.append("Chapter " + String(i))
+                    audioPath.append(path)
+                } else {
+                    break
+                }
             }
         }
        //bring mediabar forward
