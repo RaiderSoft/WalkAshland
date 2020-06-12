@@ -373,9 +373,9 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
                     case .purchased:
                         SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
                         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
-                        if let user = dataModel?.user {
-                            dataModel?.getPurchasedFor(userId: user.id, tours: dataModel!.tours)
+                        if let user = dataModel?.user {                   
                             dataModel?.savePurchase(user: user, tour: tourId! )
+                            dataModel?.getPurchasedFor(userId: user.id, tours: dataModel!.tours)
                         }
                         self.PDSButtonOut.titleLabel?.text = "Download"
                         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
