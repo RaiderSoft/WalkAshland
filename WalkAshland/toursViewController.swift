@@ -285,7 +285,7 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
     var validProducts = [SKProduct]()               //get list of products from app store
     var productIndex = 0                            //product index
     
-    @IBAction func purchasedPressed(_ sender: UIButton) {
+   @IBAction func purchasedPressed(_ sender: UIButton) {
 
         NSLog("pressed")
         if self.PDSButtonOut.titleLabel?.text != "Download" {
@@ -294,6 +294,9 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
         } else {
             // MARK: TODO if button is labled download
             // button will now be used to download tour
+            if let user = dataModel?.user {
+                dataModel?.getPurchasedFor(userId: user.id, tours: dataModel!.tours)
+            }
         }
 
     }
@@ -371,19 +374,13 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
                         SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
                         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
                         if let user = dataModel?.user {
-                            dataModel?.savePurchase(user: user, tour: tourId! )
                             dataModel?.getPurchasedFor(userId: user.id, tours: dataModel!.tours)
+                            dataModel?.savePurchase(user: user, tour: tourId! )
                         }
                         self.PDSButtonOut.titleLabel?.text = "Download"
                         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
                         if productIndex == 0 {
                             print("You've bought route 1")
-                            //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Faisal
-                            if let user = dataModel?.user {
-                                dataModel?.savePurchase(user: user, tour: tourId! )
-                                dataModel?.getPurchasedFor(userId: user.id, tours: dataModel!.tours)
-                            }
-                            //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
                             
                         } else {
                            //other purchase
@@ -426,25 +423,6 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
                     default: break
             }}}
     }
-    
-    //restore purchase (no corresponding button at the moment)
-    // MARK: TODO implement a restore button
-    func restorePurchase() {
-            SKPaymentQueue.default().add(self as SKPaymentTransactionObserver)
-            SKPaymentQueue.default().restoreCompletedTransactions()
-    }
-    
-    //transaction completed successfully
-    func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
-            
-        let msg = "Purchase Completed."
-        let title = "Transaction Success!"
-
-        
-        self.delegate?.tourCell(self, msg: msg, title: title)
-    }
-    //################################################################PITTS
-}
 
  
 //****************************************************************DYlan
