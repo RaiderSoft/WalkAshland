@@ -183,6 +183,8 @@ class DataModel {
                                 for i in toursc {
                                     //Get a/the tour from the tours
                                     let tour = t[i]
+                                    self.tours[i].flag = "ND"
+                                    //print("\n\n\n\nThe flag is \(tour.flag)")
                                     //check if the tour is already in the purchased tours otherwise add it
                                     if self.purchasedTours.count > 0 {
                                         //flag to track matches
@@ -195,7 +197,7 @@ class DataModel {
                                             
                                             self.purchasedTours.append(tour)
                                             let photos = tour.photos
-                                            print(photos)
+                                            //print(photos)
                                             
                                             
                                             
@@ -220,7 +222,7 @@ class DataModel {
                                                 else
                                                 {
                                                     let photoRef = storageRef.child("photos").child(String(i)).child(photo)
-                                                    print(photoRef)
+                                                    //print(photoRef)
                                                     
                                                     
                                                     
@@ -245,7 +247,7 @@ class DataModel {
                                     else {
                                         self.purchasedTours.append(tour)
                                         let photos = tour.photos
-                                        print(photos)
+                                        //print(photos)
                                         
                                         //Check if there is more photos than the default preview image al
                                         var numPicUnlocked = 3   //The number after purchased
@@ -262,7 +264,7 @@ class DataModel {
 
                                             let path = documentsDirectoryPath + "/" + photo
                                             // Check if file exists, given its path
-                                            print(photo)
+                                            //print(photo)
                                             if picManager.fileExists(atPath: path) {
                                                 numPicUnlocked += 1
                                             }
@@ -274,7 +276,7 @@ class DataModel {
                                                         //NSLog("Got the file in Getpurchased")
                                                         if let url = URL {
                                                             //Added this path to the array of paths to local photos
-                                                            print(url)
+                                                            //print(url)
                                                         }
                                                     }
                                                     else {
@@ -373,7 +375,7 @@ class DataModel {
                     let location = tour?["locations"] as! [[String: Double]]
                     let audio = tour?["audios"] as! [String]
                     let photos = tour?["photos"] as! [String]
-                    
+                    let flag = tour?["flag"] as? String
                     var p = 0
                     for photo in photos {
                         if !photolocked {
@@ -399,7 +401,7 @@ class DataModel {
                                         //NSLog("Got the file")
                                         if let url = URL {
                                             //Added this path to the array of paths to local photos
-                                            print(url)
+                                            //print(url)
                                             //print("THis worked")
                                         }
                                         else
@@ -423,7 +425,7 @@ class DataModel {
                     photolocked = false
                     
                     //Create a tour
-                    let t = Tour.init(ti: title, des: description, pr: price, img: image, dur: duration, type: type , locs: location, auds: audio,photos: photos, flag: "ND")
+                    let t = Tour.init(ti: title, des: description, pr: price, img: image, dur: duration, type: type , locs: location, auds: audio,photos: photos, flag: flag ?? "N")
                     //add the tour to the tours list
                     self.tours.append(t)
                     
@@ -441,13 +443,13 @@ class DataModel {
                             let audRef = storageRef.child(aud)
 
                             
-                            let picManager = FileManager.default
-
-                            let path = documentsDirectoryPath + "/" + aud
-                            // Check if file exists, given its path
-                            if !picManager.fileExists(atPath: path) {
-                                continue
-                            }
+//                            let picManager = FileManager.default
+//
+//                            let path = documentsDirectoryPath + "/" + aud
+//                            // Check if file exists, given its path
+//                            if !picManager.fileExists(atPath: path) {
+//                                continue
+//                            }
                             
                             // Download to the local filesystem
                             _ = audRef.write(toFile: audLocalURL) { (URL, error) -> Void in

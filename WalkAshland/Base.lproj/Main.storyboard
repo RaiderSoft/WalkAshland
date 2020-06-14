@@ -396,8 +396,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jpq-gf-r7c">
-                                                    <rect key="frame" x="0.0" y="160" width="162" height="37"/>
+                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jpq-gf-r7c">
+                                                    <rect key="frame" x="0.0" y="160" width="190" height="37"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DuJ-pW-mji">
                                                             <rect key="frame" x="8" y="3" width="63" height="30"/>
@@ -412,8 +412,8 @@
                                                                 <segue destination="aGu-xx-Lzz" kind="show" identifier="play" id="cbN-Xm-DZa"/>
                                                             </connections>
                                                         </button>
-                                                        <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1" verticalCompressionResistancePriority="1" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mPq-Jo-AP7" userLabel="acbutton">
-                                                            <rect key="frame" x="88" y="3" width="64" height="29"/>
+                                                        <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1" verticalCompressionResistancePriority="1" ambiguous="YES" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mPq-Jo-AP7" userLabel="acbutton">
+                                                            <rect key="frame" x="88" y="3" width="94" height="29"/>
                                                             <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="64" id="0U2-gR-iOa"/>
@@ -505,7 +505,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rGg-1l-ddc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1004" y="-320"/>
+            <point key="canvasLocation" x="1002.8985507246377" y="-320.08928571428572"/>
         </scene>
         <!--acNavigationViewController-->
         <scene sceneID="dZw-rm-ptF">
@@ -1187,8 +1187,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="slu-ro-BCk"/>
-        <segue reference="cNd-SW-68H"/>
+        <segue reference="cGf-VS-slT"/>
+        <segue reference="cbN-Xm-DZa"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="clock" width="400" height="400"/>

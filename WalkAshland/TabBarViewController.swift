@@ -37,7 +37,6 @@ class TabBarViewController: UITabBarController {
         if let avc = children.last?.children.last as? accountViewController {
             
             avc.dataModel = dataModel
-            NSLog("Did enter here")
         }
 
     }//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik

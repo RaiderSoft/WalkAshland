@@ -166,7 +166,14 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
             }
         //################################################################PITTS
         //SKPaymentQueue.default().add(cell)
-        cell.fetchAvailableProducts()
+        if tour.flag == "NP"{
+            cell.fetchAvailableProducts()
+        }
+        else{
+            cell.PDSButtonOut.setTitle("Download", for: .normal)
+            cell.PDSButtonOut.setTitleColor(.white, for: .normal)
+        }
+        
         //****************************************************************DYlan
         
         directionRequest.requestsAlternateRoutes = false                //Set alternative paths to none
@@ -223,6 +230,7 @@ class toursViewController: UITableViewController, CLLocationManagerDelegate{
             Download the image and view is
             Create a reference to this image from the firebase storage
          */
+        
         let documentsDirectoryPath: String = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
         let prevImagePath =  URL(fileURLWithPath: documentsDirectoryPath).appendingPathComponent(tour.photos[0])
         let image = UIImage(contentsOfFile: prevImagePath.path)
@@ -262,7 +270,7 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
     @IBOutlet weak var distImgOut: UIImageView!
     
     //This is for the button to be labeled download, start, or purchase (price)
-    @IBOutlet weak var PDSButtonOut: UIButton!      
+    @IBOutlet weak var PDSButtonOut: UIButton!
     @IBOutlet weak var startOut: UIButton!
     
     @IBOutlet weak var durNumOut: UILabel!
@@ -270,7 +278,6 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
     
     @IBOutlet weak var aboutOut: UILabel!
      @IBOutlet weak var titleOut: UILabel!
-    
     var dataModel: DataModel?
     //To store dowloaded tours from the model
     var tours: [Tour] {
@@ -289,8 +296,6 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
     var productIndex = 0                            //product index
     
    @IBAction func purchasedPressed(_ sender: UIButton) {
-
-        NSLog("pressed")
         if self.PDSButtonOut.titleLabel?.text != "Download" {
             productIndex = 0
             purchaseMyProduct(validProducts[productIndex])
@@ -324,8 +329,10 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
             //must be on the main thread
             //set title of button to price of route
             DispatchQueue.main.async {
+                                
                 self.PDSButtonOut.setTitle("\(self.validProducts[self.productIndex].localizedPrice)", for: .normal)
                 self.PDSButtonOut.setTitleColor(.white, for: .normal)
+                
             }
             
             print("\(validProducts[productIndex].localizedPrice)")
@@ -379,6 +386,9 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
                         if let user = dataModel?.user {                   
                             dataModel?.savePurchase(user: user, tour: tourId! )
                             dataModel?.getPurchasedFor(userId: user.id, tours: dataModel!.tours)
+                            
+                            
+                            
                         }
                         self.PDSButtonOut.titleLabel?.text = "Download"
                         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
@@ -439,6 +449,13 @@ extension toursViewController : tourCellDelegate {
 
         self.present(alertController,animated: true, completion: nil)
     }
+    
+    
+    
+    
+    
+    
+    
 }
 protocol tourCellDelegate: AnyObject {
     func tourCell(_ tourCell: tourCell, msg: String, title: String)
