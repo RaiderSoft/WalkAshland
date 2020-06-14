@@ -311,7 +311,7 @@ class DataModel {
                                         // Check if file exists, given its path
                                         if picManager.fileExists(atPath: path) {
                                             
-                                            print("audio file exist: getpurchased call")
+                                            //print("audio file exist: getpurchased call")
                                         }
                                         else {
                                             
@@ -320,10 +320,10 @@ class DataModel {
                                             { (URL, error) -> Void in
                                                 if (error != nil) {
                                                     // Uh-oh, an error occurred!
-                                                    print("Error: File Not Saved")
+                                                    //print("Error: File Not Saved")
                                                 } else {
                                                     // Local file URL for "images/island.jpg" is returned
-                                                    print("File Saved")
+                                                    //print("File Saved")
                                                     //                                                    print(audLocalURL)
                                                 }
                                             }
@@ -402,7 +402,7 @@ class DataModel {
                                         if let url = URL {
                                             //Added this path to the array of paths to local photos
                                             //print(url)
-                                            print("Pic saved")
+                                            //print("Pic saved")
                                         }
                                         else
                                         {
@@ -448,7 +448,7 @@ class DataModel {
                             let path = documentsDirectoryPath + "/" + aud
                             // Check if file exists, given its path
                             if picManager.fileExists(atPath: path) {
-                                 print("audio file exist: retrieve_data call")
+                                 //print("audio file exist: retrieve_data call")
                             }
                             else {
                                 
@@ -456,10 +456,10 @@ class DataModel {
                                 _ = audRef.write(toFile: audLocalURL) { (URL, error) -> Void in
                                   if (error != nil) {
                                     // Uh-oh, an error occurred!
-                                    print("Error: File Not Saved")
+                                    //print("Error: File Not Saved")
                                   } else {
                                     // Local file URL for "images/island.jpg" is returned
-                                    print("Audio Saved")
+                                    //print("Audio Saved")
         //                            print(audLocalURL)
                                   }
                                 }

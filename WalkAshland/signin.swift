@@ -85,7 +85,7 @@ extension SigninViewController: ASAuthorizationControllerDelegate, ASAuthorizati
                 try sv.write(to: localFile, atomically: true, encoding: .ascii)
             }
             catch{
-                print("Error Writing user to the localdb")
+                //print("Error Writing user to the localdb")
             }
             
             
