@@ -124,7 +124,7 @@ class nplayingViewController: UIViewController, UIPickerViewDataSource, UIPicker
             audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: audioPath[row]))
             //nextPoint = locationPoints[row].position
         } catch {
-            print(error)
+            //print(error)
         }
     }
     
@@ -268,7 +268,7 @@ class nplayingViewController: UIViewController, UIPickerViewDataSource, UIPicker
             camera = GMSCameraPosition(latitude: sourceLat, longitude: sourceLong, zoom: 15.0)
         }
         else {
-            print("ERROR default setup of google map api")
+            //print("ERROR default setup of google map api")
         }
         mapView.isMyLocationEnabled = true
         mapView.isBuildingsEnabled = true
@@ -281,7 +281,7 @@ class nplayingViewController: UIViewController, UIPickerViewDataSource, UIPicker
         let task = session.dataTask(with: baseURLDirections!, completionHandler: {
                 (data, response, error) in
                 if error != nil {
-                    print(error!.localizedDescription)
+                    //print(error!.localizedDescription)
                 }
                 else {
                     do {
@@ -310,7 +310,7 @@ class nplayingViewController: UIViewController, UIPickerViewDataSource, UIPicker
                         }
                     }
                     catch {
-                        print("error in JSONSerialization")
+                        //print("error in JSONSerialization")
                     }
                 }
             })
@@ -344,8 +344,20 @@ class nplayingViewController: UIViewController, UIPickerViewDataSource, UIPicker
        MediaBar.layer.zPosition = 3;
         do {
              audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: audioPath[0]))
+             audioPlayer.prepareToPlay()
+            
+            let audioSession = AVAudioSession.sharedInstance()
+            
+            do {
+                try audioSession.setCategory(AVAudioSession.Category.playback)
+            }
+            catch {
+                
+            }
+            
+            
          } catch {
-             print(error)
+             //print(error)
          }
         //mapView.settings.setAllGesturesEnabled(false)
         //used for Drop down menu(PickerTextView)
@@ -459,7 +471,7 @@ extension nplayingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                                 let prevImagePath =  URL(fileURLWithPath: documentsDirectoryPath).appendingPathComponent(tour.photos[photosOut.tag])
                                 let image = UIImage(contentsOfFile: prevImagePath.path)
                                 if let image = image {
-                                    print(" \n\n\n IN PHOTO ARES ")
+                                    //print(" \n\n\n IN PHOTO ARES ")
                                     self.photOut.image = image
                                     self.view.addSubview(photOut)
                                      //Add image
@@ -468,7 +480,7 @@ extension nplayingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                             }
                         }
                     } catch {
-                        print(error)
+                        //print(error)
                     }
                 }
                 else if !(self.audioPlayer.isPlaying) {
@@ -479,7 +491,7 @@ extension nplayingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                         self.counter = 0
                         self.nextPoint = self.locationPoints[self.counter].position
                     } catch {
-                        print(error)
+                        //print(error)
                     }
                 }
                 else {

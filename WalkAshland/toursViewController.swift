@@ -335,9 +335,9 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
                 
             }
             
-            print("\(validProducts[productIndex].localizedPrice)")
+            //print("\(validProducts[productIndex].localizedPrice)")
             let route1 = response.products[0] as SKProduct
-            print("1st rpoduct: " + route1.localizedDescription)
+            //print("1st rpoduct: " + route1.localizedDescription)
         }
     }
     //queue transaction request
@@ -393,7 +393,7 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
                         self.PDSButtonOut.titleLabel?.text = "Download"
                         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
                         if productIndex == 0 {
-                            print("You've bought route 1")
+                            //print("You've bought route 1")
                             
                         } else {
                            //other purchase
@@ -414,13 +414,13 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
                     //restoring transaction
                     case .restored:
                         SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
-                        print("Purchase has been successfully restored!")
+                        //print("Purchase has been successfully restored!")
                         break
                         
                     //transaction stuck on purchasing
                     case .purchasing:
                         
-                        print("purchasing")
+                        //print("purchasing")
                         
                         msg = "Payment is Processing please wait a moment!."
                         title = "Transaction!"
@@ -430,7 +430,7 @@ class tourCell: UITableViewCell, SKProductsRequestDelegate, SKPaymentTransaction
                         
                     //transaction deffered
                     case .deferred:
-                        print("deferred")
+                        //print("deferred")
                         break
                         
                     default: break
