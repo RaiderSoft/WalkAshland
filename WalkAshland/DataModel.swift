@@ -310,8 +310,8 @@ class DataModel {
                                         let path = documentsDirectoryPath + "/" + aud
                                         // Check if file exists, given its path
                                         if picManager.fileExists(atPath: path) {
-                                            numAudUnlocked += 1
-
+                                            
+                                            print("audio file exist: getpurchased call")
                                         }
                                         else {
                                             
@@ -327,10 +327,10 @@ class DataModel {
                                                     //                                                    print(audLocalURL)
                                                 }
                                             }
-                                            numAudUnlocked += 1
+                                            
                                         }
                                         
-
+                                        numAudUnlocked += 1
                                     }
                                         //########################################################################Pitts
                                 }
@@ -402,7 +402,7 @@ class DataModel {
                                         if let url = URL {
                                             //Added this path to the array of paths to local photos
                                             //print(url)
-                                            //print("THis worked")
+                                            print("Pic saved")
                                         }
                                         else
                                         {
@@ -443,28 +443,30 @@ class DataModel {
                             let audRef = storageRef.child(aud)
 
                             
-//                            let picManager = FileManager.default
-//
-//                            let path = documentsDirectoryPath + "/" + aud
-//                            // Check if file exists, given its path
-//                            if !picManager.fileExists(atPath: path) {
-//                                continue
-//                            }
-                            
-                            // Download to the local filesystem
-                            _ = audRef.write(toFile: audLocalURL) { (URL, error) -> Void in
-                              if (error != nil) {
-                                // Uh-oh, an error occurred!
-                                print("Error: File Not Saved")
-                              } else {
-                                // Local file URL for "images/island.jpg" is returned
-                                print("File Saved")
-    //                            print(audLocalURL)
-                              }
+                            let picManager = FileManager.default
+
+                            let path = documentsDirectoryPath + "/" + aud
+                            // Check if file exists, given its path
+                            if picManager.fileExists(atPath: path) {
+                                 print("audio file exist: retrieve_data call")
                             }
-                            if p == numPicUnlocked
-                            {
-                                audiolocked = true
+                            else {
+                                
+                                // Download to the local filesystem
+                                _ = audRef.write(toFile: audLocalURL) { (URL, error) -> Void in
+                                  if (error != nil) {
+                                    // Uh-oh, an error occurred!
+                                    print("Error: File Not Saved")
+                                  } else {
+                                    // Local file URL for "images/island.jpg" is returned
+                                    print("Audio Saved")
+        //                            print(audLocalURL)
+                                  }
+                                }
+                                if p == numPicUnlocked
+                                {
+                                    audiolocked = true
+                                }
                             }
                         }
                         p = p + 1
