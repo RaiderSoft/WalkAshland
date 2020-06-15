@@ -422,12 +422,14 @@ extension nplayingViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-Faisal
         if status == .authorizedWhenInUse || status == .authorizedAlways {             //check if the user has given authorization
             locationManager.requestLocation()           //Request the location of user
+            locationManager.allowsBackgroundLocationUpdates = true
         }
         else {
             locationManager.requestWhenInUseAuthorization()
             locationManager.startUpdatingLocation()
         }
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-Alik
+        
     }
     /*      In this function we take action for errors from     >>>>Faisal  */
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
